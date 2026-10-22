@@ -150,6 +150,22 @@ def test_management_requires_capability_and_uploads_stay_draft(system):
   assert "upload" not in {chunk.documentId for chunk in service.listSources(tokens["hr"], "2026-10-22")}
 
 
+def test_draft_withdrawal_rejected_without_hiding_current_policy(system):
+  service, tokens = system
+  current = service.readCitation(tokens["alice"], "demo-leave", "2026-10-22", "v1")
+  draft = replace(current, version="v3", chunkId="demo-leave-draft", effectiveFrom="2026-10-01")
+  service.importDocuments(tokens["hr"], json.dumps(asdict(draft), ensure_ascii=False))
+  with pytest.raises(ValueError):
+    service.setPublicationStatus(tokens["hr"], "demo-leave", "v3", "withdrawn")
+  assert [(chunk.version, chunk.publicationStatus) for chunk in service.listManagedDocuments(tokens["hr"])
+    if chunk.version == "v3" and chunk.documentId == "demo-leave"] == [("v3", "draft")]
+  assert [(chunk.version, chunk.publicationStatus) for chunk in service.listSources(tokens["alice"], "2026-10-22")
+    if chunk.documentId == "demo-leave"] == [("v1", "published")]
+  assert service.readCitation(tokens["alice"], "demo-leave", "2026-10-22", "v1") == current
+  response = service.ask(tokens["alice"], "請假申請流程", "2026-10-22", category="休假")
+  assert {(chunk.documentId, chunk.version) for chunk in response.citations} == {("demo-leave", "v1")}
+
+
 def test_maintenance_capability_cannot_read_other_role_scope(system):
   service, tokens = system
   chunk = replace(service.store.listChunks(asOf="2026-10-22")[0], documentId="private", chunkId="private",

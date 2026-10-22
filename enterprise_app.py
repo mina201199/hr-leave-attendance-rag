@@ -131,11 +131,15 @@ def showManagement(service, token, today):
   st.subheader("文件發布管理")
   if revisions:
     selected = st.selectbox("文件／版本", revisions, format_func=lambda item: f"{item[0]} / {item[1]}", key="entRevision")
+    selectedIsDraft = any(chunk.publicationStatus == "draft" for chunk in documents
+      if (chunk.documentId, chunk.version) == selected)
     for chunk in documents:
       if (chunk.documentId, chunk.version) == selected:
         showChunk(chunk)
+    if selectedIsDraft:
+      st.caption("草稿尚未發布，無法撤回。")
     for label, key, status in (("發布所選版本", "entPublish", "published"), ("撤回所選版本", "entWithdraw", "withdrawn")):
-      if st.button(label, key=key):
+      if st.button(label, key=key, disabled=status == "withdrawn" and selectedIsDraft):
         service.setPublicationStatus(token, selected[0], selected[1], status)
         st.session_state.pop("entResponse", None)
         st.session_state.pop("entResponseDate", None)

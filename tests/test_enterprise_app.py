@@ -202,7 +202,11 @@ def test_management_controls_publish_withdraw_and_explicit_index_error(appSystem
   assert app.button(key="entPreview").disabled
   assert app.button(key="entImport").disabled
   app.selectbox(key="entRevision").set_value(("demo-draft", "v1")).run()
+  assert app.button(key="entWithdraw").disabled
+  assert "草稿尚未發布，無法撤回。" in visibleText(app)
   app.button(key="entPublish").click().run()
+  assert not app.exception
+  assert not app.button(key="entWithdraw").disabled
   assert "demo-draft" in {chunk.documentId for chunk in service.listSources(token, "2026-10-22")}
   app.button(key="entWithdraw").click().run()
   assert "demo-draft" not in {chunk.documentId for chunk in service.listSources(token, "2026-10-22")}

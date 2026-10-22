@@ -102,6 +102,21 @@ def testInactiveDraftCannotDisableCurrentPublishedVersion(tmp_path):
   assert [item.version for item in store.listChunks(asOf="2026-10-22")] == ["v1"]
 
 
+def testDraftCannotBeWithdrawnAndHideCurrentPublishedVersion(tmp_path):
+  path = tmp_path / "knowledge.db"
+  store = KnowledgeStore(path)
+  store.upsert([enterpriseChunk()])
+  store.upsert([enterpriseChunk(version="v2", effectiveFrom="2026-10-01", publicationStatus="draft")])
+  assert [item.version for item in store.listChunks(asOf="2026-10-22")] == ["v1"]
+  store.setPublicationStatus("demo-leave", "v2", "draft")
+  with pytest.raises(ValueError):
+    store.setPublicationStatus("demo-leave", "v2", "withdrawn")
+  reopened = KnowledgeStore(path)
+  assert [item.version for item in reopened.listChunks(asOf="2026-10-22")] == ["v1"]
+  assert [(item.version, item.publicationStatus) for item in reopened.listChunks(includeInactive=True)] == [
+    ("v1", "published"), ("v2", "draft")]
+
+
 def testEarlierEffectiveVersionImportedLastCannotMaskNewerVersion(tmp_path):
   store = KnowledgeStore(tmp_path / "knowledge.db")
   store.upsert([enterpriseChunk(version="v2", effectiveFrom="2026-11-01")])

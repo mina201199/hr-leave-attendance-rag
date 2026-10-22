@@ -178,12 +178,12 @@ class KnowledgeStore:
     if status not in PUBLICATION_STATUSES:
       raise ValueError("publicationStatus 必須為 draft、published 或 withdrawn")
     with self.connect() as connection:
-      # 已發布的版本不能退成草稿，否則略過草稿會讓已淘汰的舊版重新出現。
-      cursor = connection.execute("UPDATE revisionStates SET publicationStatus=? WHERE documentId=? AND version=? AND (?<>'draft' OR publicationStatus='draft')",
-        (status, documentId, version, status))
+      # 在更新時限制狀態轉換，避免未發布草稿遮蔽現行版，或已淘汰舊版重新出現。
+      cursor = connection.execute("UPDATE revisionStates SET publicationStatus=? WHERE documentId=? AND version=? AND (?<>'draft' OR publicationStatus='draft') AND (?<>'withdrawn' OR publicationStatus<>'draft')",
+        (status, documentId, version, status, status))
       if cursor.rowcount != 1:
         if connection.execute("SELECT 1 FROM revisionStates WHERE documentId=? AND version=?", (documentId, version)).fetchone():
-          raise ValueError("已發布或撤回的版本不可退回草稿")
+          raise ValueError("草稿尚未發布，不可撤回" if status == "withdrawn" else "已發布或撤回的版本不可退回草稿")
         raise ValueError("找不到文件版本")
 
   def setActive(self, documentId: str, active: bool) -> None:
