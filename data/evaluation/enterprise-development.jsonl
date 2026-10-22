@@ -1,0 +1,6 @@
+{"id":"dev-employee-leave","role":"employee","question":"請假申請流程","asOf":"2026-10-22","expectedDocument":"demo-leave","forbiddenDocuments":["demo-manager","demo-hr","demo-draft"],"expectedVersion":"v1","modelJudgment":"unassessed_offline"}
+{"id":"dev-manager-guide","role":"manager","question":"主管確認指引","asOf":"2026-10-22","expectedDocument":"demo-manager","forbiddenDocuments":["demo-hr","demo-draft"],"modelJudgment":"unassessed_offline"}
+{"id":"dev-hr-sop","role":"hr","question":"人資制度疑義處理","asOf":"2026-10-22","expectedDocument":"demo-hr","forbiddenDocuments":["demo-draft"],"modelJudgment":"unassessed_offline"}
+{"id":"dev-new-version","role":"employee","question":"請假申請流程","asOf":"2026-11-01","expectedDocument":"demo-leave","expectedVersion":"v2","forbiddenDocuments":["demo-manager","demo-hr","demo-draft"],"modelJudgment":"unassessed_offline"}
+{"id":"dev-personal-balance","role":"employee","question":"我還剩多少特休？","asOf":"2026-10-22","expectedStatus":"no_evidence","forbiddenDocuments":["demo-manager","demo-hr","demo-draft"],"modelJudgment":"unassessed_offline"}
+{"id":"dev-unrelated","role":"employee","question":"量子衛星引擎","asOf":"2026-10-22","expectedStatus":"no_evidence","forbiddenDocuments":["demo-manager","demo-hr","demo-draft"],"modelJudgment":"unassessed_offline"}
