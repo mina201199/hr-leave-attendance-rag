@@ -296,3 +296,24 @@ def testConversationRetainsEachTurnDateAndBoundsMemory(appSystem):
     query(app, f"補打卡說明流程 {index}", "出勤")
   assert len(app.session_state["entConversation"]) == 10
   assert all(turn["response"].traceId != first.traceId for turn in app.session_state["entConversation"])
+
+
+@pytest.mark.parametrize("asOf,dateNote,condition", [
+  (date(2026, 10, 22), "本示範流程適用於 2026-11-01 前的制度查詢。", "需要調整時由主管退回說明"),
+  (date(2026, 11, 1), "本示範流程自 2026-11-01 起適用。", "代理安排尚未確認時先補齊說明再送出"),
+])
+def testDemoNotesAppearBelowAnswerAndOriginalCitationStaysIntact(appSystem, asOf, dateNote, condition):
+  app, _, passwords = appSystem
+  login(app, passwords, "employee")
+  response = query(app, asOf=asOf)
+  assistant = app.chat_message[-1]
+  body = assistant.get("text")[0].value
+  assert body.startswith("員工先填寫")
+  assert condition in body
+  assert "虛構" not in body
+  assert dateNote not in body
+  assert "來源識別碼" not in body
+  captions = "\n".join(element.value for element in assistant.get("caption"))
+  assert dateNote in captions
+  assert "虛構示範制度，非真實公司文件" in captions
+  assert response.citations[0].text in [element.value for element in assistant.get("text")]

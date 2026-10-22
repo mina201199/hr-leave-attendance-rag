@@ -1,5 +1,6 @@
 
 import hashlib
+import re
 import sqlite3
 import sys
 from datetime import datetime
@@ -67,11 +68,51 @@ def showChunk(chunk):
   st.text(chunk.text)
 
 
+def answerDisplayParts(response):
+  if response.mode != "企業來源摘錄（離線，非模型回答）":
+    return response.text, []
+  body = response.text.removeprefix("【來源摘錄，非模型回答；虛構示範依各來源標示】\n\n")
+  notes = []
+  demoMarker = "【虛構示範制度，非真實公司文件】"
+  demoFooters = (
+    "本頁只說明虛構操作流程，不規定法定假別日數或薪資。",
+    "本頁只改變虛構流程，不規定法定假別日數或薪資。",
+    "本系統只查詢流程，不讀取個人出勤、不接受實際補卡申請。",
+    "本文件只提供主管與人資的虛構作業指引，不授權查閱個人紀錄或執行真實核准交易。",
+    "本流程不含員工個資、實際假單或法定權益判斷。",
+  )
+  for citation in response.citations:
+    original = f"{citation.text} [{citation.chunkId}]"
+    if not citation.isDemo or not citation.text.startswith(demoMarker) or original not in body:
+      continue
+    # 只搬移已知展示格式，不用泛用句子規則刪掉制度條件；引用原文保持完整。
+    excerpt = citation.text.removeprefix(demoMarker)
+    details = ["虛構示範制度，非真實公司文件。"]
+    dateNote = re.match(r"本示範流程(?:適用於 \d{4}-\d{2}-\d{2} 前的制度查詢|自 \d{4}-\d{2}-\d{2} 起適用)。", excerpt)
+    if dateNote:
+      details.append(dateNote[0])
+      excerpt = excerpt[len(dateNote[0]):]
+    excerpt = excerpt.removesuffix(f"來源識別碼：{citation.documentId}。")
+    for footer in demoFooters:
+      if excerpt.endswith(footer):
+        excerpt = excerpt.removesuffix(footer)
+        details.append(footer)
+        break
+    if not excerpt.strip():
+      continue
+    body = body.replace(original, f"{excerpt} [{citation.chunkId}]", 1)
+    notes.append(f"[{citation.chunkId}] " + "".join(details))
+  return body, notes
+
+
 def showResponse(service, token, response, asOf):
   statusLabels = {"answered": "已找到來源", "no_evidence": "沒有足夠來源", "needs_clarification": "需要補充條件",
     "conflict": "來源有衝突", "context_limit": "來源超過內容預算"}
+  body, notes = answerDisplayParts(response)
+  st.text(body)
+  for note in notes:
+    st.caption(note)
   st.caption(f"狀態：{statusLabels.get(response.status, response.status)}｜{response.mode}")
-  st.text(response.text)
   st.caption("引用已通過權限與版本檢查；仍請核對原文中的適用條件。離線來源摘錄並非模型回答。")
   for citation in response.citations:
     # 內部識別碼只能經服務讀取，不產生可繞過授權的外部連結。
