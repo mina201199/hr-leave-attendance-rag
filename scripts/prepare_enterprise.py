@@ -31,6 +31,7 @@ def prepareEnterprise(dbPath=None, importData=False, dataDir=None):
     raise ValueError("企業資料庫必須與原版資料庫分開")
   # 僅匯入版本控制內明確標示虛構的示範檔，不接受任意上傳路徑。
   records = loadChunks(projectPath / "data/company_demo/knowledge.jsonl")
+  records += loadChunks(projectPath / "data/company_demo/scenarios.jsonl")
   if any(not chunk.isDemo or "虛構" not in chunk.text or "虛構" not in chunk.title
       or chunk.sourceType not in ENTERPRISE_SOURCE_TYPES or chunk.externalProcessingAllowed for chunk in records):
     raise ValueError("示範匯入只允許禁止外送且明確標示虛構的企業制度")

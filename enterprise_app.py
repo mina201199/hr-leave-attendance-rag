@@ -68,9 +68,15 @@ def showChunk(chunk):
   st.text(chunk.text)
 
 
+def withoutCitationMarkers(text, citations):
+  # 只隱藏服務附加在段尾的有效引用代碼，保留正文中的括號與原始回答。
+  markers = "|".join(re.escape(f"[{citation.chunkId}]") for citation in citations)
+  return re.sub(rf"(?:[ \t]+(?:{markers}))+(?=\n|$)", "", text) if markers else text
+
+
 def answerDisplayParts(response):
   if response.mode != "企業來源摘錄（離線，非模型回答）":
-    return response.text, []
+    return withoutCitationMarkers(response.text, response.citations), []
   body = response.text.removeprefix("【來源摘錄，非模型回答；虛構示範依各來源標示】\n\n")
   notes = []
   demoMarker = "【虛構示範制度，非真實公司文件】"
@@ -102,7 +108,7 @@ def answerDisplayParts(response):
       continue
     body = body.replace(original, f"{excerpt} [{citation.chunkId}]", 1)
     notes.append(f"[{citation.chunkId}] " + "".join(details))
-  return body, notes
+  return withoutCitationMarkers(body, response.citations), notes
 
 
 def showResponse(service, token, response, asOf):
@@ -135,9 +141,29 @@ def clearConversation():
 def showConversation(service, token, asOf):
   st.subheader("請假與出勤問答")
   st.caption("每次請輸入完整問題；目前逐題查詢，不會自動推論上一題的條件。最近 10 輪只保留在本次登入畫面，登出即清除。")
+  history = st.session_state.get("entConversation", [])
+  suggestedQuestion = None
+  commonQuestions = (
+    ("demo-emergency-leave", "臨時請假要通知誰？"),
+    ("demo-leave-change", "請假日期變更或取消要怎麼辦？"),
+    ("demo-attendance", "補打卡要填寫哪些說明？"),
+    ("demo-device-issue", "打卡設備故障時要怎麼通報？"),
+    ("demo-manager-overlap", "主管遇到多人同時請假怎麼處理？"),
+    ("demo-manager-return", "主管退回申請時要註明什麼？"),
+    ("demo-hr-device", "人資如何處理打卡設備故障通報？"),
+    ("demo-hr-announcement", "人資發布新版制度前要確認什麼？"),
+  )
+  readableDocuments = {chunk.documentId for chunk in service.listSources(token, asOf.isoformat())}
+  questions = [(documentId, question) for documentId, question in commonQuestions if documentId in readableDocuments]
+  if questions:
+    with st.expander("常用問題", expanded=not history):
+      columns = st.columns(2)
+      for index, (documentId, question) in enumerate(questions):
+        if columns[index % 2].button(question, key=f"entSuggested-{documentId}", use_container_width=True):
+          suggestedQuestion = question
   conversationArea = st.container()
   question = st.chat_input("輸入請假或出勤制度問題…", key="entQuestion", max_chars=1000)
-  history = st.session_state.get("entConversation", [])
+  question = question or suggestedQuestion
   if question:
     response = service.ask(token, question, asOf=asOf.isoformat())
     history = (history + [{"question": question, "response": response,

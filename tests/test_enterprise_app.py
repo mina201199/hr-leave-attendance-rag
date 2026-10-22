@@ -314,6 +314,7 @@ def testDemoNotesCollapsedBelowAnswerAndOriginalCitationStaysIntact(appSystem, a
   assert "虛構" not in body
   assert dateNote not in body
   assert "來源識別碼" not in body
+  assert all(f"[{chunk.chunkId}]" not in body for chunk in response.citations)
   details = next(element for element in assistant.get("expander") if element.label == "來源與適用說明")
   assert not details.proto.expanded
   captions = "\n".join(element.value for element in details.get("caption"))
@@ -324,3 +325,39 @@ def testDemoNotesCollapsedBelowAnswerAndOriginalCitationStaysIntact(appSystem, a
   assert response.traceId in captions
   assert not any(element.type == "caption" for element in assistant.children.values())
   assert response.citations[0].text in [element.value for element in assistant.get("text")]
+
+
+@pytest.mark.parametrize("userId,question,documentId", [
+  ("employee", "臨時請假要通知誰？", "demo-emergency-leave"),
+  ("manager", "主管遇到多人同時請假怎麼處理？", "demo-manager-overlap"),
+  ("hr", "人資如何處理打卡設備故障通報？", "demo-hr-device"),
+])
+def testSuggestedQuestionUsesAuthorizedSourcesAndDoesNotRepeat(appSystem, userId, question, documentId):
+  import importlib.util
+
+  spec = importlib.util.spec_from_file_location("prepareEnterpriseScript", projectPath / "scripts/prepare_enterprise.py")
+  script = importlib.util.module_from_spec(spec)
+  spec.loader.exec_module(script)
+
+  app, service, passwords = appSystem
+  script.prepareEnterprise(dbPath=service.store.path, importData=True)
+  token = login(app, passwords, userId)
+  app.date_input(key="entAsOf").set_value(date(2026, 10, 22)).run()
+  buttons = {button.label: button for button in app.button}
+  assert question in buttons
+  if userId == "employee":
+    assert "主管遇到多人同時請假怎麼處理？" not in buttons
+    assert "人資如何處理打卡設備故障通報？" not in buttons
+  buttons[question].click().run()
+  assert not app.exception
+  turn = app.session_state["entConversation"][-1]
+  assert turn["question"] == question
+  assert documentId in {chunk.documentId for chunk in turn["response"].citations}
+  assert all(chunk.isDemo and not chunk.externalProcessingAllowed for chunk in turn["response"].citations)
+  app.run()
+  assert len(app.session_state["entConversation"]) == 1
+  assert len(service.recentTraces(token)) == 1
+  service.store.setPublicationStatus(documentId, "v1", "withdrawn")
+  app.run()
+  assert question not in {button.label for button in app.button}
+  assert not app.session_state["entConversation"]

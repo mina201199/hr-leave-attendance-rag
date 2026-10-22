@@ -224,13 +224,16 @@ def testDemoImportUsesSeparatePathAndPreservesLifecycle(tmp_path):
 
   dbPath = tmp_path / "enterprise" / "knowledge.db"
   report = prepareEnterprise(dbPath=dbPath, importData=False)
-  assert report["documentCount"] == 5
-  assert report["revisionCount"] == 6
+  assert report["documentCount"] == 15
+  assert report["revisionCount"] == 16
   assert not dbPath.exists()
   prepareEnterprise(dbPath=dbPath, importData=True)
   store = KnowledgeStore(dbPath)
   assert {item.documentId for item in store.listChunks(asOf="2026-10-22")} == {
-    "demo-leave", "demo-attendance", "demo-manager", "demo-hr"}
+    "demo-leave", "demo-attendance", "demo-manager", "demo-hr",
+    "demo-emergency-leave", "demo-leave-change", "demo-handover", "demo-device-issue",
+    "demo-offsite", "demo-attendance-discrepancy", "demo-manager-overlap", "demo-manager-return",
+    "demo-hr-device", "demo-hr-announcement"}
   assert all(item.isDemo and "虛構" in item.text for item in store.listChunks(includeInactive=True))
   assert all(not item.externalProcessingAllowed for item in store.listChunks(includeInactive=True))
   store.setPublicationStatus("demo-leave", "v2", "withdrawn")
