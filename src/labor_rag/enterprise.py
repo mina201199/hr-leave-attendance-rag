@@ -240,7 +240,7 @@ class EnterpriseService:
   def previewImport(self, token, jsonlText):
     principal = self._manager(token)
     if not isinstance(jsonlText, str) or not jsonlText.strip() or len(jsonlText) > 2_000_000:
-      raise ValueError("請提供不超過 2 MB 的 JSONL")
+      raise ValueError("請提供包含制度資料的有效 JSONL；內容不可為空白或超過長度限制")
     chunks = []
     try:
       for line in jsonlText.lstrip("\ufeff").splitlines():

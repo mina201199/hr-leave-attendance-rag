@@ -67,18 +67,7 @@ def showChunk(chunk):
   st.text(chunk.text)
 
 
-def showResponse(service, token):
-  response = st.session_state.get("entResponse")
-  if response is None:
-    return
-  try:
-    service.validateResponse(token, response)
-  except AuthorizationError:
-    st.session_state.pop("entResponse", None)
-    st.session_state.pop("entResponseDate", None)
-    st.warning("先前答案的權限或來源版本已變更，請重新查詢。")
-    return
-  st.subheader("制度回答／來源摘錄")
+def showResponse(service, token, response, asOf):
   statusLabels = {"answered": "已找到來源", "no_evidence": "沒有足夠來源", "needs_clarification": "需要補充條件",
     "conflict": "來源有衝突", "context_limit": "來源超過內容預算"}
   st.caption(f"狀態：{statusLabels.get(response.status, response.status)}｜{response.mode}")
@@ -86,24 +75,66 @@ def showResponse(service, token):
   st.caption("引用已通過權限與版本檢查；仍請核對原文中的適用條件。離線來源摘錄並非模型回答。")
   for citation in response.citations:
     # 內部識別碼只能經服務讀取，不產生可繞過授權的外部連結。
-    authorized = service.readCitation(token, citation.chunkId, st.session_state.get("entResponseDate"), citation.version)
+    authorized = service.readCitation(token, citation.chunkId, asOf, citation.version)
     with st.expander(f"引用：{authorized.title}（{authorized.version}）"):
       showChunk(authorized)
   st.caption(f"紀錄 ID：{response.traceId}｜耗時：{response.elapsedMs:.0f} ms")
   for label, key, rating in (("有幫助", "entHelpful", "helpful"), ("需要改善", "entUnhelpful", "unhelpful")):
-    if st.button(label, key=key):
+    if st.button(label, key=f"{key}-{response.traceId}"):
       service.feedback(token, response.traceId, rating)
       st.success("已儲存本人回饋。")
 
 
+def clearConversation():
+  st.session_state["entConversation"] = []
+  st.session_state.pop("entQuestion", None)
+
+
+def showConversation(service, token, category, asOf):
+  st.subheader("請假與出勤問答")
+  st.caption("每次請輸入完整問題；目前逐題查詢，不會自動推論上一題的條件。最近 10 輪只保留在本次登入畫面，登出即清除。")
+  conversationArea = st.container()
+  question = st.chat_input("輸入請假或出勤制度問題…", key="entQuestion", max_chars=1000)
+  history = st.session_state.get("entConversation", [])
+  if question:
+    categoryValue = {"全部": None, "請假": "休假", "出勤": "工時"}[category]
+    response = service.ask(token, question, asOf=asOf.isoformat(), category=categoryValue)
+    history = (history + [{"question": question, "response": response,
+      "asOf": asOf.isoformat(), "category": category}])[-10:]
+  authorizedHistory = []
+  for turn in history:
+    try:
+      # 舊問題也可能帶有制度內容，先驗權再顯示整輪對話。
+      service.validateResponse(token, turn["response"], asOf=turn["asOf"])
+    except AuthorizationError:
+      continue
+    authorizedHistory.append(turn)
+  st.session_state["entConversation"] = authorizedHistory
+  with conversationArea:
+    if len(authorizedHistory) != len(history):
+      st.warning("部分對話的權限或來源版本已變更，已移除該輪問題與回答；請重新查詢。")
+    if not authorizedHistory:
+      with st.chat_message("assistant"):
+        st.text("你好，請告訴我想了解的請假或出勤制度。我會依你的權限提供來源，方便你核對。")
+        st.caption("例如：臨時請假要通知誰？補打卡需要哪些說明？")
+    for turn in authorizedHistory:
+      with st.chat_message("user"):
+        st.text(turn["question"])
+        st.caption(f"適用日期：{turn['asOf']}｜主題：{turn['category']}")
+      with st.chat_message("assistant"):
+        showResponse(service, token, turn["response"], turn["asOf"])
+
+
 def showManagement(service, token, today):
-  st.caption("上傳 UTF-8 JSONL，最多 1 MB。先預覽，再匯入草稿；發布與撤回須另外操作。")
+  # 傳輸層須容納 multipart 額外資料；隱藏它的大小提示，改顯示實際的檔案限制。
+  st.html("<style>[data-testid='stFileUploaderDropzoneInstructions'] { display: none; }</style>")
+  st.caption("上傳 UTF-8 JSONL，最多 1 MiB（1,048,576 bytes）。先預覽，再匯入草稿；發布與撤回須另外操作。")
   upload = st.file_uploader("制度 JSONL", type=["jsonl"], key="entUpload")
   jsonlText, uploadHash = None, None
   if upload is not None:
     data = upload.getvalue()
     if len(data) > 1_048_576:
-      st.error("檔案超過 1 MB，請縮小後重新上傳。")
+      st.error("檔案超過 1 MiB，請縮小後重新上傳。")
     else:
       try:
         jsonlText = data.decode("utf-8-sig")
@@ -141,8 +172,6 @@ def showManagement(service, token, today):
     for label, key, status in (("發布所選版本", "entPublish", "published"), ("撤回所選版本", "entWithdraw", "withdrawn")):
       if st.button(label, key=key, disabled=status == "withdrawn" and selectedIsDraft):
         service.setPublicationStatus(token, selected[0], selected[1], status)
-        st.session_state.pop("entResponse", None)
-        st.session_state.pop("entResponseDate", None)
         st.session_state["entNotice"] = "已更新文件發布狀態。"
         st.rerun()
   else:
@@ -159,32 +188,20 @@ def showManagement(service, token, today):
 def showWorkspace(service, token, principal):
   today = datetime.now(ZoneInfo("Asia/Taipei")).date()
   roleLabels = {"employee": "員工", "manager": "主管", "hr": "人資"}
-  st.caption(f"目前身分：{roleLabels[principal.role]}｜僅查制度，沒有個人假單、出勤與核准交易。")
-  st.button("登出", key="entLogout", on_click=logout, args=(service, token))
+  with st.sidebar:
+    st.subheader("查詢設定")
+    st.caption(f"目前身分：{roleLabels[principal.role]}｜僅查制度，沒有個人假單、出勤與核准交易。")
+    category = st.selectbox("主題", ["全部", "請假", "出勤"], key="entCategory")
+    asOf = st.date_input("制度適用日期", value=today, key="entAsOf")
+    st.caption("主題套用於下一題；適用日期也影響資料來源清單。舊對話保留當時的適用日期。")
+    st.button("清除對話", key="entClearConversation", on_click=clearConversation)
+    st.button("登出", key="entLogout", on_click=logout, args=(service, token))
   if "entNotice" in st.session_state:
     st.success(st.session_state.pop("entNotice"))
   canManage = principal.role == "hr" and "knowledge:manage" in principal.capabilities
   tabs = st.tabs(["制度查詢", "資料來源", "我的紀錄"] + (["維護管理"] if canManage else []))
   with tabs[0]:
-    examples = ["請假申請流程是什麼？", "補打卡需要補充哪些說明？"]
-    if principal.role in ("manager", "hr"):
-      examples.append("主管收到申請後如何確認與退回？")
-    if principal.role == "hr":
-      examples.append("人資如何處理制度疑義與草稿？")
-    st.text("可以試問：" + "；".join(examples))
-    with st.form("entAskForm"):
-      question = st.text_input("制度問題", key="entQuestion", max_chars=1000)
-      category = st.selectbox("主題", ["全部", "請假", "出勤"], key="entCategory")
-      asOf = st.date_input("制度適用日期", value=today, key="entAsOf")
-      submitted = st.form_submit_button("查詢制度", key="entAskSubmit")
-    if submitted:
-      st.session_state.pop("entResponse", None)
-      st.session_state.pop("entResponseDate", None)
-      categoryValue = {"全部": None, "請假": "休假", "出勤": "工時"}[category]
-      response = service.ask(token, question, asOf=asOf.isoformat(), category=categoryValue)
-      st.session_state["entResponse"] = response
-      st.session_state["entResponseDate"] = asOf.isoformat()
-    showResponse(service, token)
+    showConversation(service, token, category, asOf)
   with tabs[1]:
     st.caption(f"以下為 {asOf.isoformat()} 當時有效、已發布且目前身分可讀的來源。內部來源以受控文字呈現。")
     for chunk in service.listSources(token, asOf=asOf.isoformat()):
@@ -230,8 +247,10 @@ else:
     clearIdentity()
     st.rerun()
   except AuthorizationError:
-    st.session_state.pop("entResponse", None)
-    st.session_state.pop("entResponseDate", None)
+    if st.session_state.get("entConversation"):
+      clearConversation()
+      st.session_state["entNotice"] = "權限或來源已變更，已清除對話，請重新查詢。"
+      st.rerun()
     st.error("目前沒有權限執行此操作，請重新查詢或聯絡本機管理者。")
   except (ValueError, OSError, sqlite3.Error) as error:
     st.error(f"操作無法完成：{error}")

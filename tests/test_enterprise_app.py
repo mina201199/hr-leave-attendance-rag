@@ -47,12 +47,11 @@ def login(app, passwords, userId):
 
 
 def query(app, question="請假申請流程", category="請假", asOf=date(2026, 10, 22)):
-  app.text_input(key="entQuestion").set_value(question)
   app.selectbox(key="entCategory").set_value(category)
   app.date_input(key="entAsOf").set_value(asOf)
-  app.button(key="entAskSubmit").click().run()
+  app.chat_input(key="entQuestion").set_value(question).run()
   assert not app.exception
-  return app.session_state["entResponse"]
+  return app.session_state["entConversation"][-1]["response"]
 
 
 def visibleText(app):
@@ -126,12 +125,12 @@ def test_logout_clears_identity_widgets_results_and_owned_records(appSystem):
   app, service, passwords = appSystem
   oldToken = login(app, passwords, "employee")
   response = query(app)
-  app.button(key="entHelpful").click().run()
+  app.button(key=f"entHelpful-{response.traceId}").click().run()
   assert service.recentTraces(oldToken)[0]["feedback"] == "helpful"
   assert response.traceId in visibleText(app)
   app.button(key="entLogout").click().run()
   assert not app.tabs
-  assert "entResponse" not in app.session_state
+  assert ("entConversation" not in app.session_state or not app.session_state["entConversation"])
   assert "entQuestion" not in app.session_state
   assert "entAsOf" not in app.session_state
   assert response.traceId not in visibleText(app)
@@ -139,7 +138,7 @@ def test_logout_clears_identity_widgets_results_and_owned_records(appSystem):
     service.authStore.authenticate(oldToken)
   newToken = login(app, passwords, "other")
   assert service.recentTraces(newToken) == []
-  assert app.text_input(key="entQuestion").value == ""
+  assert not app.chat_input(key="entQuestion").value
   assert response.traceId not in visibleText(app)
   with pytest.raises(AuthorizationError):
     service.feedback(newToken, response.traceId, "helpful")
@@ -159,7 +158,7 @@ def test_revocation_clears_manager_ui_and_new_employee_cannot_reuse_evidence(app
   app.run()
   assert not app.tabs
   assert "entToken" not in app.session_state
-  assert "entResponse" not in app.session_state
+  assert ("entConversation" not in app.session_state or not app.session_state["entConversation"])
   assert "entQuestion" not in app.session_state
   assert "demo-manager" not in visibleText(app)
   assert response.traceId not in visibleText(app)
@@ -175,10 +174,10 @@ def test_revocation_clears_manager_ui_and_new_employee_cannot_reuse_evidence(app
     service.validateResponse(newToken, response)
   with pytest.raises(AuthorizationError):
     service.feedback(newToken, response.traceId, "helpful")
-  app.session_state["entResponse"] = response
+  app.session_state["entConversation"] = [{"question": "主管確認指引", "response": response, "asOf": "2026-10-22", "category": "請假"}]
   app.run()
   assert not app.exception
-  assert "entResponse" not in app.session_state
+  assert ("entConversation" not in app.session_state or not app.session_state["entConversation"])
   assert "demo-manager" not in visibleText(app)
 
 
@@ -189,7 +188,7 @@ def test_withdrawn_answer_is_validated_before_render(appSystem):
   service.store.setPublicationStatus("demo-leave", "v1", "withdrawn")
   app.run()
   assert not app.exception
-  assert "entResponse" not in app.session_state
+  assert ("entConversation" not in app.session_state or not app.session_state["entConversation"])
   assert response.traceId not in visibleText(app)
   assert "demo-leave｜版本：v1" not in visibleText(app)
 
@@ -247,3 +246,53 @@ def test_index_uses_selected_effective_date_without_automatic_work(appSystem, mo
   assert "demo-leave-v2" in service.store.loadVectors("test-local", futureChunks)
   historicalChunks = service.listSources(token, "2026-10-22")
   assert "demo-leave" not in service.store.loadVectors("test-local", historicalChunks)
+
+
+def testConversationKeepsTurnsAndClearsWithoutDeletingOwnedRecords(appSystem):
+  app, service, passwords = appSystem
+  token = login(app, passwords, "employee")
+  first = query(app, "請假申請流程")
+  second = query(app, "補打卡說明流程", "出勤")
+  assert [message.name for message in app.chat_message] == ["user", "assistant", "user", "assistant"]
+  assert "請假申請流程" in visibleText(app)
+  assert first.traceId in visibleText(app)
+  assert second.traceId in visibleText(app)
+  app.button(key=f"entHelpful-{first.traceId}").click().run()
+  assert next(trace for trace in service.recentTraces(token) if trace["traceId"] == first.traceId)["feedback"] == "helpful"
+  app.button(key="entClearConversation").click().run()
+  assert [message.name for message in app.chat_message] == ["assistant"]
+  assert "你好，請告訴我" in visibleText(app)
+  assert app.session_state["entConversation"] == []
+  assert service.authStore.authenticate(token).role == "employee"
+  assert len(service.recentTraces(token)) == 2
+
+
+def testOlderWithdrawnTurnRemovesQuestionAndAnswerButKeepsAuthorizedTurn(appSystem):
+  app, service, passwords = appSystem
+  login(app, passwords, "employee")
+  first = query(app, "請假申請流程與專屬識別碼QA")
+  second = query(app, "補打卡說明流程", "出勤")
+  service.store.setPublicationStatus("demo-leave", "v1", "withdrawn")
+  app.run()
+  assert not app.exception
+  assert len(app.chat_message) == 2
+  assert "專屬識別碼QA" not in visibleText(app)
+  assert first.traceId not in visibleText(app)
+  assert second.traceId in visibleText(app)
+  assert len(app.session_state["entConversation"]) == 1
+
+
+def testConversationRetainsEachTurnDateAndBoundsMemory(appSystem):
+  app, _, passwords = appSystem
+  login(app, passwords, "employee")
+  first = query(app, asOf=date(2026, 10, 31))
+  second = query(app, asOf=date(2026, 11, 1))
+  assert {chunk.version for chunk in first.citations} == {"v1"}
+  assert {chunk.version for chunk in second.citations} == {"v2"}
+  assert [turn["asOf"] for turn in app.session_state["entConversation"]] == ["2026-10-31", "2026-11-01"]
+  assert "適用日期：2026-10-31" in visibleText(app)
+  assert "適用日期：2026-11-01" in visibleText(app)
+  for index in range(9):
+    query(app, f"補打卡說明流程 {index}", "出勤")
+  assert len(app.session_state["entConversation"]) == 10
+  assert all(turn["response"].traceId != first.traceId for turn in app.session_state["entConversation"])

@@ -42,7 +42,7 @@
 ## Task 4：Streamlit 展示與完整交接
 
 - [x] 以 AppTest 先測登入、登出、角色來源隔離、管理畫面、本人紀錄與 session 失效。
-- [x] 新增 `enterprise_app.py`；主頁區分請假／出勤，登入前不顯示內規；session 只保留 token，每次重繪驗權。
+- [x] 新增 `enterprise_app.py`；主頁區分請假／出勤，登入前不顯示內規；session 保存 token 與本次 UI 狀態，Principal 每次重繪重新取得並驗權。
 - [x] 更新 README、AGENTS、架構、命令與完成狀態；保留待人工驗收／真實模型品質項目。
 - [x] 全套 pytest、離線企業情境、乾淨 Git 匯出驗證、最終安全審查，推送功能分支供換機接續。
 
@@ -51,3 +51,5 @@
 原版交接已完成：Private repo `mina201199/hr-leave-attendance-rag`，基準 `41ee534`，匯出副本 70 passed，47 原始快照雜湊一致。
 
 企業程式提交 `e750ab9`：全新 Git 匯出副本 250 passed（52.48 秒），開發題組 6／6、工程回歸 5／5；129 檔交接掃描無金鑰或執行資料庫，原版資料與歷史報告保持不變。最終草稿撤回修正複審通過，功能分支已推送。瀏覽器上傳、三角色人工流程及真實模型品質仍待驗收，詳見 README 與 `docs/enterprise-validation.md`。
+
+同日後續：已完成真實瀏覽器上傳、大小邊界、編碼、格式／ACL 及發布／撤回驗收，並依使用者要求改為對話窗；最新全套 253 passed。上述 250 項與待辦為初次交接歷史，最新結果以 `docs/enterprise-browser-acceptance-20261022.md` 為準。代表性使用者與真實模型品質仍待驗收。
