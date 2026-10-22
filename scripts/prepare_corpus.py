@@ -52,7 +52,10 @@ def main():
       "sourceUpdatedAt": item.sourceUpdatedAt, "sourceType": item.sourceType} for item in records],
     "rawFiles": [{"path": str(path.relative_to(projectPath)).replace("\\", "/"),
       "sha256": hashlib.sha256(path.read_bytes()).hexdigest()} for path in sorted(rawPath.iterdir()) if path.is_file()]}
-  saveSnapshot(outputPath / "knowledge.jsonl", "".join(json.dumps(asdict(item), ensure_ascii=False) + "\n" for item in records))
+  # 公開基準快照維持原格式，企業契約的新欄位不應改變已核對的原始位元組。
+  enterpriseFields = {"publicationStatus", "maintainerId", "isDemo", "externalProcessingAllowed"}
+  snapshotRecords = [{key: value for key, value in asdict(item).items() if key not in enterpriseFields} for item in records]
+  saveSnapshot(outputPath / "knowledge.jsonl", "".join(json.dumps(item, ensure_ascii=False) + "\n" for item in snapshotRecords))
   saveSnapshot(outputPath / "manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
   result = {key: manifest[key] for key in ("recordCount", "faqCount", "penaltyCaseCount", "chunkCount", "categories", "faqPublishers")}
   if args.importData:

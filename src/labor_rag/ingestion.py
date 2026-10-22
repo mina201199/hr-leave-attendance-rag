@@ -2,6 +2,7 @@ import csv
 import hashlib
 import io
 import json
+from dataclasses import asdict
 from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import urlparse
@@ -12,6 +13,8 @@ from .models import DocumentChunk
 
 PENALTY_SOURCE_URL = "https://data.gov.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5"
 CATEGORIES = ("薪資", "工時", "休假", "裁罰")
+ENTERPRISE_SOURCE_TYPES = ("公司制度", "主管指引", "人資SOP")
+PUBLICATION_STATUSES = ("draft", "published", "withdrawn")
 
 
 def validateChunk(chunk: DocumentChunk) -> None:
@@ -21,10 +24,24 @@ def validateChunk(chunk: DocumentChunk) -> None:
       raise ValueError(f"{fieldName} 不可為空白")
   if chunk.category not in CATEGORIES:
     raise ValueError("不支援的資料類別")
-  if chunk.sourceType not in ("官方摘要", "官方問答", "裁罰紀錄"):
+  if chunk.sourceType not in ("官方摘要", "官方問答", "裁罰紀錄") + ENTERPRISE_SOURCE_TYPES:
     raise ValueError("不支援的來源類型")
+  if chunk.publicationStatus not in PUBLICATION_STATUSES:
+    raise ValueError("publicationStatus 必須為 draft、published 或 withdrawn")
+  for fieldName in ("isDemo", "externalProcessingAllowed"):
+    if not isinstance(getattr(chunk, fieldName), bool):
+      raise ValueError(f"{fieldName} 必須為布林值")
+  if chunk.maintainerId is not None and (not isinstance(chunk.maintainerId, str) or not chunk.maintainerId.strip()):
+    raise ValueError("maintainerId 必須為有效識別碼")
   parsedUrl = urlparse(chunk.sourceUrl)
-  if parsedUrl.scheme != "https" or not parsedUrl.hostname:
+  if chunk.sourceType in ENTERPRISE_SOURCE_TYPES:
+    if chunk.sourceUrl != f"internal://{chunk.documentId}" or not parsedUrl.netloc or parsedUrl.path or parsedUrl.query or parsedUrl.fragment or parsedUrl.username or parsedUrl.password:
+      raise ValueError("內部來源必須為 internal://<documentId>")
+    if not chunk.maintainerId or not chunk.effectiveFrom:
+      raise ValueError("內部來源必須有 maintainerId 與 effectiveFrom")
+    if not isinstance(chunk.allowedRoles, (tuple, list)) or not chunk.allowedRoles or any(role not in ("employee", "manager", "hr") for role in chunk.allowedRoles):
+      raise ValueError("內部來源必須明確設定 employee、manager 或 hr ACL")
+  elif parsedUrl.scheme != "https" or not parsedUrl.hostname:
     raise ValueError("來源網址必須為有效 HTTPS 網址")
   if not isinstance(chunk.active, bool):
     raise ValueError("active 必須為布林值")
@@ -37,6 +54,39 @@ def validateChunk(chunk: DocumentChunk) -> None:
     raise ValueError("有效日期起訖顛倒")
   if (chunk.parentId is None) != (chunk.parentText is None):
     raise ValueError("父片段 ID 與全文必須一起提供")
+  if chunk.parentId is not None and any(not isinstance(value, str) or not value.strip() for value in (chunk.parentId, chunk.parentText)):
+    raise ValueError("父片段 ID 與全文不可為空白")
+
+
+def chunkMetadata(chunk: DocumentChunk) -> dict:
+  metadata = asdict(chunk)
+  for fieldName in ("chunkId", "text", "parentId", "parentText", "collectedAt"):
+    metadata.pop(fieldName)
+  # 舊公開文件會將同一頁的多題問答放在不同類別，須保留原本的語料契約。
+  if chunk.sourceType not in ENTERPRISE_SOURCE_TYPES:
+    metadata.pop("title")
+    metadata.pop("category")
+  metadata["allowedRoles"] = tuple(chunk.allowedRoles)
+  return metadata
+
+
+def validateChunkGroups(chunks: list[DocumentChunk]) -> None:
+  documents, parents, parentOwners = {}, {}, {}
+  for chunk in chunks:
+    metadata = chunkMetadata(chunk)
+    documentKey = (chunk.documentId, chunk.version)
+    if documentKey in documents and documents[documentKey] != metadata:
+      raise ValueError("同一文件的版本、來源、權限及中繼資料必須一致")
+    documents[documentKey] = metadata
+    if chunk.parentId is not None:
+      if chunk.parentId in parentOwners and parentOwners[chunk.parentId] != chunk.documentId:
+        raise ValueError("父片段 ID 不可跨文件共用")
+      parentOwners[chunk.parentId] = chunk.documentId
+      parentKey = (chunk.parentId, chunk.version)
+      parentValue = (metadata, chunk.parentText)
+      if parentKey in parents and parents[parentKey] != parentValue:
+        raise ValueError("父片段不可跨文件或使用不同權限、來源及全文")
+      parents[parentKey] = parentValue
 
 
 def loadChunks(sourcePath: str | Path) -> list[DocumentChunk]:
@@ -55,6 +105,7 @@ def loadChunks(sourcePath: str | Path) -> list[DocumentChunk]:
         chunks.append(chunk)
       except (ValueError, TypeError) as error:
         raise ValueError(f"第 {lineNumber} 行資料無效：{error}") from error
+  validateChunkGroups(chunks)
   return chunks
 
 

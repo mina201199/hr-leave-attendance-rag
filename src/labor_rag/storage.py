@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .ingestion import validateChunk
+from .ingestion import ENTERPRISE_SOURCE_TYPES, PUBLICATION_STATUSES, validateChunk, validateChunkGroups
 from .models import DocumentChunk
 
 
@@ -65,7 +65,26 @@ class KnowledgeStore:
           contentHash TEXT NOT NULL, vector TEXT NOT NULL,
           PRIMARY KEY (modelId, chunkId, version, contentHash)
         );
+        CREATE TABLE IF NOT EXISTS revisionStates (
+          documentId TEXT NOT NULL, version TEXT NOT NULL,
+          publicationStatus TEXT NOT NULL CHECK(publicationStatus IN ('draft', 'published', 'withdrawn')),
+          PRIMARY KEY (documentId, version),
+          FOREIGN KEY (documentId, version) REFERENCES revisions(documentId, version)
+        );
       """)
+      # 狀態回填使用同一交易，保留原始 payload、歷史及向量，不改寫既有文件。
+      historicalChunks = []
+      for documentId, version, payload in connection.execute("SELECT documentId, version, payload FROM revisions"):
+        records = [DocumentChunk(**record) for record in json.loads(payload)]
+        if not records:
+          raise ValueError("文件版本不可沒有片段")
+        for chunk in records:
+          validateChunk(chunk)
+        historicalChunks.extend(records)
+        validateChunkGroups(records)
+        connection.execute("INSERT OR IGNORE INTO revisionStates VALUES (?, ?, ?)",
+          (documentId, version, records[0].publicationStatus))
+      validateChunkGroups(historicalChunks)
 
   @contextmanager
   def connect(self):
@@ -83,7 +102,13 @@ class KnowledgeStore:
     for chunk in chunks:
       validateChunk(chunk)
       groups[chunk.documentId].append(chunk)
+    validateChunkGroups(chunks)
     with self.connect() as connection:
+      # 已存父群組也須檢查，避免分批匯入藉共用父 ID 混入其他權限的全文。
+      previousChunks = [DocumentChunk(**record) for (payload,) in connection.execute("SELECT payload FROM revisions")
+        for record in json.loads(payload)]
+      incomingKeys = {(chunk.documentId, chunk.version) for chunk in chunks}
+      validateChunkGroups([chunk for chunk in previousChunks if (chunk.documentId, chunk.version) not in incomingKeys] + chunks)
       storedCases = defaultdict(list)
       for oldId, oldPayload in connection.execute("SELECT d.documentId, r.payload FROM documents d JOIN revisions r ON r.documentId=d.documentId AND r.version=d.version WHERE d.active=1"):
         identity, fields = penaltyIdentity(json.loads(oldPayload))
@@ -96,7 +121,8 @@ class KnowledgeStore:
         payload = json.dumps([asdict(item) for item in sorted(group, key=lambda item: item.chunkId)], ensure_ascii=False, sort_keys=True)
         existing = connection.execute("SELECT payload FROM revisions WHERE documentId=? AND version=?", (documentId, version)).fetchone()
         if existing:
-          previousRecords, incomingRecords = json.loads(existing[0]), json.loads(payload)
+          previousRecords = [asdict(DocumentChunk(**record)) for record in json.loads(existing[0])]
+          incomingRecords = [asdict(DocumentChunk(**record)) for record in json.loads(payload)]
           for record in previousRecords + incomingRecords:
             record.pop("collectedAt", None)
           if previousRecords != incomingRecords:
@@ -118,7 +144,10 @@ class KnowledgeStore:
           if {item['chunkId'] for item in json.loads(previousPayload)} & {item.chunkId for item in group}:
             raise ValueError("片段 ID 已由其他文件使用")
         connection.execute("INSERT INTO revisions VALUES (?, ?, ?)", (documentId, version, payload))
-        connection.execute("INSERT INTO documents VALUES (?, ?, ?) ON CONFLICT(documentId) DO UPDATE SET version=excluded.version, active=excluded.active", (documentId, version, group[0].active))
+        connection.execute("INSERT INTO revisionStates VALUES (?, ?, ?)", (documentId, version, group[0].publicationStatus))
+        activeUpdate = "documents.active" if group[0].sourceType in ENTERPRISE_SOURCE_TYPES else "excluded.active"
+        connection.execute("INSERT INTO documents VALUES (?, ?, ?) ON CONFLICT(documentId) DO UPDATE SET version=excluded.version, active=" + activeUpdate,
+          (documentId, version, group[0].active))
         if identity and group[0].active:
           storedCases[identity] = [(oldId, oldFields) for oldId, oldFields in storedCases[identity] if oldId != documentId]
           storedCases[identity].append((documentId, fields))
@@ -126,21 +155,36 @@ class KnowledgeStore:
   def listChunks(self, includeInactive: bool = False, asOf: str | None = None) -> list[DocumentChunk]:
     asOf = asOf or datetime.now(ZoneInfo("Asia/Taipei")).date().isoformat()
     with self.connect() as connection:
-      rows = connection.execute("SELECT r.documentId, r.version, r.payload, d.active FROM revisions r JOIN documents d ON r.documentId=d.documentId ORDER BY r.rowid").fetchall()
+      rows = connection.execute("SELECT r.documentId, r.version, r.payload, d.active, s.publicationStatus FROM revisions r JOIN documents d ON r.documentId=d.documentId JOIN revisionStates s ON s.documentId=r.documentId AND s.version=r.version ORDER BY r.rowid").fetchall()
     currentVersions = {}
-    decodedRows = [(documentId, version, json.loads(payload), enabled) for documentId, version, payload, enabled in rows]
-    for documentId, version, records, enabled in decodedRows:
-      if not records[0]["effectiveFrom"] or records[0]["effectiveFrom"] <= asOf:
-        currentVersions[documentId] = version
+    decodedRows = [(documentId, version, json.loads(payload), enabled, status) for documentId, version, payload, enabled, status in rows]
+    for documentId, version, records, enabled, status in decodedRows:
+      effectiveFrom = records[0].get("effectiveFrom") or ""
+      if status != "draft" and effectiveFrom <= asOf:
+        previous = currentVersions.get(documentId)
+        if records[0]["sourceType"] not in ENTERPRISE_SOURCE_TYPES or previous is None or effectiveFrom >= previous[0]:
+          currentVersions[documentId] = (effectiveFrom, version)
     chunks = []
-    for documentId, version, records, enabled in decodedRows:
-      active = enabled and currentVersions.get(documentId) == version and (not records[0]["effectiveTo"] or asOf <= records[0]["effectiveTo"])
+    for documentId, version, records, enabled, status in decodedRows:
+      active = enabled and status == "published" and currentVersions.get(documentId, (None, None))[1] == version and (not records[0].get("effectiveTo") or asOf <= records[0]["effectiveTo"])
       if not active and not includeInactive:
         continue
       for record in records:
         record["allowedRoles"] = tuple(record["allowedRoles"])
-        chunks.append(replace(DocumentChunk(**record), active=bool(active)))
+        chunks.append(replace(DocumentChunk(**record), active=bool(active), publicationStatus=status))
     return chunks
+
+  def setPublicationStatus(self, documentId: str, version: str, status: str) -> None:
+    if status not in PUBLICATION_STATUSES:
+      raise ValueError("publicationStatus 必須為 draft、published 或 withdrawn")
+    with self.connect() as connection:
+      # 已發布的版本不能退成草稿，否則略過草稿會讓已淘汰的舊版重新出現。
+      cursor = connection.execute("UPDATE revisionStates SET publicationStatus=? WHERE documentId=? AND version=? AND (?<>'draft' OR publicationStatus='draft')",
+        (status, documentId, version, status))
+      if cursor.rowcount != 1:
+        if connection.execute("SELECT 1 FROM revisionStates WHERE documentId=? AND version=?", (documentId, version)).fetchone():
+          raise ValueError("已發布或撤回的版本不可退回草稿")
+        raise ValueError("找不到文件版本")
 
   def setActive(self, documentId: str, active: bool) -> None:
     with self.connect() as connection:

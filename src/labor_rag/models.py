@@ -21,6 +21,10 @@ class DocumentChunk:
   effectiveTo: str | None = None
   parentId: str | None = None
   parentText: str | None = None
+  publicationStatus: str = "published"
+  maintainerId: str | None = None
+  isDemo: bool = False
+  externalProcessingAllowed: bool = False
 
 
 @dataclass(frozen=True)
