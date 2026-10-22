@@ -15,6 +15,7 @@ sys.path.insert(0, str(projectPath / "src"))
 
 from labor_rag.auth import AuthenticationError, AuthorizationError
 from labor_rag.enterprise import buildEnterpriseRuntime
+from labor_rag.enterprise_display import conciseExcerpt
 from labor_rag.settings import loadSettings
 
 
@@ -74,11 +75,12 @@ def withoutCitationMarkers(text, citations):
   return re.sub(rf"(?:[ \t]+(?:{markers}))+(?=\n|$)", "", text) if markers else text
 
 
-def answerDisplayParts(response):
+def answerDisplayParts(response, question=""):
   if response.mode != "企業來源摘錄（離線，非模型回答）":
     return withoutCitationMarkers(response.text, response.citations), []
   body = response.text.removeprefix("【來源摘錄，非模型回答；虛構示範依各來源標示】\n\n")
   notes = []
+  primaryExcerpt = None
   demoMarker = "【虛構示範制度，非真實公司文件】"
   demoFooters = (
     "本頁只說明虛構操作流程，不規定法定假別日數或薪資。",
@@ -106,15 +108,19 @@ def answerDisplayParts(response):
         break
     if not excerpt.strip():
       continue
+    if citation == response.citations[0]:
+      primaryExcerpt = excerpt
     body = body.replace(original, f"{excerpt} [{citation.chunkId}]", 1)
     notes.append(f"[{citation.chunkId}] " + "".join(details))
+  if response.status == "answered" and primaryExcerpt is not None:
+    body = conciseExcerpt(primaryExcerpt, question)
   return withoutCitationMarkers(body, response.citations), notes
 
 
-def showResponse(service, token, response, asOf):
+def showResponse(service, token, response, asOf, question):
   statusLabels = {"answered": "已找到來源", "no_evidence": "沒有足夠來源", "needs_clarification": "需要補充條件",
     "conflict": "來源有衝突", "context_limit": "來源超過內容預算"}
-  body, notes = answerDisplayParts(response)
+  body, notes = answerDisplayParts(response, question)
   st.text(body)
   for citation in response.citations:
     # 內部識別碼只能經服務讀取，不產生可繞過授權的外部連結。
@@ -125,7 +131,7 @@ def showResponse(service, token, response, asOf):
     for note in notes:
       st.caption(note)
     st.caption(f"狀態：{statusLabels.get(response.status, response.status)}｜{response.mode}")
-    st.caption("引用已通過權限與版本檢查；仍請核對原文中的適用條件。離線來源摘錄並非模型回答。")
+    st.caption("離線重點摘錄：以本機文字比對整理最相關來源，並非模型回答；完整條件與其他檢索結果請展開引用確認。")
     st.caption(f"紀錄 ID：{response.traceId}｜耗時：{response.elapsedMs:.0f} ms")
   for label, key, rating in (("有幫助", "entHelpful", "helpful"), ("需要改善", "entUnhelpful", "unhelpful")):
     if st.button(label, key=f"{key}-{response.traceId}"):
@@ -189,7 +195,7 @@ def showConversation(service, token, asOf):
         st.text(turn["question"])
         st.caption(f"適用日期：{turn['asOf']}")
       with st.chat_message("assistant"):
-        showResponse(service, token, turn["response"], turn["asOf"])
+        showResponse(service, token, turn["response"], turn["asOf"], turn["question"])
 
 
 def showManagement(service, token, today):

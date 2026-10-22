@@ -309,7 +309,7 @@ def testDemoNotesCollapsedBelowAnswerAndOriginalCitationStaysIntact(appSystem, a
   response = query(app, asOf=asOf)
   assistant = app.chat_message[-1]
   body = assistant.get("text")[0].value
-  assert body.startswith("員工先填寫")
+  assert body.startswith("你可以先填寫")
   assert condition in body
   assert "虛構" not in body
   assert dateNote not in body
@@ -321,7 +321,7 @@ def testDemoNotesCollapsedBelowAnswerAndOriginalCitationStaysIntact(appSystem, a
   assert dateNote in captions
   assert "虛構示範制度，非真實公司文件" in captions
   assert "狀態：" in captions
-  assert "引用已通過權限與版本檢查" in captions
+  assert "離線重點摘錄" in captions
   assert response.traceId in captions
   assert not any(element.type == "caption" for element in assistant.children.values())
   assert response.citations[0].text in [element.value for element in assistant.get("text")]
@@ -354,6 +354,13 @@ def testSuggestedQuestionUsesAuthorizedSourcesAndDoesNotRepeat(appSystem, userId
   assert turn["question"] == question
   assert documentId in {chunk.documentId for chunk in turn["response"].citations}
   assert all(chunk.isDemo and not chunk.externalProcessingAllowed for chunk in turn["response"].citations)
+  body = app.chat_message[-1].get("text")[0].value
+  assert "\n\n" not in body
+  if userId == "employee":
+    assert "通知直屬主管" in body
+    assert "無法即時聯絡主管時" in body
+    assert "請假日期變更或取消時" not in body
+    assert "情況穩定後補齊示範申請表" not in body
   app.run()
   assert len(app.session_state["entConversation"]) == 1
   assert len(service.recentTraces(token)) == 1
