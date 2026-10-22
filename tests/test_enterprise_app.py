@@ -46,8 +46,7 @@ def login(app, passwords, userId):
   return app.session_state["entToken"]
 
 
-def query(app, question="請假申請流程", category="請假", asOf=date(2026, 10, 22)):
-  app.selectbox(key="entCategory").set_value(category)
+def query(app, question="請假申請流程", asOf=date(2026, 10, 22)):
   app.date_input(key="entAsOf").set_value(asOf)
   app.chat_input(key="entQuestion").set_value(question).run()
   assert not app.exception
@@ -111,13 +110,14 @@ def test_role_sources_query_and_backend_management(appSystem, userId, expected, 
   assert "internal://" not in "\n".join(element.value for element in app.markdown)
 
 
-def test_category_and_effective_date_reach_service(appSystem):
+def testAllAuthorizedTopicsAndEffectiveDateReachService(appSystem):
   app, _, passwords = appSystem
   login(app, passwords, "employee")
-  attendance = query(app, "補打卡說明流程", "出勤")
-  assert {chunk.documentId for chunk in attendance.citations} == {"demo-attendance"}
+  assert not any(element.key == "entCategory" for element in app.selectbox)
+  combined = query(app, "請假申請與補打卡流程")
+  assert {chunk.documentId for chunk in combined.citations} == {"demo-leave", "demo-attendance"}
   future = query(app, asOf=date(2026, 11, 1))
-  assert {chunk.version for chunk in future.citations} == {"v2"}
+  assert {chunk.version for chunk in future.citations if chunk.documentId == "demo-leave"} == {"v2"}
   assert "交接代理安排" in visibleText(app)
 
 
@@ -252,7 +252,7 @@ def testConversationKeepsTurnsAndClearsWithoutDeletingOwnedRecords(appSystem):
   app, service, passwords = appSystem
   token = login(app, passwords, "employee")
   first = query(app, "請假申請流程")
-  second = query(app, "補打卡說明流程", "出勤")
+  second = query(app, "補打卡說明流程")
   assert [message.name for message in app.chat_message] == ["user", "assistant", "user", "assistant"]
   assert "請假申請流程" in visibleText(app)
   assert first.traceId in visibleText(app)
@@ -271,7 +271,8 @@ def testOlderWithdrawnTurnRemovesQuestionAndAnswerButKeepsAuthorizedTurn(appSyst
   app, service, passwords = appSystem
   login(app, passwords, "employee")
   first = query(app, "請假申請流程與專屬識別碼QA")
-  second = query(app, "補打卡說明流程", "出勤")
+  second = query(app, "補打卡")
+  assert {chunk.documentId for chunk in second.citations} == {"demo-attendance"}
   service.store.setPublicationStatus("demo-leave", "v1", "withdrawn")
   app.run()
   assert not app.exception
@@ -288,12 +289,12 @@ def testConversationRetainsEachTurnDateAndBoundsMemory(appSystem):
   first = query(app, asOf=date(2026, 10, 31))
   second = query(app, asOf=date(2026, 11, 1))
   assert {chunk.version for chunk in first.citations} == {"v1"}
-  assert {chunk.version for chunk in second.citations} == {"v2"}
+  assert {chunk.version for chunk in second.citations if chunk.documentId == "demo-leave"} == {"v2"}
   assert [turn["asOf"] for turn in app.session_state["entConversation"]] == ["2026-10-31", "2026-11-01"]
   assert "適用日期：2026-10-31" in visibleText(app)
   assert "適用日期：2026-11-01" in visibleText(app)
   for index in range(9):
-    query(app, f"補打卡說明流程 {index}", "出勤")
+    query(app, f"補打卡說明流程 {index}")
   assert len(app.session_state["entConversation"]) == 10
   assert all(turn["response"].traceId != first.traceId for turn in app.session_state["entConversation"])
 
@@ -302,7 +303,7 @@ def testConversationRetainsEachTurnDateAndBoundsMemory(appSystem):
   (date(2026, 10, 22), "本示範流程適用於 2026-11-01 前的制度查詢。", "需要調整時由主管退回說明"),
   (date(2026, 11, 1), "本示範流程自 2026-11-01 起適用。", "代理安排尚未確認時先補齊說明再送出"),
 ])
-def testDemoNotesAppearBelowAnswerAndOriginalCitationStaysIntact(appSystem, asOf, dateNote, condition):
+def testDemoNotesCollapsedBelowAnswerAndOriginalCitationStaysIntact(appSystem, asOf, dateNote, condition):
   app, _, passwords = appSystem
   login(app, passwords, "employee")
   response = query(app, asOf=asOf)
@@ -313,7 +314,13 @@ def testDemoNotesAppearBelowAnswerAndOriginalCitationStaysIntact(appSystem, asOf
   assert "虛構" not in body
   assert dateNote not in body
   assert "來源識別碼" not in body
-  captions = "\n".join(element.value for element in assistant.get("caption"))
+  details = next(element for element in assistant.get("expander") if element.label == "來源與適用說明")
+  assert not details.proto.expanded
+  captions = "\n".join(element.value for element in details.get("caption"))
   assert dateNote in captions
   assert "虛構示範制度，非真實公司文件" in captions
+  assert "狀態：" in captions
+  assert "引用已通過權限與版本檢查" in captions
+  assert response.traceId in captions
+  assert not any(element.type == "caption" for element in assistant.children.values())
   assert response.citations[0].text in [element.value for element in assistant.get("text")]

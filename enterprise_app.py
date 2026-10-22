@@ -110,16 +110,17 @@ def showResponse(service, token, response, asOf):
     "conflict": "來源有衝突", "context_limit": "來源超過內容預算"}
   body, notes = answerDisplayParts(response)
   st.text(body)
-  for note in notes:
-    st.caption(note)
-  st.caption(f"狀態：{statusLabels.get(response.status, response.status)}｜{response.mode}")
-  st.caption("引用已通過權限與版本檢查；仍請核對原文中的適用條件。離線來源摘錄並非模型回答。")
   for citation in response.citations:
     # 內部識別碼只能經服務讀取，不產生可繞過授權的外部連結。
     authorized = service.readCitation(token, citation.chunkId, asOf, citation.version)
     with st.expander(f"引用：{authorized.title}（{authorized.version}）"):
       showChunk(authorized)
-  st.caption(f"紀錄 ID：{response.traceId}｜耗時：{response.elapsedMs:.0f} ms")
+  with st.expander("來源與適用說明", expanded=False):
+    for note in notes:
+      st.caption(note)
+    st.caption(f"狀態：{statusLabels.get(response.status, response.status)}｜{response.mode}")
+    st.caption("引用已通過權限與版本檢查；仍請核對原文中的適用條件。離線來源摘錄並非模型回答。")
+    st.caption(f"紀錄 ID：{response.traceId}｜耗時：{response.elapsedMs:.0f} ms")
   for label, key, rating in (("有幫助", "entHelpful", "helpful"), ("需要改善", "entUnhelpful", "unhelpful")):
     if st.button(label, key=f"{key}-{response.traceId}"):
       service.feedback(token, response.traceId, rating)
@@ -131,17 +132,16 @@ def clearConversation():
   st.session_state.pop("entQuestion", None)
 
 
-def showConversation(service, token, category, asOf):
+def showConversation(service, token, asOf):
   st.subheader("請假與出勤問答")
   st.caption("每次請輸入完整問題；目前逐題查詢，不會自動推論上一題的條件。最近 10 輪只保留在本次登入畫面，登出即清除。")
   conversationArea = st.container()
   question = st.chat_input("輸入請假或出勤制度問題…", key="entQuestion", max_chars=1000)
   history = st.session_state.get("entConversation", [])
   if question:
-    categoryValue = {"全部": None, "請假": "休假", "出勤": "工時"}[category]
-    response = service.ask(token, question, asOf=asOf.isoformat(), category=categoryValue)
+    response = service.ask(token, question, asOf=asOf.isoformat())
     history = (history + [{"question": question, "response": response,
-      "asOf": asOf.isoformat(), "category": category}])[-10:]
+      "asOf": asOf.isoformat()}])[-10:]
   authorizedHistory = []
   for turn in history:
     try:
@@ -161,7 +161,7 @@ def showConversation(service, token, category, asOf):
     for turn in authorizedHistory:
       with st.chat_message("user"):
         st.text(turn["question"])
-        st.caption(f"適用日期：{turn['asOf']}｜主題：{turn['category']}")
+        st.caption(f"適用日期：{turn['asOf']}")
       with st.chat_message("assistant"):
         showResponse(service, token, turn["response"], turn["asOf"])
 
@@ -232,9 +232,8 @@ def showWorkspace(service, token, principal):
   with st.sidebar:
     st.subheader("查詢設定")
     st.caption(f"目前身分：{roleLabels[principal.role]}｜僅查制度，沒有個人假單、出勤與核准交易。")
-    category = st.selectbox("主題", ["全部", "請假", "出勤"], key="entCategory")
     asOf = st.date_input("制度適用日期", value=today, key="entAsOf")
-    st.caption("主題套用於下一題；適用日期也影響資料來源清單。舊對話保留當時的適用日期。")
+    st.caption("適用日期影響下一題與資料來源清單。舊對話保留當時的適用日期。")
     st.button("清除對話", key="entClearConversation", on_click=clearConversation)
     st.button("登出", key="entLogout", on_click=logout, args=(service, token))
   if "entNotice" in st.session_state:
@@ -242,7 +241,7 @@ def showWorkspace(service, token, principal):
   canManage = principal.role == "hr" and "knowledge:manage" in principal.capabilities
   tabs = st.tabs(["制度查詢", "資料來源", "我的紀錄"] + (["維護管理"] if canManage else []))
   with tabs[0]:
-    showConversation(service, token, category, asOf)
+    showConversation(service, token, asOf)
   with tabs[1]:
     st.caption(f"以下為 {asOf.isoformat()} 當時有效、已發布且目前身分可讀的來源。內部來源以受控文字呈現。")
     for chunk in service.listSources(token, asOf=asOf.isoformat()):
