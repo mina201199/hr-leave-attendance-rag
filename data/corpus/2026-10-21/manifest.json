@@ -1,0 +1,1051 @@
+{
+  "collectedAt": "2026-10-21",
+  "recordCount": 120,
+  "faqCount": 40,
+  "penaltyCaseCount": 80,
+  "chunkCount": 124,
+  "categories": {
+    "薪資": 17,
+    "工時": 8,
+    "休假": 15,
+    "裁罰": 80
+  },
+  "faqPublishers": {
+    "臺北市政府勞動局": 29,
+    "勞動部": 11
+  },
+  "selection": "人工選定 40 題薪資、工時、休假官方問答；裁罰限備註含工讀／部分工時專案，至少一項第21–28、30–43條違規，排除撤銷，依處分日期取最近80件，依處分字號合併。",
+  "limitations": "官方問答為來源日期版本；非完整法規資料庫。裁罰是歷史公告，專案名稱不代表每案受罰事項均涉及工讀生。不推論目前違規；80件並非所有公司完整紀錄。",
+  "sources": [
+    {
+      "documentId": "official-bola-0835C7A13BC1EF15",
+      "title": "勞工每月工資為最低工資29,500元（含全勤獎金），如勞工請事假如何扣薪？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=0835C7A13BC1EF15",
+      "sourceUpdatedAt": "2026-04-13",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-9E7DB7AF346E2B7D",
+      "title": "「最低工資法」的適用對象？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=9E7DB7AF346E2B7D",
+      "sourceUpdatedAt": "2024-11-26",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-659A978FCD6DD2C3",
+      "title": "「最低工資」與「基本工資」有何區別？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=659A978FCD6DD2C3",
+      "sourceUpdatedAt": "2024-11-26",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-6BA2B6D870F13C23",
+      "title": "勞工在家中或下班後，經雇主交辦工作，可否申請加班？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=6BA2B6D870F13C23",
+      "sourceUpdatedAt": "2024-08-06",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-1F52A51C58625A34",
+      "title": "約定每日工作8小時，所以居家工作期間，勞工連續工作8小時（例如9:00~17:00），這樣可以嗎？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=1F52A51C58625A34",
+      "sourceUpdatedAt": "2024-08-06",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-D63232505FEC3843",
+      "title": "休息日第9至第12小時加班費計算方式？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=D63232505FEC3843",
+      "sourceUpdatedAt": "2024-01-30",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-D071801F88711ED5",
+      "title": "勞動基準法第34條有關輪班制勞工換班之休息時間修正內容？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=D071801F88711ED5",
+      "sourceUpdatedAt": "2024-01-30",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-CE03773A2E71617A",
+      "title": "休息日加班工時總量控管所指為何？休息日之工作時間要不要計入每月的加班上限？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=CE03773A2E71617A",
+      "sourceUpdatedAt": "2019-07-10",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-70464C835E4688A8",
+      "title": "115年1月1日起，最低工資之調漲?",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=70464C835E4688A8",
+      "sourceUpdatedAt": "2026-04-01",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-82FD6BE83122A7A0",
+      "title": "出差的交通時間(如搭火車或飛機抵達目的地前的交通時間)的時間是否可視為加班？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=82FD6BE83122A7A0",
+      "sourceUpdatedAt": "2019-06-20",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-BB7AAE526A9BA3D8",
+      "title": "如果加班時間跨夜(到凌晨)，工時要如何計算?",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=BB7AAE526A9BA3D8",
+      "sourceUpdatedAt": "2019-11-06",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-024AC00552729B45",
+      "title": "平均工資如何計算？如果工作未滿6個月，又該如何計算？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=024AC00552729B45",
+      "sourceUpdatedAt": "2024-02-27",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-5BA1BA88064D0F26",
+      "title": "颱風天經主管機關宣布停止上班時，雇主要求勞工出勤者，且因颱風要求加班，工資該如何給付？是否需給事後休息？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=5BA1BA88064D0F26",
+      "sourceUpdatedAt": "2023-12-18",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-D0530C11174A545A",
+      "title": "勞工因故未於休假日出席教育訓練，是否以曠工論？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=D0530C11174A545A",
+      "sourceUpdatedAt": "2023-12-18",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-EDE809BE28BC4E4D",
+      "title": "若公司積欠薪資或少發薪資，但無薪資轉帳、薪資明細，員工該如何證明？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=EDE809BE28BC4E4D",
+      "sourceUpdatedAt": "2023-12-18",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-C67BB3717EC148B8",
+      "title": "勞基法規定工資之定義為何？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=C67BB3717EC148B8",
+      "sourceUpdatedAt": "2023-12-18",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-8D48F35D4240FBEC",
+      "title": "雇主可以因勞工有過失逕自扣發勞工薪資嗎?",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8D48F35D4240FBEC",
+      "sourceUpdatedAt": "2023-12-18",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-8DC386681402F624",
+      "title": "績效獎金算不算工資，列入平均工資計算？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8DC386681402F624",
+      "sourceUpdatedAt": "2023-12-18",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-89046A0E7CE5E5AC",
+      "title": "事業單位可否以品質扣款、盤損等名義扣發績效獎金作為賠償之用？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=89046A0E7CE5E5AC",
+      "sourceUpdatedAt": "2025-04-24",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-C89ED2FE141B47BC",
+      "title": "勞基法是否對員工年終獎金有相關規定？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=C89ED2FE141B47BC",
+      "sourceUpdatedAt": "2023-09-07",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-86E3C6586F9A2EDD",
+      "title": "部份工時定義?",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=86E3C6586F9A2EDD",
+      "sourceUpdatedAt": "2022-03-02",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-8C413EC102381D8D",
+      "title": "事業單位停工，其停工期間工資應如何發給？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8C413EC102381D8D",
+      "sourceUpdatedAt": "2024-12-31",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-2B4459B0BAA6CB3D",
+      "title": "員工請了普通傷病假，公司可以怎麼處理全勤獎金?",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=2B4459B0BAA6CB3D",
+      "sourceUpdatedAt": "2026-05-25",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-231C37E49F241157",
+      "title": "勞工可以用通訊軟體(如：Line)向公司請假嗎?",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=231C37E49F241157",
+      "sourceUpdatedAt": "2024-01-25",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-D3AFE42FAD98227F",
+      "title": "勞工普通傷病假怎麼請？病假期間工資如何給付？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=D3AFE42FAD98227F",
+      "sourceUpdatedAt": "2023-08-21",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-C66C625CF46D828C",
+      "title": "計時人員的病假如何計算 ?",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=C66C625CF46D828C",
+      "sourceUpdatedAt": "2023-12-19",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-C7F1B09DBDDB54D5",
+      "title": "勞工事假，一年不得超過幾日？工資給付？如一年超過14日公司如何處理？",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=C7F1B09DBDDB54D5",
+      "sourceUpdatedAt": "2025-04-24",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-B5DDD7D62A791464",
+      "title": "勞工婚假有幾日呢?何時可以開始請假？需要一次請完嗎?未休完可以折算工資嗎?",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=B5DDD7D62A791464",
+      "sourceUpdatedAt": "2026-10-07",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-bola-6A8B18F938AEDB3F",
+      "title": "喪假請假規定",
+      "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=6A8B18F938AEDB3F",
+      "sourceUpdatedAt": "2023-04-19",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-81202",
+      "title": "部分工時勞工應如何計給特別休假?",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+      "sourceUpdatedAt": "2025-09-01",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-81186",
+      "title": "雇主是否可以規定特別休假要事先提出不能臨時請、要求預排全年特休，或未經同意將事（病）假改為特別休假？",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81186/post",
+      "sourceUpdatedAt": "2026-04-23",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-81182",
+      "title": "勞工離職當年畸零月數是否須依比例計給特別休假，又留職停薪應如何計算?另如滿一年有7天特別休假是否包含滿半年的3天?",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81182/post",
+      "sourceUpdatedAt": "2026-04-23",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-81173",
+      "title": "公司特別休假採曆年制(即每年1月1日至12月31日)，該如何計算給假的天數?勞工之特別休假於年度終結仍未休畢，是否可經勞雇雙方協商遞延至次一年度實施?勞工離職時要用週年制來計算剩餘天數嗎?",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81173/post",
+      "sourceUpdatedAt": "2026-04-23",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-7174",
+      "title": "每月的加班費應該要在什麼時候給付？",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2290/7174/post",
+      "sourceUpdatedAt": "2021-10-20",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-7255",
+      "title": "例假與休息日之差別為何？每7日的週期起迄是否也可以任意調動呢？可否任意於週期內任意更動例假及休息日日期?",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7255/post",
+      "sourceUpdatedAt": "2026-04-23",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-7246",
+      "title": "按時計酬（或按日計酬）之部分工時勞工，是否有休息日規定的適用？",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7246/post",
+      "sourceUpdatedAt": "2021-10-20",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-7170",
+      "title": "按時計酬（或按日計酬）之部分工時勞工，如例假及休息日未出勤，是否還要給「例假」、「休息日」工資？延時工資、休假日工資如何計算？",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2290/7170/post",
+      "sourceUpdatedAt": "2026-04-21",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-7168",
+      "title": "雇主是否要給勞工「工資明細」（薪資單）？「各項目」應該要包括哪些項目？雇主要如何提供？",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2290/7168/post",
+      "sourceUpdatedAt": "2026-04-21",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-7241",
+      "title": "例假日及休息日是否為完整1日？",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7241/post",
+      "sourceUpdatedAt": "2021-10-20",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "official-mol-7239",
+      "title": "國定假日一年有幾天?國定假日遇到例假或休息日，是否可以補假?雇主可否將國定假日、休息日與工作日調移？勞工於配合調移後之國定假日當日出勤工作，雇主是否應加倍發給工資？",
+      "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7239/post",
+      "sourceUpdatedAt": "2026-04-23",
+      "sourceType": "官方問答"
+    },
+    {
+      "documentId": "taipei-case-0a13ba11e4c65bc00b0a",
+      "title": "剛剛股份有限公司｜北市勞動字第11560018831號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-a84f61cf614b94f05471",
+      "title": "愛神阿芙羅黛蒂餐飲有限公司｜北市勞動字第11560018861號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-36b33feb0f6dfa3dbb3d",
+      "title": "鰻谷實業有限公司｜北市勞動字第11560018841號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-56a69fd3e32485c82ae0",
+      "title": "龍都酒樓股份有限公司｜北市勞動字第11560018171號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-5fb9aec56e47e8742dde",
+      "title": "王錦麗即伊髮造型名店｜北市勞動字第11560018161號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-14f16153fd7d3eb3bd07",
+      "title": "頭癮創意遊戲有限公司｜北市勞動字第11560016531號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-0aaf9324feeb16ddf1b7",
+      "title": "笨蛋工作室有限公司｜北市勞動字第11560016341號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-2cfbcbf5bab143cdf3fb",
+      "title": "謎書創意有限公司｜北市勞動字第11560016051號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-7f5996d4e2dcdea6fea0",
+      "title": "開溜有限公司｜北市勞動字第11560016061號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-17952acd74b6ac92a551",
+      "title": "食彧有限公司｜北市勞動字第11460132551號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3dd35d948b0aaf9a597a",
+      "title": "浦華興業股份有限公司｜北市勞動字第11460132541號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-e84a687d81a41b24d39e",
+      "title": "鳥貴成股份有限公司｜北市勞動字第11460132331號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3cbcba9b96acc01800dc",
+      "title": "豐味饌企業有限公司｜北市勞動字第11460132071號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-4b5dfbf1f489aaaec481",
+      "title": "草原永康有限公司｜北市勞動字第11460131921號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-f9037e7c8a6e3cb166fe",
+      "title": "富客餐飲股份有限公司｜北市勞動字第11460132431號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-a675dd4cd20ae6f7a304",
+      "title": "聖百味有限公司｜北市勞動字第11460132211號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-c1cbeea649ad7b4378d7",
+      "title": "盛和風企業有限公司｜北市勞動字第11460131991號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-6df20f6636747d45428b",
+      "title": "廣香股份有限公司｜北市勞動字第11460132231號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-5696ff175d6768143a4b",
+      "title": "泰姬餐飲有限公司｜北市勞動字第11460131771號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3ec4d58aae880840e6f7",
+      "title": "王宏傑即雅堂餐坊｜北市勞動字第11460131731號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-345b64c36267fde770fa",
+      "title": "帕可帕克牛肚包有限公司｜北市勞動字第11460131471號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-4d64c036ceb6725e9702",
+      "title": "木可餐飲有限公司｜北市勞動字第11460131361號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-9a4b6277c16eea5736e2",
+      "title": "閤家生活開發有限公司｜北市勞動字第11460131291號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-a3e2f4dcb9e6f4895e64",
+      "title": "日商樂比亞股份有限公司台灣分公司｜北市勞動字第11460131151號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-32dded52be27f517fbde",
+      "title": "福利麵包食品有限公司｜北市勞動字第11460130891號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-62cf384ef57728a532a5",
+      "title": "慵懶國際餐飲有限公司｜北市勞動字第11460130671號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-a83f6d6bb3c18ec9a6a0",
+      "title": "京都鐵板燒有限公司｜北市勞動字第11460130401號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3289327a0a10fed6778b",
+      "title": "中菱保全股份有限公司｜北市勞動字第11460130201號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-05d6d9e1a6a8ff779b93",
+      "title": "剛剛股份有限公司｜北市勞動字第11460130061號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-71808d4040c70a88cc1f",
+      "title": "王承偉即食來運轉餐坊｜北市勞動字第11460130391號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-c96abd2c1298fec19602",
+      "title": "新視紀整合行銷傳播股份有限公司｜北市勞動字第11360276361號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-e70f46c273d61b830dce",
+      "title": "愛睿思股份有限公司｜北市勞動字第11360276271號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-89f1ec0922a6030549ca",
+      "title": "寬霖科技股份有限公司｜北市勞動字第11360276091號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-857246ad99de4cb41967",
+      "title": "初芽餐飲有限公司｜北市勞動字第11360275471號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-5d89f28b3fd2428f2a52",
+      "title": "飛揚聯合科技股份有限公司｜北市勞動字第11360275851號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3b9748f3f3c3adc4dac1",
+      "title": "聖百味有限公司｜北市勞動字第11360275991號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-ba0ec7e5de28d8ec43c7",
+      "title": "葳立汽車股份有限公司｜北市勞動字第11360275341號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-98b8d4e10ec8fba954b6",
+      "title": "陳建誌即啤卡早餐店｜北市勞動字第11360275301號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-38ba607c5cb6e9adfdad",
+      "title": "品特商業股份有限公司｜北市勞動字第11360275521號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3b34753351e3b909bea6",
+      "title": "密斯杰餐飲行銷股份有限公司｜北市勞動字第11360275111號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-8eed8bece31f460cd4e7",
+      "title": "百家班餐飲管理顧問有限公司｜北市勞動字第11360276371號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-49a057a570c0abbe5c06",
+      "title": "黑彩管理顧問有限公司｜北市勞動字第11360275451號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-ef7b99c65785917433a9",
+      "title": "陽光士林開發股份有限公司｜北市勞動字第11360275121號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-95aab9873e5cbbf1d27e",
+      "title": "臺北市私立經貿夢想幼兒園｜北市勞動字第11360276201號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-7d862a87833dd10d098e",
+      "title": "韓之味小吃店｜北市勞動字第11360275171號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-22027168621137fd9e2f",
+      "title": "頂全工程有限公司｜北市勞動字第11360275061號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-86c5da39e60c535308b5",
+      "title": "黃育萱即食樂餐飲舖｜北市勞動字第11360275071號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3c3baf85d8afad2e5d2a",
+      "title": "富叡股份有限公司｜北市勞動字第11360274941號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-18567f1e52668217b66f",
+      "title": "郭力仁即慶輝牙醫診所｜北市勞動字第11360274711號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-ee9f312b8d76dd8356f3",
+      "title": "翔麟牙醫診所｜北市勞動字第11360274381號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-119940232b4b2249afc3",
+      "title": "樂淘淘創意有限公司｜北市勞動字第11360919231號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-6082716558bc4d986462",
+      "title": "肉倉有限公司｜北市勞動字第11360274741號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-5c62d4bccfff9a160872",
+      "title": "日商樂比亞股份有限公司台灣分公司｜北市勞動字第11360274571號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-f0e70fea54d6d9d47ec0",
+      "title": "陳伯任即興饕餐飲商行｜北市勞動字第11360274501號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-d0e4c1be8e6e0865d38b",
+      "title": "黑茶屋餐飲事業股份有限公司｜北市勞動字第11360274471號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-165a540e2550c06b9fae",
+      "title": "德益營造有限公司｜北市勞動字第11360274461號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-7e2563bbb92e1badbf54",
+      "title": "大雨國際實業有限公司｜北市勞動字第11360885231號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-7dec4a2a8f1dd785319a",
+      "title": "盛和風企業有限公司｜北市勞動字第11360274861號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-8650fbab264920ba6321",
+      "title": "錦達事業有限公司｜北市勞動字第11360273911號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-6d507c1728a7af134e02",
+      "title": "啞舍永康文化股份有限公司｜北市勞動字第11360274241號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-e5024b42fbadd9d44581",
+      "title": "廖朝聖即揚德健康診所｜北市勞動字第11360273991號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-2c7d7f53041e8d6cf066",
+      "title": "春秋養生國際有限公司｜北市勞動字第11360273671號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-cd55851f79fb2ef90019",
+      "title": "新凱汽車股份有限公司｜北市勞動字第11360273591號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-b24017ed972a717be0ab",
+      "title": "糕飛有限公司｜北市勞動字第11360274351號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-a2c22e7ccc61dd3b45c9",
+      "title": "優力國際人力資源顧問有限公司｜北市勞動字第11360273761號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-d6d4ecdb8f22c91a8ec2",
+      "title": "佐佧有限公司｜北市勞動字第11360885181號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-2ec2cd5492c441de1fc2",
+      "title": "得勝者文教股份有限公司｜北市勞動字第11360273481號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-07d79493bd99b9bf02b6",
+      "title": "白金噸國際生技有限公司｜北市勞動字第11360857411號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-69c3f82bc7351611206a",
+      "title": "麥斯國際管理有限公司｜北市勞動字第11360274551號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-1fd2e17d4ed9ca39e440",
+      "title": "香港商菲登有限公司台灣分公司｜北市勞動字第11360274271號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3104f30c284ffe80f382",
+      "title": "黃信淵即看見造型美髮店｜北市勞動字第11360273351號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-7d55c3663b855b167d46",
+      "title": "東方餐飲管理顧問有限公司｜北市勞動字第11360274021號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3a46ed4d9ae750ffed84",
+      "title": "鼎王國際餐飲股份有限公司｜北市勞動字第11360273621號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-3c47cc6abaf9465b7554",
+      "title": "綺樂旅行社股份有限公司｜北市勞動字第11360273371號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-9ce74c3623222bff8c45",
+      "title": "隱家有限公司｜北市勞動字第11360273501號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-c7b248f38494a35804bf",
+      "title": "漢來美食股份有限公司｜北市勞動字第11360272711號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-ffaf0aabed84ff734c15",
+      "title": "丁金蘭即三仁肉鬆店｜北市勞動字第11360838811號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-ff7925235d2048b0cc32",
+      "title": "領航環保工程有限公司｜北市勞動字第11360273381號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-593153ef076e8d2170b9",
+      "title": "泰和樓股份有限公司｜北市勞動字第11360272961號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    },
+    {
+      "documentId": "taipei-case-5a0554b5d0357cf738f0",
+      "title": "品誠娛樂股份有限公司｜北市勞動字第11360274091號｜裁罰紀錄",
+      "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+      "sourceUpdatedAt": null,
+      "sourceType": "裁罰紀錄"
+    }
+  ],
+  "rawFiles": [
+    {
+      "path": "data/raw/expansion-20261021/bola-024AC00552729B45.html",
+      "sha256": "10a41790e8531e9a7a17c8fd2e124319dddde3c085486040b0ba204fa8902d83"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-0835C7A13BC1EF15.html",
+      "sha256": "c0d157967ee9c744e8528786475450cc760e3ffcebfedee09782750ad1d9d9b1"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-1F52A51C58625A34.html",
+      "sha256": "7822bb3f868cfab1b7b93668eec5b7395f0b07f11bab0b476f5842a6ea0850b6"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-231C37E49F241157.html",
+      "sha256": "0a8c8c531037033c024bc3c5baf066471983e5a63e633d1d6fdf31c490a04c7b"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-2B4459B0BAA6CB3D.html",
+      "sha256": "f28988f03fc61cda76eaf05670a81d94cdc79acc64f7c2052ee42846e1f5f63d"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-5BA1BA88064D0F26.html",
+      "sha256": "37a56d54ac052467f7f8f68fb4220e7db46bd41519e48d1f2c26dff7dfdbc01f"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-659A978FCD6DD2C3.html",
+      "sha256": "eb97735da0b7a3e698b5071fb00ee37cff4e7d52451e359107a4bf273fb090d0"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-6A8B18F938AEDB3F.html",
+      "sha256": "25a60500b6f680e0d9899cb2965817b6c4c38d1be799768a377adc1292835994"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-6BA2B6D870F13C23.html",
+      "sha256": "eae5bac9fa4d30bbfc7f673946594a415084f45af2fa3b83f5382333977a4abf"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-70464C835E4688A8.html",
+      "sha256": "fe1ac8a1230d8fc92c587344bf29e23b213565d7f400a4b00e88e5e68ff9b676"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-82FD6BE83122A7A0.html",
+      "sha256": "a7e0c8309897aeec05d432b5905c29b50de4c8a74afee528b9520f231c6736d1"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-86E3C6586F9A2EDD.html",
+      "sha256": "725f29688fc56020170ffd8464fce0eef48ae98f10e48326b975bb7aabf810bb"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-89046A0E7CE5E5AC.html",
+      "sha256": "68c7d75ab0b2c255c566330fcd43cff0aa27332faa2939ae38f32981eadd33f9"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-8C413EC102381D8D.html",
+      "sha256": "9c30b7769a0493b7ba9bf04a7925120ea06ed98177e3686d0a95d0447abb80ab"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-8D48F35D4240FBEC.html",
+      "sha256": "d8ffa70196c80f11995df67f70dcd4803d2200618189a285ff00ba86e5ccdb1f"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-8DC386681402F624.html",
+      "sha256": "1de97f45c5e6fcf25211460fbb8cfd62bc4d76f69f7072cae5eae4e1f4fd22ce"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-9E7DB7AF346E2B7D.html",
+      "sha256": "da6af60e072a70e7d6c4b3e7313d4b749efbec15ed626a5c0a4e3a2a7f1c663f"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-B5DDD7D62A791464.html",
+      "sha256": "e28c887e8b0f164a95b22fe168898aa435bd06964944cf8802765037d1613626"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-BB7AAE526A9BA3D8.html",
+      "sha256": "b84fb5d22a1ccdfb26b6e5892c9240a9e7c681da18a0e7b000956242f0f1bc6b"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-C66C625CF46D828C.html",
+      "sha256": "bbe5004403ac11ff780232f933f773a867f411190435bc1e52acb59cdbba2798"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-C67BB3717EC148B8.html",
+      "sha256": "bed70b8ea47bcea1a5be79b12982371890bb6b4865f961a4f2f38ef7803261e0"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-C7F1B09DBDDB54D5.html",
+      "sha256": "cd74114ee0397811b81b3985301024c12bcb3139f417351a7e0c47138c4b7261"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-C89ED2FE141B47BC.html",
+      "sha256": "12a9025fa77d248f712e93071bc177a5348f16d4554de650cddcee0a3ce1d75a"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-CE03773A2E71617A.html",
+      "sha256": "58a436502591abbbc3db955bfea1c2274502c956ef67da7707f7d7cf89b95db9"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-D0530C11174A545A.html",
+      "sha256": "1ad78094afda8420eedb05e229f61e737f9dc1c7526b8dc06056b960f70ac210"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-D071801F88711ED5.html",
+      "sha256": "a13ac2e8c08b1ef044a5d105628fbaad831a5b355260e3b14c55ae32be665f5b"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-D3AFE42FAD98227F.html",
+      "sha256": "d1dca219aab4fb0746e26ef5e54d92a80d75402109f1b2ab4fc03e1f987157f4"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-D63232505FEC3843.html",
+      "sha256": "3a9c445ed6144aeed5161787196a6d86d852ef310c0a4a97852a49d83fea449e"
+    },
+    {
+      "path": "data/raw/expansion-20261021/bola-EDE809BE28BC4E4D.html",
+      "sha256": "951933b98d9404793371204e4ecd362df6056fd073461f2b76b6f1e330d6be9e"
+    },
+    {
+      "path": "data/raw/expansion-20261021/faq-selection.json",
+      "sha256": "368d31ae52046e8ae6522cd44945a78db604b95ed546098bfb07682783af5ba9"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-7168.html",
+      "sha256": "1020f9443a189b9767d14486ce38b9b9e02492af2158de280e02a0a326a176c7"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-7170.html",
+      "sha256": "297fee3c48dab362bb122f2cae3f5f2d6be85f15c41ebccbb0ff999981e7ecb3"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-7174.html",
+      "sha256": "5b5c9146dd531c07d697d25ad757a720f1011d5e2ce18a880ca3670e198e4847"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-7239.html",
+      "sha256": "6497bfd8fddaf3fa38897acea8235305ed9c85764e560e253b29578db9d8a4b8"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-7241.html",
+      "sha256": "943bc21bf23c5ffd1a68c8c455bd772a28c2cbbdec84bb630450bd4b84d0d1ce"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-7246.html",
+      "sha256": "d3cc5ad6d406610ba747c7f2a0897195bb34af2fa2ee46d0c7119bf37ab4c29f"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-7255.html",
+      "sha256": "11e30d0db05d7bf182254241e974ac6c5f6d53532b64cb45dc999a1a10bd912d"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-81173.html",
+      "sha256": "2fef1d827071249adf966bd2e5b64cc230e390e3782735757a15459bd62f60f9"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-81182.html",
+      "sha256": "2fcc0b22d1f39616327cce279daa69f69c98ebfefefdd175f85e683e34b3cde5"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-81186.html",
+      "sha256": "983923f667b0735c6f32c32e63f5603695218ac45faf81d3be857f81ef4be8aa"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-81202.html",
+      "sha256": "772d55c2de5c6381cd314ca27a4e94fcb771d4b3c991c1ec9ab5a1e3b1aa5b7a"
+    },
+    {
+      "path": "data/raw/expansion-20261021/mol-faq-list.html",
+      "sha256": "2e0aeca7bb10d756a1e62e9c4beb8c77495d74e77d505c93320001934c63f8c5"
+    },
+    {
+      "path": "data/raw/expansion-20261021/taipei-dataset.html",
+      "sha256": "413ae9f7d37ac431f87d37ad8a6adae82f6e2a6a5fdf80ad77af3ba759053bd7"
+    },
+    {
+      "path": "data/raw/expansion-20261021/taipei-faq-list.html",
+      "sha256": "2698ae7d7edca2d71367aa77c918a527f2b734b1d6cc127ec46b00cd48f37415"
+    },
+    {
+      "path": "data/raw/expansion-20261021/taipei-faq.json",
+      "sha256": "6e8b2049306addcd495a0bf0c791e18a926d35ff9ba4d826ab46357748bae6bd"
+    },
+    {
+      "path": "data/raw/expansion-20261021/taipei-leave-list.html",
+      "sha256": "494d31fb4f9930ef5b70cf89a985ba913e1b3c2bdb8a8fd5624d4735519c5213"
+    },
+    {
+      "path": "data/raw/expansion-20261021/taipei-penalties.csv",
+      "sha256": "e686b95e4ead0bc8ded9bd16f3588d66ff49354a97ec03714a622e816eb58c4a"
+    }
+  ]
+}

@@ -1,0 +1,1016 @@
+{
+  "mode": "live",
+  "promptVersion": "labor-grounded-v2",
+  "caseFile": "C:\\Users\\User\\Desktop\\RAG1\\data\\evaluation\\annual-conditions.jsonl",
+  "budgetUsd": 3,
+  "historicalReservationUsd": 2.1500000000000004,
+  "calls": [
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 46,
+        "total_tokens": 46
+      },
+      "estimatedCostUsd": 9.200000000000001e-07
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 2092,
+        "input_tokens_details": {
+          "cache_write_tokens": 2089,
+          "cached_tokens": 0
+        },
+        "output_tokens": 452,
+        "output_tokens_details": {
+          "reasoning_tokens": 272
+        },
+        "total_tokens": 2544
+      },
+      "estimatedCostUsd": 0.000487425
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 51,
+        "total_tokens": 51
+      },
+      "estimatedCostUsd": 1.02e-06
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 2101,
+        "input_tokens_details": {
+          "cache_write_tokens": 2098,
+          "cached_tokens": 0
+        },
+        "output_tokens": 200,
+        "output_tokens_details": {
+          "reasoning_tokens": 105
+        },
+        "total_tokens": 2301
+      },
+      "estimatedCostUsd": 0.00036255
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 52,
+        "total_tokens": 52
+      },
+      "estimatedCostUsd": 1.04e-06
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 2241,
+        "input_tokens_details": {
+          "cache_write_tokens": 2238,
+          "cached_tokens": 0
+        },
+        "output_tokens": 458,
+        "output_tokens_details": {
+          "reasoning_tokens": 253
+        },
+        "total_tokens": 2699
+      },
+      "estimatedCostUsd": 0.00050905
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 54,
+        "total_tokens": 54
+      },
+      "estimatedCostUsd": 1.08e-06
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 1816,
+        "input_tokens_details": {
+          "cache_write_tokens": 1813,
+          "cached_tokens": 0
+        },
+        "output_tokens": 428,
+        "output_tokens_details": {
+          "reasoning_tokens": 182
+        },
+        "total_tokens": 2244
+      },
+      "estimatedCostUsd": 0.000440925
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 30,
+        "total_tokens": 30
+      },
+      "estimatedCostUsd": 6e-07
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 1674,
+        "input_tokens_details": {
+          "cache_write_tokens": 1671,
+          "cached_tokens": 0
+        },
+        "output_tokens": 691,
+        "output_tokens_details": {
+          "reasoning_tokens": 390
+        },
+        "total_tokens": 2365
+      },
+      "estimatedCostUsd": 0.0005546749999999999
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 27,
+        "total_tokens": 27
+      },
+      "estimatedCostUsd": 5.4e-07
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 1943,
+        "input_tokens_details": {
+          "cache_write_tokens": 1940,
+          "cached_tokens": 0
+        },
+        "output_tokens": 110,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2053
+      },
+      "estimatedCostUsd": 0.00029780000000000003
+    }
+  ],
+  "results": [
+    {
+      "id": "annual-original",
+      "question": "兼職每週上班天數跟正職一樣、每天時數較短，特休怎麼給？",
+      "relevantDocumentIds": [
+        "official-mol-81202"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "reviewCriteria": [
+        "依第38條給予休假日數，不因每日工時較短折減日數",
+        "不得接續把一般8小時換算套用到本情境"
+      ],
+      "retrievedDocumentIds": [
+        "official-mol-81202",
+        "official-mol-81173",
+        "official-mol-81182"
+      ],
+      "citedDocumentIds": [
+        "official-mol-81202"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "若兼職勞工每週工作日數與同事業單位全時勞工相同、只是每日工時較短，應依《勞動基準法》第38條給予特別休假「日數」，不適用一般按全年正常工時比例計給的方式。 [official-mol-81202]\n\n具體可休日數須依年資等條件按第38條判定；目前資料未提供完整日數級距，因此無法據此算出個人日數。資料也不足以判定這個例外情形如何換算成休假時數。 [official-mol-81202]",
+        "citations": [
+          {
+            "chunkId": "official-mol-81202",
+            "documentId": "official-mol-81202",
+            "title": "部分工時勞工應如何計給特別休假?",
+            "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2025-09-01",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-81202",
+              "documentId": "official-mol-81202",
+              "title": "部分工時勞工應如何計給特別休假?",
+              "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-09-01",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.032266458495966696
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81173",
+              "documentId": "official-mol-81173",
+              "title": "公司特別休假採曆年制(即每年1月1日至12月31日)，該如何計算給假的天數?勞工之特別休假於年度終結仍未休畢，是否可經勞雇雙方協商遞延至次一年度實施?勞工離職時要用週年制來計算剩餘天數嗎?",
+              "text": "一、勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作滿一定期間之翌日如仍在職，即取得請特別休假之權利。另實務上，勞雇雙方仍多有約定以曆年制、會計年度、學年度（學校）或自行約定之年度給假之模式，已為慣例且行之有年，勞動基準法施行細則第24條第2項亦有明定經勞雇雙方協商後，得以前開方式計算特別休假期間。如果事業單位為配合出勤管理，經勞雇雙方協商約定以曆年制為特別休假行使期間，在勞工法定享有特別休假日數不得減損前提下，按比例分段計給特別休假，尚無不可；但是勞動契約終止時，雇主應依勞工「到職日」(即週年制)計算給予勞工實際工作年資之特別休假日數。 二、又依同法第38條第4項規定，勞工之特別休假，因年度終結而未休之日數，雇主應發給工資；但年度終結未休之日數，經「勞雇雙方協商」遞延至次1年度實施者，如果於次一年度終結或契約終止仍未休之日數，雇主應發給工資。本部另設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉，勞工可依不同「年度」需求計算特別休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81173/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81182",
+              "documentId": "official-mol-81182",
+              "title": "勞工離職當年畸零月數是否須依比例計給特別休假，又留職停薪應如何計算?另如滿一年有7天特別休假是否包含滿半年的3天?",
+              "text": "一、本部設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉可供參考。 二、依勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作，滿一定期間(留職停薪不計入年資，但前後年資可併計)之「翌日」如仍在職，即取得請特別休假之權利。勞工於年資滿1年，依法共可取得年資滿半年3天特別休假及年資滿1年7天之特別休假，共計10天。 三、特別休假是指勞工每繼續工作滿一定期間後，即應享有一定日數之特別休假，不因年度中終止勞動契約，而影響該勞工最後在職當年基於上一年度服務滿一定期間所應給予之特別休假。但是，勞工離職當年度繼續工作之畸零月數因未再滿一年，無應按比例另予特別休假之規定。例如：離職時年資1年又5個月餘，當年度工作的5個多月，得不另給特別休假。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81182/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03125763125763126
+          }
+        ],
+        "traceId": "0258f31f307041229f136181dfbaed96",
+        "elapsedMs": 7785.02
+      },
+      "manualReview": null
+    },
+    {
+      "id": "annual-short-day",
+      "question": "我和同公司的正職每週都上五天班，我每天四小時，正職每天八小時。我的特休日數要減半嗎？",
+      "relevantDocumentIds": [
+        "official-mol-81202"
+      ],
+      "category": null,
+      "companyName": null,
+      "expectedStatus": "answered",
+      "reviewCriteria": [
+        "辨識同單位、相同每週工作日數、每日工時較短的例外，日數不減半",
+        "不自行推算特休總小時或每個休假日一律八小時"
+      ],
+      "retrievedDocumentIds": [
+        "official-mol-81202",
+        "official-mol-81173",
+        "official-mol-81182"
+      ],
+      "citedDocumentIds": [
+        "official-mol-81202"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "你每週工作日數與正職相同、只是每天工時較短，符合來源所列的例外：特別休假應依《勞動基準法》第38條給予休假日數，因此日數不因每日工時減半。 [official-mol-81202]",
+        "citations": [
+          {
+            "chunkId": "official-mol-81202",
+            "documentId": "official-mol-81202",
+            "title": "部分工時勞工應如何計給特別休假?",
+            "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2025-09-01",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-81202",
+              "documentId": "official-mol-81202",
+              "title": "部分工時勞工應如何計給特別休假?",
+              "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-09-01",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.032266458495966696
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81173",
+              "documentId": "official-mol-81173",
+              "title": "公司特別休假採曆年制(即每年1月1日至12月31日)，該如何計算給假的天數?勞工之特別休假於年度終結仍未休畢，是否可經勞雇雙方協商遞延至次一年度實施?勞工離職時要用週年制來計算剩餘天數嗎?",
+              "text": "一、勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作滿一定期間之翌日如仍在職，即取得請特別休假之權利。另實務上，勞雇雙方仍多有約定以曆年制、會計年度、學年度（學校）或自行約定之年度給假之模式，已為慣例且行之有年，勞動基準法施行細則第24條第2項亦有明定經勞雇雙方協商後，得以前開方式計算特別休假期間。如果事業單位為配合出勤管理，經勞雇雙方協商約定以曆年制為特別休假行使期間，在勞工法定享有特別休假日數不得減損前提下，按比例分段計給特別休假，尚無不可；但是勞動契約終止時，雇主應依勞工「到職日」(即週年制)計算給予勞工實際工作年資之特別休假日數。 二、又依同法第38條第4項規定，勞工之特別休假，因年度終結而未休之日數，雇主應發給工資；但年度終結未休之日數，經「勞雇雙方協商」遞延至次1年度實施者，如果於次一年度終結或契約終止仍未休之日數，雇主應發給工資。本部另設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉，勞工可依不同「年度」需求計算特別休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81173/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03128054740957967
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81182",
+              "documentId": "official-mol-81182",
+              "title": "勞工離職當年畸零月數是否須依比例計給特別休假，又留職停薪應如何計算?另如滿一年有7天特別休假是否包含滿半年的3天?",
+              "text": "一、本部設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉可供參考。 二、依勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作，滿一定期間(留職停薪不計入年資，但前後年資可併計)之「翌日」如仍在職，即取得請特別休假之權利。勞工於年資滿1年，依法共可取得年資滿半年3天特別休假及年資滿1年7天之特別休假，共計10天。 三、特別休假是指勞工每繼續工作滿一定期間後，即應享有一定日數之特別休假，不因年度中終止勞動契約，而影響該勞工最後在職當年基於上一年度服務滿一定期間所應給予之特別休假。但是，勞工離職當年度繼續工作之畸零月數因未再滿一年，無應按比例另予特別休假之規定。例如：離職時年資1年又5個月餘，當年度工作的5個多月，得不另給特別休假。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81182/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03057889822595705
+          }
+        ],
+        "traceId": "b532e5fa0c2e486482599438fa4f6de6",
+        "elapsedMs": 4930.61
+      },
+      "manualReview": null
+    },
+    {
+      "id": "annual-eight-hour-trap",
+      "question": "我和同公司正職每週都上五天，我每天四小時。既然特休日數一樣，是不是每一天都可以換成八小時？",
+      "relevantDocumentIds": [
+        "official-mol-81202"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "reviewCriteria": [
+        "確認此例外依第38條給予休假日數",
+        "明確表示現有資料不足以把此例外每一日直接換為八小時，不附加無根據的替代換算公式"
+      ],
+      "retrievedDocumentIds": [
+        "official-mol-81202",
+        "official-mol-81173",
+        "official-mol-7239"
+      ],
+      "citedDocumentIds": [
+        "official-mol-81202"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "依你描述的條件，若你每週工作日數與同公司全時勞工相同、只是每天工時較短，應依《勞動基準法》第38條給予特別休假日數。 [official-mol-81202]\n\n這項資料不足以判定你的每一特休日是否可換算為八小時；官方問答雖提到經勞雇雙方協商以小時為給假單位時，可按每日8小時乘以應休假日數計給，但沒有明確說明該換算方式也適用於你所屬的「每週工作日數相同、僅每日工時較短」例外情形。 [official-mol-81202]",
+        "citations": [
+          {
+            "chunkId": "official-mol-81202",
+            "documentId": "official-mol-81202",
+            "title": "部分工時勞工應如何計給特別休假?",
+            "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2025-09-01",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-81202",
+              "documentId": "official-mol-81202",
+              "title": "部分工時勞工應如何計給特別休假?",
+              "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-09-01",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.032266458495966696
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81173",
+              "documentId": "official-mol-81173",
+              "title": "公司特別休假採曆年制(即每年1月1日至12月31日)，該如何計算給假的天數?勞工之特別休假於年度終結仍未休畢，是否可經勞雇雙方協商遞延至次一年度實施?勞工離職時要用週年制來計算剩餘天數嗎?",
+              "text": "一、勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作滿一定期間之翌日如仍在職，即取得請特別休假之權利。另實務上，勞雇雙方仍多有約定以曆年制、會計年度、學年度（學校）或自行約定之年度給假之模式，已為慣例且行之有年，勞動基準法施行細則第24條第2項亦有明定經勞雇雙方協商後，得以前開方式計算特別休假期間。如果事業單位為配合出勤管理，經勞雇雙方協商約定以曆年制為特別休假行使期間，在勞工法定享有特別休假日數不得減損前提下，按比例分段計給特別休假，尚無不可；但是勞動契約終止時，雇主應依勞工「到職日」(即週年制)計算給予勞工實際工作年資之特別休假日數。 二、又依同法第38條第4項規定，勞工之特別休假，因年度終結而未休之日數，雇主應發給工資；但年度終結未休之日數，經「勞雇雙方協商」遞延至次1年度實施者，如果於次一年度終結或契約終止仍未休之日數，雇主應發給工資。本部另設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉，勞工可依不同「年度」需求計算特別休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81173/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.031754032258064516
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-7239",
+              "documentId": "official-mol-7239",
+              "title": "國定假日一年有幾天?國定假日遇到例假或休息日，是否可以補假?雇主可否將國定假日、休息日與工作日調移？勞工於配合調移後之國定假日當日出勤工作，雇主是否應加倍發給工資？",
+              "text": "一、114年5月28日《紀念日及節日實施條例》公布施行後，國定假日總共16日(含5月1日勞動節)。依《勞動基準法》第37條及第39條規定，內政部所定應放假之紀念日、節日、勞動節及其他中央主管機關指定應放假日，均應休假，工資照給。若該日為勞雇雙方原約定之「休息日」或「例假」，雇主應於其他工作日給予勞工補假一天，補假當天性質即為國定假日，應給予勞工休假工資照給，如補假當日有出勤，工資亦應加倍發給，亦即除原本約定照給之工資之外，於工作時間8小時以內者再加發一日工資，超過8小時部分，屬延長工作時間，延時工資依勞基法第24條規定覈實給付。至補假日期可由勞雇雙方協商排定。 二、勞資雙方亦得就「國定假日與工作日對調實施」進行協商，惟該協商因涉個別勞工勞動條件之變更，仍應徵得勞工「個人」之同意。至於勞資雙方雖得協商約定將國定假日調移至其他「工作日」實施，仍應確明前開所調移國定假日之休假日期，即國定假日與工作日對調後，因調移後之國定假日當日，成為正常工作日，該等被調移實施休假之原工作日即應使勞工得以休假，且雇主不得減損勞工應有之國定休假日數，始屬適法。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7239/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03128054740957967
+          }
+        ],
+        "traceId": "62a2b51a268a44c383994c8bd6a8bf1f",
+        "elapsedMs": 6423.2
+      },
+      "manualReview": null
+    },
+    {
+      "id": "annual-general",
+      "question": "我每週只上兩天，同公司正職每週五天，全年正常工時也比較少。部分工時特休可以按什麼比例計給？",
+      "relevantDocumentIds": [
+        "official-mol-81202"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "reviewCriteria": [
+        "依全年正常工作時間占全時全年正常工作時間比例乘法定特休日數說明一般情況",
+        "不套用同每週工作日數的例外，也不逕以每週兩天除五天代替全年工時比例",
+        "若提小時計給須保留雙方協商及一般情境條件"
+      ],
+      "retrievedDocumentIds": [
+        "official-mol-81202",
+        "official-mol-7246",
+        "official-mol-81173"
+      ],
+      "citedDocumentIds": [
+        "official-mol-81202"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "你每週工作日數少於同公司正職（兩天對五天），不符合「每週工作日數相同、僅每日工時較短」的例外；因此不能僅以每週工作日數直接按 2/5 計給。 [official-mol-81202]\n\n適用一般比例方式時，特休時數按「部分工時勞工全年正常工作時間 ÷ 全時勞工全年正常工作時間」的比例，乘以勞基法第38條所定特休日數計給；不足一日部分由勞雇雙方協商，但不得損害勞工權益。 [official-mol-81202]\n\n你尚未提供雙方全年正常工時，故目前無法算出具體比例或時數；該官方問答資料更新日期為2025年9月1日。 [official-mol-81202]",
+        "citations": [
+          {
+            "chunkId": "official-mol-81202",
+            "documentId": "official-mol-81202",
+            "title": "部分工時勞工應如何計給特別休假?",
+            "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2025-09-01",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-81202",
+              "documentId": "official-mol-81202",
+              "title": "部分工時勞工應如何計給特別休假?",
+              "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-09-01",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-7246",
+              "documentId": "official-mol-7246",
+              "title": "按時計酬（或按日計酬）之部分工時勞工，是否有休息日規定的適用？",
+              "text": "凡適用勞動基準法之事業單位，其僱用之勞工（包括工讀生、部分時間工作者等）均受該法保障。部分工時勞工如於法定休息日出勤工作，即使當週正常工作時間未達 40 小時，仍應依休息日出勤工資加給標準計給工資。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7246/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2021-10-20",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81173",
+              "documentId": "official-mol-81173",
+              "title": "公司特別休假採曆年制(即每年1月1日至12月31日)，該如何計算給假的天數?勞工之特別休假於年度終結仍未休畢，是否可經勞雇雙方協商遞延至次一年度實施?勞工離職時要用週年制來計算剩餘天數嗎?",
+              "text": "一、勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作滿一定期間之翌日如仍在職，即取得請特別休假之權利。另實務上，勞雇雙方仍多有約定以曆年制、會計年度、學年度（學校）或自行約定之年度給假之模式，已為慣例且行之有年，勞動基準法施行細則第24條第2項亦有明定經勞雇雙方協商後，得以前開方式計算特別休假期間。如果事業單位為配合出勤管理，經勞雇雙方協商約定以曆年制為特別休假行使期間，在勞工法定享有特別休假日數不得減損前提下，按比例分段計給特別休假，尚無不可；但是勞動契約終止時，雇主應依勞工「到職日」(即週年制)計算給予勞工實際工作年資之特別休假日數。 二、又依同法第38條第4項規定，勞工之特別休假，因年度終結而未休之日數，雇主應發給工資；但年度終結未休之日數，經「勞雇雙方協商」遞延至次1年度實施者，如果於次一年度終結或契約終止仍未休之日數，雇主應發給工資。本部另設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉，勞工可依不同「年度」需求計算特別休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81173/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03125763125763126
+          }
+        ],
+        "traceId": "211dab1bb30948ab9d5d1169aa2184c6",
+        "elapsedMs": 6232.95
+      },
+      "manualReview": null
+    },
+    {
+      "id": "annual-missing-days",
+      "question": "我是每天四小時的兼職，特休一定是正職的一半嗎？",
+      "relevantDocumentIds": [
+        "official-mol-81202"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "reviewCriteria": [
+        "不能僅由每天四小時確定日數減半，指出需要比較每週工作日數等條件",
+        "區分一般工時比例與每週日數相同的例外，不假設使用者屬於其中一種"
+      ],
+      "retrievedDocumentIds": [
+        "official-mol-81182",
+        "official-mol-81202",
+        "official-mol-7246"
+      ],
+      "citedDocumentIds": [
+        "official-mol-81202"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "不一定是正職的一半。官方問答說，部分工時特休時數可按全年正常工作時間占全時勞工全年正常工作時間的比例計給；因此僅知道你每天工作4小時，還不能判定比例。 [official-mol-81202]\n\n若你每週工作日數與同事中的全時勞工相同、只是每天工時較短，則應依勞動基準法給予特休日數；這個例外分支不是按較短的每日工時比例減少日數。 [official-mol-81202]\n\n要判斷你適用哪個分支，還需確認每週工作日數是否與全時勞工相同；要算出實際特休日數，還需知道年資。官方問答另指出，若雙方協商以小時為給假單位，才可依應休假日數乘以每日8小時計給；此說明不等於上述例外分支的特休日數也可換算成時數。該問答更新於2025年9月1日。 [official-mol-81202]",
+        "citations": [
+          {
+            "chunkId": "official-mol-81202",
+            "documentId": "official-mol-81202",
+            "title": "部分工時勞工應如何計給特別休假?",
+            "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2025-09-01",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-81182",
+              "documentId": "official-mol-81182",
+              "title": "勞工離職當年畸零月數是否須依比例計給特別休假，又留職停薪應如何計算?另如滿一年有7天特別休假是否包含滿半年的3天?",
+              "text": "一、本部設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉可供參考。 二、依勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作，滿一定期間(留職停薪不計入年資，但前後年資可併計)之「翌日」如仍在職，即取得請特別休假之權利。勞工於年資滿1年，依法共可取得年資滿半年3天特別休假及年資滿1年7天之特別休假，共計10天。 三、特別休假是指勞工每繼續工作滿一定期間後，即應享有一定日數之特別休假，不因年度中終止勞動契約，而影響該勞工最後在職當年基於上一年度服務滿一定期間所應給予之特別休假。但是，勞工離職當年度繼續工作之畸零月數因未再滿一年，無應按比例另予特別休假之規定。例如：離職時年資1年又5個月餘，當年度工作的5個多月，得不另給特別休假。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81182/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.032018442622950824
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81202",
+              "documentId": "official-mol-81202",
+              "title": "部分工時勞工應如何計給特別休假?",
+              "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-09-01",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03200204813108039
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-7246",
+              "documentId": "official-mol-7246",
+              "title": "按時計酬（或按日計酬）之部分工時勞工，是否有休息日規定的適用？",
+              "text": "凡適用勞動基準法之事業單位，其僱用之勞工（包括工讀生、部分時間工作者等）均受該法保障。部分工時勞工如於法定休息日出勤工作，即使當週正常工作時間未達 40 小時，仍應依休息日出勤工資加給標準計給工資。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7246/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2021-10-20",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03131881575727918
+          }
+        ],
+        "traceId": "128310f8cc3d4b63a1c4acc9142ff226",
+        "elapsedMs": 9556.27
+      },
+      "manualReview": null
+    },
+    {
+      "id": "annual-control",
+      "question": "老闆可以未經我同意把病假改成特休嗎？",
+      "relevantDocumentIds": [
+        "official-mol-81186"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "reviewCriteria": [
+        "特休期日由勞工排定，雇主不得未經同意將病假改特休",
+        "不要帶入部分工時比例或八小時換算等無關內容"
+      ],
+      "retrievedDocumentIds": [
+        "official-mol-81186",
+        "official-mol-81173",
+        "official-bola-C7F1B09DBDDB54D5"
+      ],
+      "citedDocumentIds": [
+        "official-mol-81186"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "不可以。勞動部官方問答指出，雇主不得擅自將勞工已請的事假或病假改為特別休假；特休日期原則上由勞工依意願排定，雇主若基於企業經營急迫需求，應與勞工協商調整。 [official-mol-81186]",
+        "citations": [
+          {
+            "chunkId": "official-mol-81186",
+            "documentId": "official-mol-81186",
+            "title": "雇主是否可以規定特別休假要事先提出不能臨時請、要求預排全年特休，或未經同意將事（病）假改為特別休假？",
+            "text": "勞工應從事之工作、工作開始及終止之時間、請假等事項，應於勞動契約中約定，勞動基準法施行細則第7條定有明文。復依勞動基準法第38條第2項規定，特別休假期日，由勞工排定之；但雇主基於企業經營上之急迫需求或勞工因個人因素，得與他方協商調整。勞工請假，應依事業單位工作規則之規定或勞動契約之約定辦理相關請假手續。特別休假是為了提供勞工休憩之用，休假日期由勞工依照自己意願決定。雇主可提醒或促請勞工排定休假，但不可以限制勞工特別休假期日的排定，或規定僅得一次預先排定或在特定期日前休假，亦不得將勞工已請的事(病)假擅自更改為特別休假。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81186/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2026-04-23",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-81186",
+              "documentId": "official-mol-81186",
+              "title": "雇主是否可以規定特別休假要事先提出不能臨時請、要求預排全年特休，或未經同意將事（病）假改為特別休假？",
+              "text": "勞工應從事之工作、工作開始及終止之時間、請假等事項，應於勞動契約中約定，勞動基準法施行細則第7條定有明文。復依勞動基準法第38條第2項規定，特別休假期日，由勞工排定之；但雇主基於企業經營上之急迫需求或勞工因個人因素，得與他方協商調整。勞工請假，應依事業單位工作規則之規定或勞動契約之約定辦理相關請假手續。特別休假是為了提供勞工休憩之用，休假日期由勞工依照自己意願決定。雇主可提醒或促請勞工排定休假，但不可以限制勞工特別休假期日的排定，或規定僅得一次預先排定或在特定期日前休假，亦不得將勞工已請的事(病)假擅自更改為特別休假。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81186/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81173",
+              "documentId": "official-mol-81173",
+              "title": "公司特別休假採曆年制(即每年1月1日至12月31日)，該如何計算給假的天數?勞工之特別休假於年度終結仍未休畢，是否可經勞雇雙方協商遞延至次一年度實施?勞工離職時要用週年制來計算剩餘天數嗎?",
+              "text": "一、勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作滿一定期間之翌日如仍在職，即取得請特別休假之權利。另實務上，勞雇雙方仍多有約定以曆年制、會計年度、學年度（學校）或自行約定之年度給假之模式，已為慣例且行之有年，勞動基準法施行細則第24條第2項亦有明定經勞雇雙方協商後，得以前開方式計算特別休假期間。如果事業單位為配合出勤管理，經勞雇雙方協商約定以曆年制為特別休假行使期間，在勞工法定享有特別休假日數不得減損前提下，按比例分段計給特別休假，尚無不可；但是勞動契約終止時，雇主應依勞工「到職日」(即週年制)計算給予勞工實際工作年資之特別休假日數。 二、又依同法第38條第4項規定，勞工之特別休假，因年度終結而未休之日數，雇主應發給工資；但年度終結未休之日數，經「勞雇雙方協商」遞延至次1年度實施者，如果於次一年度終結或契約終止仍未休之日數，雇主應發給工資。本部另設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉，勞工可依不同「年度」需求計算特別休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81173/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.030834914611005692
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-C7F1B09DBDDB54D5",
+              "documentId": "official-bola-C7F1B09DBDDB54D5",
+              "title": "勞工事假，一年不得超過幾日？工資給付？如一年超過14日公司如何處理？",
+              "text": "依勞工請假規則第7條規定：「勞工因有事故必須親自處理者，得請事假，一年內合計不得超過十四日。事假期間不給工資。」，超過14日者，依內政部(74)台內勞字第315047號函釋略以：「勞工全年事假日數超過本規則者，其超過部份得以特別休假抵充，如無特別休假或特別休假已休畢者，其處理原則事業單位可明定於工作規則中，報准後實施並公開揭示。」超過部分勞資雙方協商議定。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=C7F1B09DBDDB54D5",
+              "publisher": "臺北市政府勞動局",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-04-24",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.030536130536130537
+          }
+        ],
+        "traceId": "6a7aaaac11184caa992fd2daaec73b64",
+        "elapsedMs": 2696.36
+      },
+      "manualReview": null
+    }
+  ],
+  "costNote": "依 2026-10-21 公開標準價格與 API 用量保守估算，未折抵輸入快取；非帳戶帳單或全站預算鎖。每次請求先預留 US$0.05，含先前測試預留總額不超過 US$3。",
+  "pricingSources": [
+    "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "https://developers.openai.com/api/docs/models/text-embedding-3-small"
+  ],
+  "index": {
+    "indexed": 0,
+    "cached": 124,
+    "totalTokens": 0
+  },
+  "missingVectorsAfter": 0,
+  "estimatedCostUsd": 0.002657625,
+  "reservedTotalUsd": 0.6000000000000001,
+  "summary": {
+    "caseCount": 6,
+    "statusMatches": 6,
+    "answerableCount": 6,
+    "sourceHitsAt3": 6,
+    "expectedSourcesCited": 6
+  }
+}

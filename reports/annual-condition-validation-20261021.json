@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-21",
+  "scope": "修正部分工時特休一般規則與例外的條件混用；區分日數與時數。",
+  "models": {
+    "generation": "gpt-6-luna",
+    "embedding": "text-embedding-3-small",
+    "reranker": null
+  },
+  "source": {
+    "url": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+    "sourceUpdatedAt": "2025-09-01",
+    "documentId": "official-mol-81202"
+  },
+  "baseline": {
+    "report": "reports/corpus-check-live-20261021-172550-801561.json",
+    "caseId": "annual",
+    "result": "failed",
+    "reason": "第一段例外日數正確，但第二段將一般協商8小時換算接到例外。"
+  },
+  "firstRun": {
+    "promptVersion": "labor-grounded-v2",
+    "report": "reports/corpus-check-live-20261021-174306-220949.json",
+    "summary": {
+      "caseCount": 6,
+      "statusMatches": 6,
+      "answerableCount": 6,
+      "sourceHitsAt3": 6,
+      "expectedSourcesCited": 6
+    },
+    "manualPassCount": 5,
+    "manualFailCount": 1,
+    "reviews": [
+      {
+        "id": "annual-original",
+        "passed": true,
+        "note": "同每週日數、每日較短工時適用例外；沒有將一般8小時換算接續套用。",
+        "answer": "若兼職勞工每週工作日數與同事業單位全時勞工相同、只是每日工時較短，應依《勞動基準法》第38條給予特別休假「日數」，不適用一般按全年正常工時比例計給的方式。 [official-mol-81202]\n\n具體可休日數須依年資等條件按第38條判定；目前資料未提供完整日數級距，因此無法據此算出個人日數。資料也不足以判定這個例外情形如何換算成休假時數。 [official-mol-81202]"
+      },
+      {
+        "id": "annual-short-day",
+        "passed": true,
+        "note": "辨識每週同為五天的條件，日數不因每天工時減半。",
+        "answer": "你每週工作日數與正職相同、只是每天工時較短，符合來源所列的例外：特別休假應依《勞動基準法》第38條給予休假日數，因此日數不因每日工時減半。 [official-mol-81202]"
+      },
+      {
+        "id": "annual-eight-hour-trap",
+        "passed": true,
+        "note": "區分法定日數與時數，表示現有來源不足以支持此例外每一日換為8小時。",
+        "answer": "依你描述的條件，若你每週工作日數與同公司全時勞工相同、只是每天工時較短，應依《勞動基準法》第38條給予特別休假日數。 [official-mol-81202]\n\n這項資料不足以判定你的每一特休日是否可換算為八小時；官方問答雖提到經勞雇雙方協商以小時為給假單位時，可按每日8小時乘以應休假日數計給，但沒有明確說明該換算方式也適用於你所屬的「每週工作日數相同、僅每日工時較短」例外情形。 [official-mol-81202]"
+      },
+      {
+        "id": "annual-general",
+        "passed": false,
+        "note": "比例乘以日數卻稱為時數，單位錯誤；已於 v3 修正並複測。",
+        "answer": "你每週工作日數少於同公司正職（兩天對五天），不符合「每週工作日數相同、僅每日工時較短」的例外；因此不能僅以每週工作日數直接按 2/5 計給。 [official-mol-81202]\n\n適用一般比例方式時，特休時數按「部分工時勞工全年正常工作時間 ÷ 全時勞工全年正常工作時間」的比例，乘以勞基法第38條所定特休日數計給；不足一日部分由勞雇雙方協商，但不得損害勞工權益。 [official-mol-81202]\n\n你尚未提供雙方全年正常工時，故目前無法算出具體比例或時數；該官方問答資料更新日期為2025年9月1日。 [official-mol-81202]"
+      },
+      {
+        "id": "annual-missing-days",
+        "passed": true,
+        "note": "不假定每週日數，說明尚需的條件，未將一般8小時換算套用例外。",
+        "answer": "不一定是正職的一半。官方問答說，部分工時特休時數可按全年正常工作時間占全時勞工全年正常工作時間的比例計給；因此僅知道你每天工作4小時，還不能判定比例。 [official-mol-81202]\n\n若你每週工作日數與同事中的全時勞工相同、只是每天工時較短，則應依勞動基準法給予特休日數；這個例外分支不是按較短的每日工時比例減少日數。 [official-mol-81202]\n\n要判斷你適用哪個分支，還需確認每週工作日數是否與全時勞工相同；要算出實際特休日數，還需知道年資。官方問答另指出，若雙方協商以小時為給假單位，才可依應休假日數乘以每日8小時計給；此說明不等於上述例外分支的特休日數也可換算成時數。該問答更新於2025年9月1日。 [official-mol-81202]"
+      },
+      {
+        "id": "annual-control",
+        "passed": true,
+        "note": "依來源回答雇主不得擅改病假為特休，未帶入無關比例。",
+        "answer": "不可以。勞動部官方問答指出，雇主不得擅自將勞工已請的事假或病假改為特別休假；特休日期原則上由勞工依意願排定，雇主若基於企業經營急迫需求，應與勞工協商調整。 [official-mol-81186]"
+      }
+    ]
+  },
+  "finalRun": {
+    "promptVersion": "labor-grounded-v3",
+    "report": "reports/corpus-check-live-20261021-174457-733943.json",
+    "summary": {
+      "caseCount": 2,
+      "statusMatches": 2,
+      "answerableCount": 2,
+      "sourceHitsAt3": 2,
+      "expectedSourcesCited": 2
+    },
+    "manualPassCount": 2,
+    "manualFailCount": 0,
+    "reviews": [
+      {
+        "id": "annual-original",
+        "passed": true,
+        "note": "同每週日數、每日較短工時適用例外；沒有將一般8小時換算接續套用。",
+        "answer": "若兼職勞工每週工作日數與同事業單位的全時勞工相同，只是每日工作時數較短，應依《勞動基準法》第38條給予特別休假日數；此情況適用日數規則，不是按全年工時比例計給。 [official-mol-81202]\n\n實際可休日數仍須依適用的年資條件確認；這份資料不足以判定你的具體日數，也沒有提供此例外下如何將休假日數換算成時數的依據。 [official-mol-81202]"
+      },
+      {
+        "id": "annual-general",
+        "passed": true,
+        "note": "按全年正常工時比例計給特休日數，沒有混用時數，也沒有直接以每週兩天除五天計算。",
+        "answer": "你每週工作日數（兩天）不同於同公司全時勞工（五天），因此不適用「每週工作日數相同、僅每日工時較短」的例外；可參考按全年正常工時比例計給的方式。 [official-mol-81202]\n\n比例是你的全年正常工作時間 ÷ 全時勞工全年正常工作時間；再依該比例計給勞基法第38條所定的特別休假日數。不足一日的部分由勞雇雙方協商議定，且不得損害勞工權益。 [official-mol-81202]\n\n僅知道每週分別工作兩天、五天，尚不能確定全年正常工時比例或實際休假日數；還需確認雙方全年正常工作時間及適用的法定特休日數。此官方問答資料更新日期為2025年9月1日。 [official-mol-81202]"
+      }
+    ]
+  },
+  "localTests": {
+    "command": "python -X utf8 -m pytest -q",
+    "passed": 70,
+    "failed": 0,
+    "resumeRegression": "相同路徑題組內容變更，先重現拒絕失敗，再加入 SHA-256 檢查後通過。"
+  },
+  "cost": {
+    "budgetUsd": 3,
+    "thisTaskEstimatedUsd": 0.0037882249999999997,
+    "allKnownEstimatedUsd": 0.00897015,
+    "unconfirmedReservationUsd": 0.05,
+    "knownPlusUnconfirmedUsd": 0.05897015,
+    "allRequestReservationsUsd": 2.95,
+    "note": "依既有測試腳本價格與 API 回傳用量估計，非 OpenAI 帳單；沒有修改帳戶付款設定或全站費用鎖。"
+  },
+  "limitations": [
+    "最終 v3 僅重新呼叫原題與一般比例題2題，其餘4種問法為 v2 驗證；不宣稱完整題組均已以 v3 複測。",
+    "6題為開發回歸題組，人工對照來源的結果不代表模型對所有問題皆正確。",
+    "離線抽取測試只驗證檢索路徑，不代表生成模型語意正確。"
+  ]
+}

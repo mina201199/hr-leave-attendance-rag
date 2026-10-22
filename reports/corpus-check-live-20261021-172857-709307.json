@@ -1,0 +1,2162 @@
+{
+  "mode": "live",
+  "budgetUsd": 3,
+  "historicalReservationUsd": 1.6500000000000001,
+  "calls": [
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 41,
+        "total_tokens": 41
+      },
+      "estimatedCostUsd": 8.200000000000001e-07
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 954,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 288,
+        "output_tokens_details": {
+          "reasoning_tokens": 66
+        },
+        "total_tokens": 1242
+      },
+      "estimatedCostUsd": 0.00023940000000000002
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 41,
+        "total_tokens": 41
+      },
+      "estimatedCostUsd": 8.200000000000001e-07
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 616,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 153,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 769
+      },
+      "estimatedCostUsd": 0.0001381
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 41,
+        "total_tokens": 41
+      },
+      "estimatedCostUsd": 8.200000000000001e-07
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 600,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 283,
+        "output_tokens_details": {
+          "reasoning_tokens": 141
+        },
+        "total_tokens": 883
+      },
+      "estimatedCostUsd": 0.0002015
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 41,
+        "total_tokens": 41
+      },
+      "estimatedCostUsd": 8.200000000000001e-07
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 598,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 149,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 747
+      },
+      "estimatedCostUsd": 0.0001343
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "estimatedCostUsd": 1.4e-07
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "estimatedCostUsd": 3.6e-07
+    }
+  ],
+  "results": [
+    {
+      "id": "damage",
+      "question": "打破杯子，老闆能直接從薪水扣賠償費嗎？",
+      "relevantDocumentIds": [
+        "official-bola-8D48F35D4240FBEC"
+      ],
+      "category": "薪資",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-bola-89046A0E7CE5E5AC",
+        "official-bola-8D48F35D4240FBEC",
+        "official-bola-8C413EC102381D8D"
+      ],
+      "citedDocumentIds": [
+        "official-bola-8D48F35D4240FBEC"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "不能因為你打破杯子就直接從薪水扣賠償費；工資應全額直接給付，雇主不得逕自扣抵。 [official-bola-8D48F35D4240FBEC]\n\n民事賠償金額與清償方式可由雇主和勞工協議；若未能達成協議，賠償不能由雇主單方面認定，應循司法途徑解決。 [official-bola-8D48F35D4240FBEC]",
+        "citations": [
+          {
+            "chunkId": "official-bola-8D48F35D4240FBEC",
+            "documentId": "official-bola-8D48F35D4240FBEC",
+            "title": "雇主可以因勞工有過失逕自扣發勞工薪資嗎?",
+            "text": "工資乃勞工提供勞務所得之對價報酬，應全額直接給付勞工，此與違約金或因契約所生之損害賠償之債權，性質不同，不得逕行扣抵。若勞工於工作中故意或過失損壞產品或其它物品，其觸犯刑章部分，雇主可訴請司法機關辦理；民事賠償部分可由雇主與勞工決定賠償金額及清償方式，如未能達成協議，其賠償非雇主單方面所能認定者，應循司法途徑解決，不得逕自扣發工資。",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8D48F35D4240FBEC",
+            "publisher": "臺北市政府勞動局",
+            "category": "薪資",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2023-12-18",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-bola-89046A0E7CE5E5AC",
+              "documentId": "official-bola-89046A0E7CE5E5AC",
+              "title": "事業單位可否以品質扣款、盤損等名義扣發績效獎金作為賠償之用？",
+              "text": "雇主不可以品質扣款、盤損等名義扣發績效獎金作為賠償之用，依照勞動基準法第22條第2項規定，工資應全額直接給付勞工，且同法第26條規定雇主不得預扣勞工工資作為違約金或賠償費用。所稱「預扣勞工工資」，係指在違約、賠償等事實未發生或其事實已發生，但責任歸屬、範圍大小、金額多寡等未確定前，雇主不可以預先扣發勞工工資作為違約金或賠償費用。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=89046A0E7CE5E5AC",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-04-24",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03252247488101534
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-8D48F35D4240FBEC",
+              "documentId": "official-bola-8D48F35D4240FBEC",
+              "title": "雇主可以因勞工有過失逕自扣發勞工薪資嗎?",
+              "text": "工資乃勞工提供勞務所得之對價報酬，應全額直接給付勞工，此與違約金或因契約所生之損害賠償之債權，性質不同，不得逕行扣抵。若勞工於工作中故意或過失損壞產品或其它物品，其觸犯刑章部分，雇主可訴請司法機關辦理；民事賠償部分可由雇主與勞工決定賠償金額及清償方式，如未能達成協議，其賠償非雇主單方面所能認定者，應循司法途徑解決，不得逕自扣發工資。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8D48F35D4240FBEC",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2023-12-18",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03252247488101534
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-8C413EC102381D8D--1",
+              "documentId": "official-bola-8C413EC102381D8D",
+              "title": "事業單位停工，其停工期間工資應如何發給？",
+              "text": "一、若事業單位停工原因可歸責於雇主，工資應由雇主照給。 二、事業單位停工期間之工資如何發給，應視停工原因依具體個案認定之： (一) 停工原因如係可歸責於雇主，而非歸責於勞工時，停工期間之工資應由雇主照給。另停工原因如屬雇主經營之風險者，為可歸責於雇主之事由。 (二) 停工原因如係不可歸責於雇主，而係歸責於勞工，雇主可不發給工資。 (三) 停工原因不可歸責於勞雇任何一方者，勞工不必補服勞務，雇主亦不必發給工資。但勞雇雙方如另有約定者，從其約定。 準此，歸責於雇主之停工，工資自不得低於最低工資。歸責於勞工之停工，雇主可不發給工資，自無可否低於最低工資之問題。不可歸責於勞雇任何一方之停工，勞工不必補服勞務，雇主亦可不發給工資，但勞雇雙方另有約定者，從其約定，不受最低工資之限制。 （行政院勞工委員會(現為勞動部)83年5月11日(83)台勞動二字第35290號函）。 三、例如： (一)可歸責於雇主： 1.主管機關及勞動檢查機構如因工作場所有發生危險之虞，將事業單位處以停工處分時，停工期間之工資自當由雇主照給。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8C413EC102381D8D",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2024-12-31",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": "official-bola-8C413EC102381D8D",
+              "parentText": "一、若事業單位停工原因可歸責於雇主，工資應由雇主照給。 二、事業單位停工期間之工資如何發給，應視停工原因依具體個案認定之： (一) 停工原因如係可歸責於雇主，而非歸責於勞工時，停工期間之工資應由雇主照給。另停工原因如屬雇主經營之風險者，為可歸責於雇主之事由。 (二) 停工原因如係不可歸責於雇主，而係歸責於勞工，雇主可不發給工資。 (三) 停工原因不可歸責於勞雇任何一方者，勞工不必補服勞務，雇主亦不必發給工資。但勞雇雙方如另有約定者，從其約定。 準此，歸責於雇主之停工，工資自不得低於最低工資。歸責於勞工之停工，雇主可不發給工資，自無可否低於最低工資之問題。不可歸責於勞雇任何一方之停工，勞工不必補服勞務，雇主亦可不發給工資，但勞雇雙方另有約定者，從其約定，不受最低工資之限制。 （行政院勞工委員會(現為勞動部)83年5月11日(83)台勞動二字第35290號函）。 三、例如： (一)可歸責於雇主： 1.主管機關及勞動檢查機構如因工作場所有發生危險之虞，將事業單位處以停工處分時，停工期間之工資自當由雇主照給。(行政院勞工委員會102年1月22日勞檢1字第1020150046號函) 2.事業單位停工之原因如係可歸責於雇主，而非歸責於勞工時，停工期間資應由雇主照給。（行政院勞工委員會89年8月 18日(89)台勞動二字第0036018號函)。 3.因週轉不靈停工，法院裁定重整，至○年○月○日復工，停工期間由公司發給員工生活費。(內政部76年6月23日(76)臺內勞字第513331號)。 (二)可歸責於勞工： （勞工）因與業務有關之案件經提起公訴，該公司如確依法報經主管機關核備有案之工作件規則予以暫時停工難謂不當，情嗣後法院判決確定並諭知緩刑，則非有其他依法得終止契約之原因時，即應准予復工。如該公司核備有案之工作規則有不發給停工期間工資之規定者，得從其規定。(內政部75年9月23日(75)台內勞字第442697號函)。 (三)「公司裝修」、「公司失火」仍須視個案事實加以認定歸屬責任。"
+            },
+            "score": 0.031009615384615385
+          }
+        ],
+        "traceId": "bd2bc9ca027b4cdd8b82fd8e1cc9fffc",
+        "elapsedMs": 5374.21
+      },
+      "manualReview": null
+    },
+    {
+      "id": "payslip",
+      "question": "公司發薪水時一定要給薪資明細嗎？可以用電子郵件寄嗎？",
+      "relevantDocumentIds": [
+        "official-mol-7168"
+      ],
+      "category": "薪資",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-mol-7168",
+        "official-bola-EDE809BE28BC4E4D",
+        "official-bola-8C413EC102381D8D"
+      ],
+      "citedDocumentIds": [
+        "official-mol-7168"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "依提供的勞動部官方問答摘要，雇主給付工資時應同時提供工資各項目計算方式明細（薪資明細）給勞工。 [official-mol-7168]\n\n薪資明細可以電子方式提供，例如以電子郵件寄送；也可以使用簡訊、通訊軟體或內部薪資系統等方式，前提是勞工能隨時取得及列印。 [official-mol-7168]",
+        "citations": [
+          {
+            "chunkId": "official-mol-7168",
+            "documentId": "official-mol-7168",
+            "title": "雇主是否要給勞工「工資明細」（薪資單）？「各項目」應該要包括哪些項目？雇主要如何提供？",
+            "text": "依勞動基準法第23條規定，雇主給付工資的同時，應提供工資各項目計算方式明細（也就是俗稱之薪資單、薪資明細、薪資袋等）給勞工，其中應包含下列事項： 勞雇雙方約定的工資總額。 工資各項目之給付金額：包括本（底）薪、獎金、津貼、延時工資（加班費）等勞工因提供勞務獲得之報酬均屬之。 依法令之規定或勞雇雙方另有約定，得扣除項目之金額：例如勞工應負擔之勞工保險、就業保險及全民健康保險費、勞工自願提繳之退休金、職工福利金、依執行政法院或行政執行機關之執行命令所為之扣押，以及勞雇雙方約定得扣除之項目，例如：雇主代轉帳之勞工個人自行參加之團體保險費用。 實際發給之金額。 提供「工資各項目計算方式明細」的型式不限於紙本，也可以用電子資料傳輸方式（例如：電子郵件、簡訊、通訊軟體、事業單位內部網站之薪資系統等），或是勞工能隨時取得及可以列印之資料，即已符合法令規定。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2290/7168/post",
+            "publisher": "勞動部",
+            "category": "薪資",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2026-04-21",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-7168",
+              "documentId": "official-mol-7168",
+              "title": "雇主是否要給勞工「工資明細」（薪資單）？「各項目」應該要包括哪些項目？雇主要如何提供？",
+              "text": "依勞動基準法第23條規定，雇主給付工資的同時，應提供工資各項目計算方式明細（也就是俗稱之薪資單、薪資明細、薪資袋等）給勞工，其中應包含下列事項： 勞雇雙方約定的工資總額。 工資各項目之給付金額：包括本（底）薪、獎金、津貼、延時工資（加班費）等勞工因提供勞務獲得之報酬均屬之。 依法令之規定或勞雇雙方另有約定，得扣除項目之金額：例如勞工應負擔之勞工保險、就業保險及全民健康保險費、勞工自願提繳之退休金、職工福利金、依執行政法院或行政執行機關之執行命令所為之扣押，以及勞雇雙方約定得扣除之項目，例如：雇主代轉帳之勞工個人自行參加之團體保險費用。 實際發給之金額。 提供「工資各項目計算方式明細」的型式不限於紙本，也可以用電子資料傳輸方式（例如：電子郵件、簡訊、通訊軟體、事業單位內部網站之薪資系統等），或是勞工能隨時取得及可以列印之資料，即已符合法令規定。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2290/7168/post",
+              "publisher": "勞動部",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-21",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-EDE809BE28BC4E4D",
+              "documentId": "official-bola-EDE809BE28BC4E4D",
+              "title": "若公司積欠薪資或少發薪資，但無薪資轉帳、薪資明細，員工該如何證明？",
+              "text": "如果没有辦法提具或舉證者，可以向臺北巿勞動檢查處〈臺北市萬華區艋舺大道101號7樓〉檢舉並請求派員實施勞動檢查。〈檢舉內容建議包括：資方名稱、住址、勞工提供勞務的實際地址、資方違法的事實等，以方便該處有效的檢查〉。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=EDE809BE28BC4E4D",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2023-12-18",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-8C413EC102381D8D--2",
+              "documentId": "official-bola-8C413EC102381D8D",
+              "title": "事業單位停工，其停工期間工資應如何發給？",
+              "text": "(行政院勞工委員會102年1月22日勞檢1字第1020150046號函) 2.事業單位停工之原因如係可歸責於雇主，而非歸責於勞工時，停工期間資應由雇主照給。（行政院勞工委員會89年8月 18日(89)台勞動二字第0036018號函)。 3.因週轉不靈停工，法院裁定重整，至○年○月○日復工，停工期間由公司發給員工生活費。(內政部76年6月23日(76)臺內勞字第513331號)。 (二)可歸責於勞工： （勞工）因與業務有關之案件經提起公訴，該公司如確依法報經主管機關核備有案之工作件規則予以暫時停工難謂不當，情嗣後法院判決確定並諭知緩刑，則非有其他依法得終止契約之原因時，即應准予復工。如該公司核備有案之工作規則有不發給停工期間工資之規定者，得從其規定。(內政部75年9月23日(75)台內勞字第442697號函)。 (三)「公司裝修」、「公司失火」仍須視個案事實加以認定歸屬責任。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8C413EC102381D8D",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2024-12-31",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": "official-bola-8C413EC102381D8D",
+              "parentText": "一、若事業單位停工原因可歸責於雇主，工資應由雇主照給。 二、事業單位停工期間之工資如何發給，應視停工原因依具體個案認定之： (一) 停工原因如係可歸責於雇主，而非歸責於勞工時，停工期間之工資應由雇主照給。另停工原因如屬雇主經營之風險者，為可歸責於雇主之事由。 (二) 停工原因如係不可歸責於雇主，而係歸責於勞工，雇主可不發給工資。 (三) 停工原因不可歸責於勞雇任何一方者，勞工不必補服勞務，雇主亦不必發給工資。但勞雇雙方如另有約定者，從其約定。 準此，歸責於雇主之停工，工資自不得低於最低工資。歸責於勞工之停工，雇主可不發給工資，自無可否低於最低工資之問題。不可歸責於勞雇任何一方之停工，勞工不必補服勞務，雇主亦可不發給工資，但勞雇雙方另有約定者，從其約定，不受最低工資之限制。 （行政院勞工委員會(現為勞動部)83年5月11日(83)台勞動二字第35290號函）。 三、例如： (一)可歸責於雇主： 1.主管機關及勞動檢查機構如因工作場所有發生危險之虞，將事業單位處以停工處分時，停工期間之工資自當由雇主照給。(行政院勞工委員會102年1月22日勞檢1字第1020150046號函) 2.事業單位停工之原因如係可歸責於雇主，而非歸責於勞工時，停工期間資應由雇主照給。（行政院勞工委員會89年8月 18日(89)台勞動二字第0036018號函)。 3.因週轉不靈停工，法院裁定重整，至○年○月○日復工，停工期間由公司發給員工生活費。(內政部76年6月23日(76)臺內勞字第513331號)。 (二)可歸責於勞工： （勞工）因與業務有關之案件經提起公訴，該公司如確依法報經主管機關核備有案之工作件規則予以暫時停工難謂不當，情嗣後法院判決確定並諭知緩刑，則非有其他依法得終止契約之原因時，即應准予復工。如該公司核備有案之工作規則有不發給停工期間工資之規定者，得從其規定。(內政部75年9月23日(75)台內勞字第442697號函)。 (三)「公司裝修」、「公司失火」仍須視個案事實加以認定歸屬責任。"
+            },
+            "score": 0.03125763125763126
+          }
+        ],
+        "traceId": "64084bf47ee34f7582adf505718a9379",
+        "elapsedMs": 4791.59
+      },
+      "manualReview": null
+    },
+    {
+      "id": "afterwork",
+      "question": "下班回家後老闆又交辦工作，這段時間有加班費嗎？",
+      "relevantDocumentIds": [
+        "official-bola-6BA2B6D870F13C23"
+      ],
+      "category": "工時",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-bola-6BA2B6D870F13C23",
+        "official-bola-1F52A51C58625A34",
+        "official-bola-82FD6BE83122A7A0"
+      ],
+      "citedDocumentIds": [
+        "official-bola-6BA2B6D870F13C23"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "依官方問答，若正常工作時間結束後因工作需要接獲雇主要求繼續工作，完成後應回報結束時間；雇主應記錄交辦工作的起迄時間並給付加班費。 [official-bola-6BA2B6D870F13C23]",
+        "citations": [
+          {
+            "chunkId": "official-bola-6BA2B6D870F13C23",
+            "documentId": "official-bola-6BA2B6D870F13C23",
+            "title": "勞工在家中或下班後，經雇主交辦工作，可否申請加班？",
+            "text": "可以。 勞工約定的正常工作時間結束後，因工作需要接獲雇主要求延長工作時間時，於完成工作後，應將結束時間回報雇主，雇主應記載交付工作之起迄時間並給付加班費。",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=6BA2B6D870F13C23",
+            "publisher": "臺北市政府勞動局",
+            "category": "工時",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2024-08-06",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-bola-6BA2B6D870F13C23",
+              "documentId": "official-bola-6BA2B6D870F13C23",
+              "title": "勞工在家中或下班後，經雇主交辦工作，可否申請加班？",
+              "text": "可以。 勞工約定的正常工作時間結束後，因工作需要接獲雇主要求延長工作時間時，於完成工作後，應將結束時間回報雇主，雇主應記載交付工作之起迄時間並給付加班費。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=6BA2B6D870F13C23",
+              "publisher": "臺北市政府勞動局",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2024-08-06",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-1F52A51C58625A34",
+              "documentId": "official-bola-1F52A51C58625A34",
+              "title": "約定每日工作8小時，所以居家工作期間，勞工連續工作8小時（例如9:00~17:00），這樣可以嗎？",
+              "text": "不可以。 居家工作期間仍應遵守勞動基準法第35條規定，勞工繼續工作4小時，至少應有30分鐘之休息時間。但實行輪班制或其工作有連續性或緊急性者，雇主得在工作時間內，另行調配其休息時間。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=1F52A51C58625A34",
+              "publisher": "臺北市政府勞動局",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2024-08-06",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.031746031746031744
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-82FD6BE83122A7A0",
+              "documentId": "official-bola-82FD6BE83122A7A0",
+              "title": "出差的交通時間(如搭火車或飛機抵達目的地前的交通時間)的時間是否可視為加班？",
+              "text": "有關出差時之交通時間是否列入工作時間計算，因法無明定，可由勞資雙方協商議定。 參考：行政院勞工委員會(現為勞動部)78年6月3日台(78)勞動2字第13366號函釋：「勞工奉派出差或受訓，乘車往返時間，是否屬工作時間，法無明文規定。」 聯絡科室：勞動基準科承辦人 聯絡電話：1999「限臺北巿境內直撥，外縣巿請撥02-27208889」轉7015-7019、3325、3327、3349；02-23026355轉9",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=82FD6BE83122A7A0",
+              "publisher": "臺北市政府勞動局",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2019-06-20",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03128054740957967
+          }
+        ],
+        "traceId": "c31ca8838ed9407fade45925a4b30dd5",
+        "elapsedMs": 5607.08
+      },
+      "manualReview": null
+    },
+    {
+      "id": "break",
+      "question": "居家工作可以連續工作八小時都不休息嗎？",
+      "relevantDocumentIds": [
+        "official-bola-1F52A51C58625A34"
+      ],
+      "category": "工時",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-bola-1F52A51C58625A34",
+        "official-mol-7241",
+        "official-bola-6BA2B6D870F13C23"
+      ],
+      "citedDocumentIds": [
+        "official-bola-1F52A51C58625A34"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "不可以。依官方問答，居家工作仍應在連續工作4小時後，至少安排30分鐘休息。 [official-bola-1F52A51C58625A34]\n\n例外是實行輪班制，或工作具連續性、緊急性時，雇主得在工作時間內另行調配休息時間。 [official-bola-1F52A51C58625A34]",
+        "citations": [
+          {
+            "chunkId": "official-bola-1F52A51C58625A34",
+            "documentId": "official-bola-1F52A51C58625A34",
+            "title": "約定每日工作8小時，所以居家工作期間，勞工連續工作8小時（例如9:00~17:00），這樣可以嗎？",
+            "text": "不可以。 居家工作期間仍應遵守勞動基準法第35條規定，勞工繼續工作4小時，至少應有30分鐘之休息時間。但實行輪班制或其工作有連續性或緊急性者，雇主得在工作時間內，另行調配其休息時間。",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=1F52A51C58625A34",
+            "publisher": "臺北市政府勞動局",
+            "category": "工時",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2024-08-06",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-bola-1F52A51C58625A34",
+              "documentId": "official-bola-1F52A51C58625A34",
+              "title": "約定每日工作8小時，所以居家工作期間，勞工連續工作8小時（例如9:00~17:00），這樣可以嗎？",
+              "text": "不可以。 居家工作期間仍應遵守勞動基準法第35條規定，勞工繼續工作4小時，至少應有30分鐘之休息時間。但實行輪班制或其工作有連續性或緊急性者，雇主得在工作時間內，另行調配其休息時間。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=1F52A51C58625A34",
+              "publisher": "臺北市政府勞動局",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2024-08-06",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-7241",
+              "documentId": "official-mol-7241",
+              "title": "例假日及休息日是否為完整1日？",
+              "text": "勞工應從事之工作、工作開始及終止之時間、休息時間、例假、休息日等有關事項，應於勞動契約中約定，其約定之內容仍不得違反勞動基準法相關規範。勞工之例假及休息日，仍應由勞資雙方於契約訂定時或契約履行中，進一步詳細約定。 勞動基準法第 36 條 所稱之「一日」，原則係指午前零時至午後 12 時之連續 24 小時。但因雇主經營方式並不一致，爰雇主如配合業務特性，實施「輪班制」之出勤方式，而各班輪替具有規律，雖非不得採取「連續 24 小時」為一日，但為顧及勞工之身心健康，雇主仍應盡量安排完整之一日使勞工獲得足夠休息。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7241/post",
+              "publisher": "勞動部",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2021-10-20",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.031746031746031744
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-6BA2B6D870F13C23",
+              "documentId": "official-bola-6BA2B6D870F13C23",
+              "title": "勞工在家中或下班後，經雇主交辦工作，可否申請加班？",
+              "text": "可以。 勞工約定的正常工作時間結束後，因工作需要接獲雇主要求延長工作時間時，於完成工作後，應將結束時間回報雇主，雇主應記載交付工作之起迄時間並給付加班費。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=6BA2B6D870F13C23",
+              "publisher": "臺北市政府勞動局",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2024-08-06",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.0315136476426799
+          }
+        ],
+        "traceId": "2fcc880efd5c482084cf9660e8acc228",
+        "elapsedMs": 5443.02
+      },
+      "manualReview": null
+    },
+    {
+      "id": "midnight",
+      "question": "加班跨過午夜，工時可以分成兩天計算嗎？",
+      "relevantDocumentIds": [
+        "official-bola-BB7AAE526A9BA3D8"
+      ],
+      "category": "工時",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-bola-BB7AAE526A9BA3D8",
+        "official-bola-82FD6BE83122A7A0",
+        "official-bola-CE03773A2E71617A"
+      ],
+      "citedDocumentIds": [
+        "official-bola-BB7AAE526A9BA3D8"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "不可以分成兩天分開計算；工作時間跨越兩個曆日，應合併計算。 [official-bola-BB7AAE526A9BA3D8]",
+        "citations": [
+          {
+            "chunkId": "official-bola-BB7AAE526A9BA3D8",
+            "documentId": "official-bola-BB7AAE526A9BA3D8",
+            "title": "如果加班時間跨夜(到凌晨)，工時要如何計算?",
+            "text": "工作時間跨越二曆日者，其工作時間應合併計算。 參考： 勞動基準法施行細則第17條：「本法第30條所稱正常工作時間跨越二曆日者，其工作時間應合併計算。」。 聯絡科室：勞動基準科承辦人 聯絡電話：1999「限臺北巿境內直撥，外縣巿請撥02-27208889」轉7015-7017、3325、3327、3349；02-23026355轉9",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=BB7AAE526A9BA3D8",
+            "publisher": "臺北市政府勞動局",
+            "category": "工時",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2019-11-06",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-bola-BB7AAE526A9BA3D8",
+              "documentId": "official-bola-BB7AAE526A9BA3D8",
+              "title": "如果加班時間跨夜(到凌晨)，工時要如何計算?",
+              "text": "工作時間跨越二曆日者，其工作時間應合併計算。 參考： 勞動基準法施行細則第17條：「本法第30條所稱正常工作時間跨越二曆日者，其工作時間應合併計算。」。 聯絡科室：勞動基準科承辦人 聯絡電話：1999「限臺北巿境內直撥，外縣巿請撥02-27208889」轉7015-7017、3325、3327、3349；02-23026355轉9",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=BB7AAE526A9BA3D8",
+              "publisher": "臺北市政府勞動局",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2019-11-06",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-82FD6BE83122A7A0",
+              "documentId": "official-bola-82FD6BE83122A7A0",
+              "title": "出差的交通時間(如搭火車或飛機抵達目的地前的交通時間)的時間是否可視為加班？",
+              "text": "有關出差時之交通時間是否列入工作時間計算，因法無明定，可由勞資雙方協商議定。 參考：行政院勞工委員會(現為勞動部)78年6月3日台(78)勞動2字第13366號函釋：「勞工奉派出差或受訓，乘車往返時間，是否屬工作時間，法無明文規定。」 聯絡科室：勞動基準科承辦人 聯絡電話：1999「限臺北巿境內直撥，外縣巿請撥02-27208889」轉7015-7019、3325、3327、3349；02-23026355轉9",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=82FD6BE83122A7A0",
+              "publisher": "臺北市政府勞動局",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2019-06-20",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03200204813108039
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-CE03773A2E71617A",
+              "documentId": "official-bola-CE03773A2E71617A",
+              "title": "休息日加班工時總量控管所指為何？休息日之工作時間要不要計入每月的加班上限？",
+              "text": "1.休息日工作之時間，必須全數計入第32條第2項所定延長工作時間總數(一個月延長工時總數不得超過46小時；107年3月1日後，經工會或勞資會議同意一個月延長工時總數不得超過54小時，每3個月不得超過138小時) 。但若休息日工作係因天災、事變或突發事件所致，其出勤時數不計入第32條第2項所定延長工作時間總數。 例：當月平日加班已有36小時，休息日出勤最多只能為10小時。（休息日出勤10小時，連同原已加班之36小時，合計為46小時，始符合一個月46小時上限之規定。） 2.例假與休息日並未限定只能排在週六及週日，其日期應在不違反勞動基準法第36條第1項及第2項規定之前提下由勞雇雙方協議之。 聯絡科室：勞動基準科(含勞動條件檢查組)承辦人 聯絡電話：1999「限臺北巿境內直撥，外縣巿請撥02-27208889」轉7015-7018、3325、3327、3349；02-23026355轉9",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=CE03773A2E71617A",
+              "publisher": "臺北市政府勞動局",
+              "category": "工時",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2019-07-10",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.0315136476426799
+          }
+        ],
+        "traceId": "1d5bb7f801944d38aed26d92ca5c357f",
+        "elapsedMs": 3696.08
+      },
+      "manualReview": null
+    },
+    {
+      "id": "annual",
+      "question": "兼職每週上班天數跟正職一樣、每天時數較短，特休怎麼給？",
+      "relevantDocumentIds": [
+        "official-mol-81202"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-mol-81202",
+        "official-mol-81173",
+        "official-mol-81182"
+      ],
+      "citedDocumentIds": [
+        "official-mol-81202"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "若兼職勞工每週工作日數與同單位全時勞工相同、僅每日工作時數較短，特別休假仍應依《勞動基準法》第38條給予休假日數，不按工時比例折減日數。 [official-mol-81202]\n\n若勞雇雙方協商約定以小時為給假單位，可按每日8小時乘以應休假日數計給時數。 [official-mol-81202]",
+        "citations": [
+          {
+            "chunkId": "official-mol-81202",
+            "documentId": "official-mol-81202",
+            "title": "部分工時勞工應如何計給特別休假?",
+            "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2025-09-01",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-81202",
+              "documentId": "official-mol-81202",
+              "title": "部分工時勞工應如何計給特別休假?",
+              "text": "依本部所定「僱用部分時間工作勞工應行注意事項」規定，部分工時勞工之特別休假亦應依勞動基準法第38條規定辦理。其年度可休特別休假時數，得參考下列方式比例計給之：以部分工時勞工全年正常工作時間占全時勞工全年正常工作時間之比例，乘以勞動基準法第38條所定特別休假日數計給。不足1日部分由勞雇雙方協商議定，惟不得損害勞工權益。勞雇雙方若協商約定以「小時」為給假單位，得以每日8小時乘以應休假日數所得之時數計給之。但部分工時勞工每週工作日數與該事業單位之全時勞工相同，僅每日工作時數較短者，仍應依勞動基準法第 38 條規定給予休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81202/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-09-01",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.032266458495966696
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81173",
+              "documentId": "official-mol-81173",
+              "title": "公司特別休假採曆年制(即每年1月1日至12月31日)，該如何計算給假的天數?勞工之特別休假於年度終結仍未休畢，是否可經勞雇雙方協商遞延至次一年度實施?勞工離職時要用週年制來計算剩餘天數嗎?",
+              "text": "一、勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作滿一定期間之翌日如仍在職，即取得請特別休假之權利。另實務上，勞雇雙方仍多有約定以曆年制、會計年度、學年度（學校）或自行約定之年度給假之模式，已為慣例且行之有年，勞動基準法施行細則第24條第2項亦有明定經勞雇雙方協商後，得以前開方式計算特別休假期間。如果事業單位為配合出勤管理，經勞雇雙方協商約定以曆年制為特別休假行使期間，在勞工法定享有特別休假日數不得減損前提下，按比例分段計給特別休假，尚無不可；但是勞動契約終止時，雇主應依勞工「到職日」(即週年制)計算給予勞工實際工作年資之特別休假日數。 二、又依同法第38條第4項規定，勞工之特別休假，因年度終結而未休之日數，雇主應發給工資；但年度終結未休之日數，經「勞雇雙方協商」遞延至次1年度實施者，如果於次一年度終結或契約終止仍未休之日數，雇主應發給工資。本部另設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉，勞工可依不同「年度」需求計算特別休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81173/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81182",
+              "documentId": "official-mol-81182",
+              "title": "勞工離職當年畸零月數是否須依比例計給特別休假，又留職停薪應如何計算?另如滿一年有7天特別休假是否包含滿半年的3天?",
+              "text": "一、本部設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉可供參考。 二、依勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作，滿一定期間(留職停薪不計入年資，但前後年資可併計)之「翌日」如仍在職，即取得請特別休假之權利。勞工於年資滿1年，依法共可取得年資滿半年3天特別休假及年資滿1年7天之特別休假，共計10天。 三、特別休假是指勞工每繼續工作滿一定期間後，即應享有一定日數之特別休假，不因年度中終止勞動契約，而影響該勞工最後在職當年基於上一年度服務滿一定期間所應給予之特別休假。但是，勞工離職當年度繼續工作之畸零月數因未再滿一年，無應按比例另予特別休假之規定。例如：離職時年資1年又5個月餘，當年度工作的5個多月，得不另給特別休假。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81182/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03125763125763126
+          }
+        ],
+        "traceId": "76a95b2194394c1ab3c433e3af88771f",
+        "elapsedMs": 6737.56
+      },
+      "manualReview": null
+    },
+    {
+      "id": "annual-control",
+      "question": "老闆可以未經我同意把病假改成特休嗎？",
+      "relevantDocumentIds": [
+        "official-mol-81186"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-mol-81186",
+        "official-mol-81173",
+        "official-bola-C7F1B09DBDDB54D5"
+      ],
+      "citedDocumentIds": [
+        "official-mol-81186"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "不可以。雇主不得未經同意，擅自把你已請的病假改為特別休假；特別休假日期原則上由勞工排定。 [official-mol-81186]\n\n請假仍應依事業單位工作規則或勞動契約約定辦理相關手續。 [official-mol-81186]",
+        "citations": [
+          {
+            "chunkId": "official-mol-81186",
+            "documentId": "official-mol-81186",
+            "title": "雇主是否可以規定特別休假要事先提出不能臨時請、要求預排全年特休，或未經同意將事（病）假改為特別休假？",
+            "text": "勞工應從事之工作、工作開始及終止之時間、請假等事項，應於勞動契約中約定，勞動基準法施行細則第7條定有明文。復依勞動基準法第38條第2項規定，特別休假期日，由勞工排定之；但雇主基於企業經營上之急迫需求或勞工因個人因素，得與他方協商調整。勞工請假，應依事業單位工作規則之規定或勞動契約之約定辦理相關請假手續。特別休假是為了提供勞工休憩之用，休假日期由勞工依照自己意願決定。雇主可提醒或促請勞工排定休假，但不可以限制勞工特別休假期日的排定，或規定僅得一次預先排定或在特定期日前休假，亦不得將勞工已請的事(病)假擅自更改為特別休假。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81186/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2026-04-23",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-81186",
+              "documentId": "official-mol-81186",
+              "title": "雇主是否可以規定特別休假要事先提出不能臨時請、要求預排全年特休，或未經同意將事（病）假改為特別休假？",
+              "text": "勞工應從事之工作、工作開始及終止之時間、請假等事項，應於勞動契約中約定，勞動基準法施行細則第7條定有明文。復依勞動基準法第38條第2項規定，特別休假期日，由勞工排定之；但雇主基於企業經營上之急迫需求或勞工因個人因素，得與他方協商調整。勞工請假，應依事業單位工作規則之規定或勞動契約之約定辦理相關請假手續。特別休假是為了提供勞工休憩之用，休假日期由勞工依照自己意願決定。雇主可提醒或促請勞工排定休假，但不可以限制勞工特別休假期日的排定，或規定僅得一次預先排定或在特定期日前休假，亦不得將勞工已請的事(病)假擅自更改為特別休假。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81186/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-81173",
+              "documentId": "official-mol-81173",
+              "title": "公司特別休假採曆年制(即每年1月1日至12月31日)，該如何計算給假的天數?勞工之特別休假於年度終結仍未休畢，是否可經勞雇雙方協商遞延至次一年度實施?勞工離職時要用週年制來計算剩餘天數嗎?",
+              "text": "一、勞動基準法第38條及同法施行細則第5條規定，勞工自受僱之日起於同一雇主或事業單位工作滿一定期間之翌日如仍在職，即取得請特別休假之權利。另實務上，勞雇雙方仍多有約定以曆年制、會計年度、學年度（學校）或自行約定之年度給假之模式，已為慣例且行之有年，勞動基準法施行細則第24條第2項亦有明定經勞雇雙方協商後，得以前開方式計算特別休假期間。如果事業單位為配合出勤管理，經勞雇雙方協商約定以曆年制為特別休假行使期間，在勞工法定享有特別休假日數不得減損前提下，按比例分段計給特別休假，尚無不可；但是勞動契約終止時，雇主應依勞工「到職日」(即週年制)計算給予勞工實際工作年資之特別休假日數。 二、又依同法第38條第4項規定，勞工之特別休假，因年度終結而未休之日數，雇主應發給工資；但年度終結未休之日數，經「勞雇雙方協商」遞延至次1年度實施者，如果於次一年度終結或契約終止仍未休之日數，雇主應發給工資。本部另設有特別休假日數試算系統〈網址：https://calcr2.mol.gov.tw/RestDays〉，勞工可依不同「年度」需求計算特別休假日數。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/81173/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.030834914611005692
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-C7F1B09DBDDB54D5",
+              "documentId": "official-bola-C7F1B09DBDDB54D5",
+              "title": "勞工事假，一年不得超過幾日？工資給付？如一年超過14日公司如何處理？",
+              "text": "依勞工請假規則第7條規定：「勞工因有事故必須親自處理者，得請事假，一年內合計不得超過十四日。事假期間不給工資。」，超過14日者，依內政部(74)台內勞字第315047號函釋略以：「勞工全年事假日數超過本規則者，其超過部份得以特別休假抵充，如無特別休假或特別休假已休畢者，其處理原則事業單位可明定於工作規則中，報准後實施並公開揭示。」超過部分勞資雙方協商議定。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=C7F1B09DBDDB54D5",
+              "publisher": "臺北市政府勞動局",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-04-24",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.030536130536130537
+          }
+        ],
+        "traceId": "c1bee2d9407e42feadad0e8df1a6c4b9",
+        "elapsedMs": 3371.61
+      },
+      "manualReview": null
+    },
+    {
+      "id": "parttime-rest",
+      "question": "工讀生休息日加班，可是當週還沒做滿四十小時，需要加給工資嗎？",
+      "relevantDocumentIds": [
+        "official-mol-7246"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-mol-7246",
+        "official-mol-7255",
+        "official-bola-B5DDD7D62A791464"
+      ],
+      "citedDocumentIds": [
+        "official-mol-7246"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "若雇主所屬事業單位適用《勞動基準法》，工讀生於法定休息日出勤，即使當週正常工時未滿40小時，仍應依休息日出勤工資加給標準計給工資。 [official-mol-7246]",
+        "citations": [
+          {
+            "chunkId": "official-mol-7246",
+            "documentId": "official-mol-7246",
+            "title": "按時計酬（或按日計酬）之部分工時勞工，是否有休息日規定的適用？",
+            "text": "凡適用勞動基準法之事業單位，其僱用之勞工（包括工讀生、部分時間工作者等）均受該法保障。部分工時勞工如於法定休息日出勤工作，即使當週正常工作時間未達 40 小時，仍應依休息日出勤工資加給標準計給工資。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7246/post",
+            "publisher": "勞動部",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2021-10-20",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-7246",
+              "documentId": "official-mol-7246",
+              "title": "按時計酬（或按日計酬）之部分工時勞工，是否有休息日規定的適用？",
+              "text": "凡適用勞動基準法之事業單位，其僱用之勞工（包括工讀生、部分時間工作者等）均受該法保障。部分工時勞工如於法定休息日出勤工作，即使當週正常工作時間未達 40 小時，仍應依休息日出勤工資加給標準計給工資。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7246/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2021-10-20",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-mol-7255",
+              "documentId": "official-mol-7255",
+              "title": "例假與休息日之差別為何？每7日的週期起迄是否也可以任意調動呢？可否任意於週期內任意更動例假及休息日日期?",
+              "text": "一、「例假」屬強制性規定，俾以適當地中斷勞工連續多日之工作，保護其身心健康，雇主不得任意剝奪勞工此項基本權益。例假之合法出勤要件，僅限於勞動基準法第40條所列「天災、事變或突發事件」之極特殊狀況，若無該等法定原因，縱然勞工同意，亦不得使勞工於例假日工作。「休息日」之出勤較為彈性，其出勤性質屬延長工作時間，雇主如有使勞工於休息日工作之必要，在遵守勞動基準法第24條第2項、第32條及第36條規定之前提下，可徵求勞工之同意出勤。 二、例假及休息日之安排，以每7日為1週期，除彈性工時之情況外，每1週期內應有1日例假、1日休息日，得由勞雇雙方於不違反現行規定情形下，依照事業單位營運特性及勞工的需求自行約定，並未限制僅能安排於星期六、日。如有調整的需要，必須經過與勞工協商合意才能變更。 三、每1週期的起訖，由勞雇雙方議定，並依曆日連續計算，不因跨月而重新起算，且不得任意調動。例如，勞雇雙方約定星期一至星期日為一週期，以115年為例，每一週期依序為3月16日至3月22日、3月23日至3月29日。但如約定以星期日至星期六為一週期，則每週期依序為3月15日至3月21日、3月22日至3月28日。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2292/7255/post",
+              "publisher": "勞動部",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-23",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.031754032258064516
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-B5DDD7D62A791464",
+              "documentId": "official-bola-B5DDD7D62A791464",
+              "title": "勞工婚假有幾日呢?何時可以開始請假？需要一次請完嗎?未休完可以折算工資嗎?",
+              "text": "勞工婚假14日，自結婚之日前10日起3個月內請休。但經雇主同意者，得於1年內請畢。尚無限制僅能一次請完，得由雙方約定之。未休完，能否折算工資，法無明文規定，應由勞資雙方協商辦理。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=B5DDD7D62A791464",
+              "publisher": "臺北市政府勞動局",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-10-07",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.031746031746031744
+          }
+        ],
+        "traceId": "4ee79ec950244d3b84ff975b958fddbf",
+        "elapsedMs": 3991.51
+      },
+      "manualReview": null
+    },
+    {
+      "id": "minimum",
+      "question": "2026年最低時薪與月薪是多少？",
+      "relevantDocumentIds": [
+        "official-bola-70464C835E4688A8"
+      ],
+      "category": "薪資",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-bola-70464C835E4688A8",
+        "official-bola-0835C7A13BC1EF15",
+        "official-bola-659A978FCD6DD2C3"
+      ],
+      "citedDocumentIds": [
+        "official-bola-70464C835E4688A8"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "自2026年（民國115年）1月1日起，月最低工資為29,500元，每小時最低工資為196元。 [official-bola-70464C835E4688A8]",
+        "citations": [
+          {
+            "chunkId": "official-bola-70464C835E4688A8",
+            "documentId": "official-bola-70464C835E4688A8",
+            "title": "115年1月1日起，最低工資之調漲?",
+            "text": "勞動部發布，自115年1月1日起實施，每月最低工資調整為29,500元，每小時最低工資調整為196元。",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=70464C835E4688A8",
+            "publisher": "臺北市政府勞動局",
+            "category": "薪資",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2026-04-01",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-bola-70464C835E4688A8",
+              "documentId": "official-bola-70464C835E4688A8",
+              "title": "115年1月1日起，最低工資之調漲?",
+              "text": "勞動部發布，自115年1月1日起實施，每月最低工資調整為29,500元，每小時最低工資調整為196元。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=70464C835E4688A8",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-01",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03252247488101534
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-0835C7A13BC1EF15",
+              "documentId": "official-bola-0835C7A13BC1EF15",
+              "title": "勞工每月工資為最低工資29,500元（含全勤獎金），如勞工請事假如何扣薪？",
+              "text": "勞工請事假，因未提供勞務，如依其「實際工作時間」發給工資，尚不違反勞動基準法。 依最低工資法第5條規定，勞工與雇主雙方議定之工資，不得低於最低工資。故勞工每月在正常工作時間內所得之工資，不得低於每月最低工資扣除因請假而未發之每日最低工資之餘額。 例如：勞工請事假一天，其當月薪資不得低於28,517元（即29,500元-983元）。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=0835C7A13BC1EF15",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-13",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03200204813108039
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-659A978FCD6DD2C3",
+              "documentId": "official-bola-659A978FCD6DD2C3",
+              "title": "「最低工資」與「基本工資」有何區別？",
+              "text": "現行「基本工資審議辦法」位階僅為法規命令，為強化工資審議機制，經總統於112年12月27日制定公布「最低工資法」，以法律位階保障勞工工資權益。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=659A978FCD6DD2C3",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2024-11-26",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03149801587301587
+          }
+        ],
+        "traceId": "cd4161bcdf174b8187565c8fce812538",
+        "elapsedMs": 3438.42
+      },
+      "manualReview": null
+    },
+    {
+      "id": "sick-bonus",
+      "question": "請一天普通病假，可以把整個月全勤獎金都扣掉嗎？",
+      "relevantDocumentIds": [
+        "official-bola-2B4459B0BAA6CB3D"
+      ],
+      "category": "休假",
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-bola-2B4459B0BAA6CB3D",
+        "official-bola-D3AFE42FAD98227F",
+        "official-bola-B5DDD7D62A791464"
+      ],
+      "citedDocumentIds": [
+        "official-bola-2B4459B0BAA6CB3D"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "依官方問答，普通傷病假應按請假日數比例計算全勤獎金，因此請一天普通病假，不應因此扣掉整個月全勤獎金。 [official-bola-2B4459B0BAA6CB3D]\n\n官方舉例：月薪33,000元、其中全勤獎金3,000元，當月請病假一天且其他工作日皆出勤，該月全勤獎金扣除不得超過100元（3,000元÷30天）。 [official-bola-2B4459B0BAA6CB3D]",
+        "citations": [
+          {
+            "chunkId": "official-bola-2B4459B0BAA6CB3D",
+            "documentId": "official-bola-2B4459B0BAA6CB3D",
+            "title": "員工請了普通傷病假，公司可以怎麼處理全勤獎金?",
+            "text": "勞工依勞工請假規則規定請普通傷病假，公司應按請普通傷病假的日數，依比例計算全勤獎金。例如: 雙方約定月薪新臺幣(下同)33,000元，其中3,000元為全勤獎金，勞工於某一個月請病假一天，其他工作日皆有出勤，則該月全勤獎金之扣除不得超過100元(即3,000元÷30天)。 其他有關病假勤獎金之疑問，詳細可參考 勞動部常見問答 。",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=2B4459B0BAA6CB3D",
+            "publisher": "臺北市政府勞動局",
+            "category": "休假",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2026-05-25",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-bola-2B4459B0BAA6CB3D",
+              "documentId": "official-bola-2B4459B0BAA6CB3D",
+              "title": "員工請了普通傷病假，公司可以怎麼處理全勤獎金?",
+              "text": "勞工依勞工請假規則規定請普通傷病假，公司應按請普通傷病假的日數，依比例計算全勤獎金。例如: 雙方約定月薪新臺幣(下同)33,000元，其中3,000元為全勤獎金，勞工於某一個月請病假一天，其他工作日皆有出勤，則該月全勤獎金之扣除不得超過100元(即3,000元÷30天)。 其他有關病假勤獎金之疑問，詳細可參考 勞動部常見問答 。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=2B4459B0BAA6CB3D",
+              "publisher": "臺北市政府勞動局",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-05-25",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-D3AFE42FAD98227F",
+              "documentId": "official-bola-D3AFE42FAD98227F",
+              "title": "勞工普通傷病假怎麼請？病假期間工資如何給付？",
+              "text": "一、查勞工請假規則第4條第1項規定:「一、未住院者，一年內合計不得超過30日。二、住院者，二年內合計不得超過一年。三、未住院傷病假與住院傷病假二年內合計不得超過一年。四、經醫師診斷，罹患癌症（含原位癌）採門診方式治療或懷孕期間需安胎休養者，其治療或休養期間，併入住院傷病假計算。」 二、同條第3項規定:「普通傷病假一年內未超過30日部分，工資折半發給，其領有勞工保險普通傷病未達工資半數者，由雇主補足之。」 聯絡科室：勞動基準科承辦人 聯絡電話：1999「限臺北巿境內直撥，外縣巿請撥02-27208889」轉7015-7017、3325、3327、3349",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=D3AFE42FAD98227F",
+              "publisher": "臺北市政府勞動局",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2023-08-21",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-B5DDD7D62A791464",
+              "documentId": "official-bola-B5DDD7D62A791464",
+              "title": "勞工婚假有幾日呢?何時可以開始請假？需要一次請完嗎?未休完可以折算工資嗎?",
+              "text": "勞工婚假14日，自結婚之日前10日起3個月內請休。但經雇主同意者，得於1年內請畢。尚無限制僅能一次請完，得由雙方約定之。未休完，能否折算工資，法無明文規定，應由勞資雙方協商辦理。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=B5DDD7D62A791464",
+              "publisher": "臺北市政府勞動局",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-10-07",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.031009615384615385
+          }
+        ],
+        "traceId": "601068ebef89408b929b0290e08477e1",
+        "elapsedMs": 5373.43
+      },
+      "manualReview": null
+    },
+    {
+      "id": "damage-unfiltered",
+      "question": "打工不小心弄壞店裡的東西，可以直接扣我的薪水嗎？",
+      "relevantDocumentIds": [
+        "official-bola-8D48F35D4240FBEC"
+      ],
+      "category": null,
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-bola-8D48F35D4240FBEC",
+        "official-bola-89046A0E7CE5E5AC",
+        "official-bola-B5DDD7D62A791464"
+      ],
+      "citedDocumentIds": [
+        "official-bola-8D48F35D4240FBEC",
+        "official-bola-89046A0E7CE5E5AC"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "不可以因為你不小心弄壞店內物品，就由雇主單方面直接扣你的薪水；工資應全額直接給付，損害賠償不能逕行扣抵。 [official-bola-8D48F35D4240FBEC]\n\n賠償金額和清償方式可以由雇主與你協議；若談不成，賠償應循司法途徑處理，而不是由雇主單方面認定後扣薪。 [official-bola-8D48F35D4240FBEC]\n\n在責任歸屬、賠償範圍或金額尚未確定前，雇主不得預先扣發工資作為賠償費用。 [official-bola-89046A0E7CE5E5AC]",
+        "citations": [
+          {
+            "chunkId": "official-bola-8D48F35D4240FBEC",
+            "documentId": "official-bola-8D48F35D4240FBEC",
+            "title": "雇主可以因勞工有過失逕自扣發勞工薪資嗎?",
+            "text": "工資乃勞工提供勞務所得之對價報酬，應全額直接給付勞工，此與違約金或因契約所生之損害賠償之債權，性質不同，不得逕行扣抵。若勞工於工作中故意或過失損壞產品或其它物品，其觸犯刑章部分，雇主可訴請司法機關辦理；民事賠償部分可由雇主與勞工決定賠償金額及清償方式，如未能達成協議，其賠償非雇主單方面所能認定者，應循司法途徑解決，不得逕自扣發工資。",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8D48F35D4240FBEC",
+            "publisher": "臺北市政府勞動局",
+            "category": "薪資",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2023-12-18",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          },
+          {
+            "chunkId": "official-bola-89046A0E7CE5E5AC",
+            "documentId": "official-bola-89046A0E7CE5E5AC",
+            "title": "事業單位可否以品質扣款、盤損等名義扣發績效獎金作為賠償之用？",
+            "text": "雇主不可以品質扣款、盤損等名義扣發績效獎金作為賠償之用，依照勞動基準法第22條第2項規定，工資應全額直接給付勞工，且同法第26條規定雇主不得預扣勞工工資作為違約金或賠償費用。所稱「預扣勞工工資」，係指在違約、賠償等事實未發生或其事實已發生，但責任歸屬、範圍大小、金額多寡等未確定前，雇主不可以預先扣發勞工工資作為違約金或賠償費用。",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=89046A0E7CE5E5AC",
+            "publisher": "臺北市政府勞動局",
+            "category": "薪資",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2025-04-24",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-bola-8D48F35D4240FBEC",
+              "documentId": "official-bola-8D48F35D4240FBEC",
+              "title": "雇主可以因勞工有過失逕自扣發勞工薪資嗎?",
+              "text": "工資乃勞工提供勞務所得之對價報酬，應全額直接給付勞工，此與違約金或因契約所生之損害賠償之債權，性質不同，不得逕行扣抵。若勞工於工作中故意或過失損壞產品或其它物品，其觸犯刑章部分，雇主可訴請司法機關辦理；民事賠償部分可由雇主與勞工決定賠償金額及清償方式，如未能達成協議，其賠償非雇主單方面所能認定者，應循司法途徑解決，不得逕自扣發工資。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8D48F35D4240FBEC",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2023-12-18",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-89046A0E7CE5E5AC",
+              "documentId": "official-bola-89046A0E7CE5E5AC",
+              "title": "事業單位可否以品質扣款、盤損等名義扣發績效獎金作為賠償之用？",
+              "text": "雇主不可以品質扣款、盤損等名義扣發績效獎金作為賠償之用，依照勞動基準法第22條第2項規定，工資應全額直接給付勞工，且同法第26條規定雇主不得預扣勞工工資作為違約金或賠償費用。所稱「預扣勞工工資」，係指在違約、賠償等事實未發生或其事實已發生，但責任歸屬、範圍大小、金額多寡等未確定前，雇主不可以預先扣發勞工工資作為違約金或賠償費用。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=89046A0E7CE5E5AC",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-04-24",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.031754032258064516
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-B5DDD7D62A791464",
+              "documentId": "official-bola-B5DDD7D62A791464",
+              "title": "勞工婚假有幾日呢?何時可以開始請假？需要一次請完嗎?未休完可以折算工資嗎?",
+              "text": "勞工婚假14日，自結婚之日前10日起3個月內請休。但經雇主同意者，得於1年內請畢。尚無限制僅能一次請完，得由雙方約定之。未休完，能否折算工資，法無明文規定，應由勞資雙方協商辦理。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=B5DDD7D62A791464",
+              "publisher": "臺北市政府勞動局",
+              "category": "休假",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-10-07",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.016129032258064516
+          }
+        ],
+        "traceId": "a436130117b0468889345a3c0ad26dd4",
+        "elapsedMs": 6453.19
+      },
+      "manualReview": null
+    },
+    {
+      "id": "payslip-unfiltered",
+      "question": "我的薪資單應該列哪些項目？",
+      "relevantDocumentIds": [
+        "official-mol-7168"
+      ],
+      "category": null,
+      "companyName": null,
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "official-mol-7168",
+        "official-bola-024AC00552729B45",
+        "official-bola-8DC386681402F624"
+      ],
+      "citedDocumentIds": [
+        "official-mol-7168"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "雇主給付工資時，應提供工資各項目的計算方式明細；薪資單內容應列出勞雇雙方約定的工資總額。 [official-mol-7168]\n\n應列出各項工資的給付金額，例如本薪、獎金、津貼及加班費等因提供勞務取得的報酬。 [official-mol-7168]\n\n應列出依法令或雙方約定得扣除項目的金額，例如勞工負擔的勞保、就業保險及健保費、自願提繳退休金、職工福利金、執行命令扣押，或雙方約定可扣除的項目。 [official-mol-7168]\n\n薪資單還應列出實際發給的金額。明細可用紙本或電子方式提供，也可以提供勞工能隨時取得及列印的資料。 [official-mol-7168]",
+        "citations": [
+          {
+            "chunkId": "official-mol-7168",
+            "documentId": "official-mol-7168",
+            "title": "雇主是否要給勞工「工資明細」（薪資單）？「各項目」應該要包括哪些項目？雇主要如何提供？",
+            "text": "依勞動基準法第23條規定，雇主給付工資的同時，應提供工資各項目計算方式明細（也就是俗稱之薪資單、薪資明細、薪資袋等）給勞工，其中應包含下列事項： 勞雇雙方約定的工資總額。 工資各項目之給付金額：包括本（底）薪、獎金、津貼、延時工資（加班費）等勞工因提供勞務獲得之報酬均屬之。 依法令之規定或勞雇雙方另有約定，得扣除項目之金額：例如勞工應負擔之勞工保險、就業保險及全民健康保險費、勞工自願提繳之退休金、職工福利金、依執行政法院或行政執行機關之執行命令所為之扣押，以及勞雇雙方約定得扣除之項目，例如：雇主代轉帳之勞工個人自行參加之團體保險費用。 實際發給之金額。 提供「工資各項目計算方式明細」的型式不限於紙本，也可以用電子資料傳輸方式（例如：電子郵件、簡訊、通訊軟體、事業單位內部網站之薪資系統等），或是勞工能隨時取得及可以列印之資料，即已符合法令規定。",
+            "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2290/7168/post",
+            "publisher": "勞動部",
+            "category": "薪資",
+            "sourceType": "官方問答",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2026-04-21",
+            "companyName": null,
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "official-mol-7168",
+              "documentId": "official-mol-7168",
+              "title": "雇主是否要給勞工「工資明細」（薪資單）？「各項目」應該要包括哪些項目？雇主要如何提供？",
+              "text": "依勞動基準法第23條規定，雇主給付工資的同時，應提供工資各項目計算方式明細（也就是俗稱之薪資單、薪資明細、薪資袋等）給勞工，其中應包含下列事項： 勞雇雙方約定的工資總額。 工資各項目之給付金額：包括本（底）薪、獎金、津貼、延時工資（加班費）等勞工因提供勞務獲得之報酬均屬之。 依法令之規定或勞雇雙方另有約定，得扣除項目之金額：例如勞工應負擔之勞工保險、就業保險及全民健康保險費、勞工自願提繳之退休金、職工福利金、依執行政法院或行政執行機關之執行命令所為之扣押，以及勞雇雙方約定得扣除之項目，例如：雇主代轉帳之勞工個人自行參加之團體保險費用。 實際發給之金額。 提供「工資各項目計算方式明細」的型式不限於紙本，也可以用電子資料傳輸方式（例如：電子郵件、簡訊、通訊軟體、事業單位內部網站之薪資系統等），或是勞工能隨時取得及可以列印之資料，即已符合法令規定。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/2282/2284/2290/7168/post",
+              "publisher": "勞動部",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-04-21",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-024AC00552729B45--1",
+              "documentId": "official-bola-024AC00552729B45",
+              "title": "平均工資如何計算？如果工作未滿6個月，又該如何計算？",
+              "text": "一、日平均工資：謂計算事由發生之當日前6個月內所得工資總額除以該期間之總日數所得之金額。工作未滿6個月者，謂工作期間所得工資總額除以工作期間之總日數所得之金額。 二、月平均工資：事由發生前6個月工資除以6；或日平均工資乘以計算期間每月之平均日數。 三、例如：某勞工工作未滿六個月，在職區間為108年1月1日至5月10日（勞動基準法施行細則第2條第1款規定「發生計算事由之當日」不列入計算）： (一)日平均工資：應自1月1日計算至5月9日所得工資總額除以4個月又9天總日數(31天+28天+31天+30天+9天)。 (二)月平均工資：1月1日至5月9日期間(跨越1月至5月)每月之平均日數為(31天+28天+31天+30天+31天)/5=30.2天，則該名勞工之月平均工資應為「(每日)平均工資」X30.2天。 ※參考： 四、依本法第2條第4款計算平均工資時，下列各款期日或期間均不計入（勞動基準法施行細則第2條規定及勞動部歷年函令補充）： （一）發生計算事由之當日(依本府函詢勞動釋示係指「契約存續之末日」)。 （二）因職業災害尚在醫療中者。 （三）依本法第50條第2項減半發給工資者。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=024AC00552729B45",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2024-02-27",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": "official-bola-024AC00552729B45",
+              "parentText": "一、日平均工資：謂計算事由發生之當日前6個月內所得工資總額除以該期間之總日數所得之金額。工作未滿6個月者，謂工作期間所得工資總額除以工作期間之總日數所得之金額。 二、月平均工資：事由發生前6個月工資除以6；或日平均工資乘以計算期間每月之平均日數。 三、例如：某勞工工作未滿六個月，在職區間為108年1月1日至5月10日（勞動基準法施行細則第2條第1款規定「發生計算事由之當日」不列入計算）： (一)日平均工資：應自1月1日計算至5月9日所得工資總額除以4個月又9天總日數(31天+28天+31天+30天+9天)。 (二)月平均工資：1月1日至5月9日期間(跨越1月至5月)每月之平均日數為(31天+28天+31天+30天+31天)/5=30.2天，則該名勞工之月平均工資應為「(每日)平均工資」X30.2天。 ※參考： 四、依本法第2條第4款計算平均工資時，下列各款期日或期間均不計入（勞動基準法施行細則第2條規定及勞動部歷年函令補充）： （一）發生計算事由之當日(依本府函詢勞動釋示係指「契約存續之末日」)。 （二）因職業災害尚在醫療中者。 （三）依本法第50條第2項減半發給工資者。 （四）雇主因天災、事變或其他不可抗力而不能繼續其事業，致勞工未能工作者。 （五）依勞工請假規則請普通傷病假者。 （六）依性別平等工作法請生理假、產假、家庭照顧假或安胎休養，致減少工資者。 （七）留職停薪者。 （八）勞資協商無薪假(減班休息)期間(勞動部91.1.17勞動2字第0910002799號令)。 （九）合法罷工期間(行政院勞工委員會(現勞動部)84.7.14臺勞資3字第124022號函)。 （十）勞工曾於疫情期間，依嚴重特殊傳染性肺炎防治及紓困振興特別條例第三條規定請防疫隔離假、勞工依嚴重特殊傳染性肺炎中央流行疫情指揮中心所為之應變措施，請防疫照顧假。(勞動部109.3.30勞動條2字第1090130209號令) （十一）勞工曾於疫情期間，依嚴重特殊傳染性肺炎中央流行疫情指揮中心所為之應變措施，請疫苗接種假期間 (勞動部110.7.19勞動條2字第1100130753號令)。 （十二）事業單位為配合嚴重特殊傳染性肺炎防疫措施，曾受政府命令、公告或通知而停業或不能繼續其事業，致勞工未能工作之期間(勞動部110.7.27勞動條2字第1100130738號令)。 五、由於勞動基準法暨施行細則對於『一個月平均工資』並無定義，該法第2條第4款雖有『平均工資』定義，惟係屬『日平均工資』之意，該法施行之初，前主管機關內政部曾於74年函釋：『一個月平均工資，係指日平均工資乘以30所得之數額』。 惟該函執行以來，迭有反映有欠合理，因計算事由發生之當日前6個月之總日數，由於大月小月不同，分別為181天至184天，而非180天，平均每月之日數應為30.17天至30.67天而非30天，故一律以30天計算，將使勞工應得之資遣費、退休金、職業災害補償費減少，故改以『日平均工資』乘以計算期間每月之平均日數為計算標準...。（行政院勞工委員會(現勞動部)83年4月9日(83)台勞動2字第25564號函） 六、查民法第123條之立法理由已明定，以月或年定期間者，為交易上便利，應依曆計算。月或年非連續計算者，既非連續，即無從依曆計算，故應就其日數以1月為30日。 勞動基準法第2條第4款規定『平均工資』，係計算事由發生之當日前6個月內所得工資總額除以該期間之總日數所得之金額，即事由發生當日不算入，自當日前一日依曆往前推算6個月期間，該期間並不屬於非連續計算之情形，自應依民法第123條第1項規定依曆計算，而不宜解為算足30日。故本會83年4月9日台(83)勞動2字第25564號函釋內容與民法第123條規定，尚無牴觸。因此，有關平均工資之計算，仍請依上開函釋規定辦理。（行政院勞工委員會(現勞動部)86年12月9日(86)台勞動2字第052675號函）"
+            },
+            "score": 0.030536130536130537
+          },
+          {
+            "chunk": {
+              "chunkId": "official-bola-8DC386681402F624",
+              "documentId": "official-bola-8DC386681402F624",
+              "title": "績效獎金算不算工資，列入平均工資計算？",
+              "text": "績效獎金如係以勞工工作達成預定目標而發放，具有因工作而獲得之報酬之性質，依勞動基準法第2條第3款暨施行細則第10條規定，應屬工資範疇，於計算退休金時，自應列入平均工資計算。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&sms=87415A8B9CE81B16&s=8DC386681402F624",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方問答",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2023-12-18",
+              "companyName": null,
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.030158730158730156
+          }
+        ],
+        "traceId": "05b9440a79ea41f6a0ffa81d0b674486",
+        "elapsedMs": 5462.92
+      },
+      "manualReview": null
+    },
+    {
+      "id": "company-0",
+      "question": "請列出這家公司的裁罰處分字號、違規內容及公告中的罰鍰金額。",
+      "relevantDocumentIds": [
+        "taipei-case-0a13ba11e4c65bc00b0a"
+      ],
+      "category": "裁罰",
+      "companyName": "剛剛股份有限公司",
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "taipei-case-0a13ba11e4c65bc00b0a",
+        "taipei-case-05d6d9e1a6a8ff779b93"
+      ],
+      "citedDocumentIds": [
+        "taipei-case-0a13ba11e4c65bc00b0a",
+        "taipei-case-05d6d9e1a6a8ff779b93"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "歷史裁罰紀錄：處分字號為北市勞動字第11560018831號；違規內容為假日工資未給或於休假日工作未依規定加給工資；公告罰鍰金額為新臺幣50,000元。 [taipei-case-0a13ba11e4c65bc00b0a]\n\n歷史裁罰紀錄：處分字號為北市勞動字第11460130061號；違規內容為假日工資未給或於休假日工作未依規定加給工資，以及未依法給付休息日工作之工資；公告罰鍰金額為新臺幣40,000元。 [taipei-case-05d6d9e1a6a8ff779b93]",
+        "citations": [
+          {
+            "chunkId": "taipei-case-0a13ba11e4c65bc00b0a",
+            "documentId": "taipei-case-0a13ba11e4c65bc00b0a",
+            "title": "剛剛股份有限公司｜北市勞動字第11560018831號｜裁罰紀錄",
+            "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1150915\n處分日期：1150831\n處分字號：北市勞動字第11560018831號\n事業單位或事業主之名稱：剛剛股份有限公司\n違反勞動基準法條款：勞動基準法第39條\n違反法規內容：假日工資未給或於休假日工作未依規定加給工資\n罰鍰金額：50000\n備註：勞動部115年度工讀生與部分工時勞工勞動條件專案+複查專案",
+            "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+            "publisher": "臺北市政府勞動局",
+            "category": "裁罰",
+            "sourceType": "裁罰紀錄",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": null,
+            "companyName": "剛剛股份有限公司",
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          },
+          {
+            "chunkId": "taipei-case-05d6d9e1a6a8ff779b93",
+            "documentId": "taipei-case-05d6d9e1a6a8ff779b93",
+            "title": "剛剛股份有限公司｜北市勞動字第11460130061號｜裁罰紀錄",
+            "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1141007\n處分日期：1140818\n處分字號：北市勞動字第11460130061號\n事業單位或事業主之名稱：剛剛股份有限公司\n違反勞動基準法條款：勞動基準法第39條;勞動基準法第24條第2項\n違反法規內容：假日工資未給或於休假日工作未依規定加給工資;未依法給付休息日工作之工資\n罰鍰金額：40000\n備註：勞動部114年度工讀生與部分工時勞工勞動條件專案+僱用管理就業平等專案",
+            "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+            "publisher": "臺北市政府勞動局",
+            "category": "裁罰",
+            "sourceType": "裁罰紀錄",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": null,
+            "companyName": "剛剛股份有限公司",
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "taipei-case-0a13ba11e4c65bc00b0a",
+              "documentId": "taipei-case-0a13ba11e4c65bc00b0a",
+              "title": "剛剛股份有限公司｜北市勞動字第11560018831號｜裁罰紀錄",
+              "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1150915\n處分日期：1150831\n處分字號：北市勞動字第11560018831號\n事業單位或事業主之名稱：剛剛股份有限公司\n違反勞動基準法條款：勞動基準法第39條\n違反法規內容：假日工資未給或於休假日工作未依規定加給工資\n罰鍰金額：50000\n備註：勞動部115年度工讀生與部分工時勞工勞動條件專案+複查專案",
+              "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+              "publisher": "臺北市政府勞動局",
+              "category": "裁罰",
+              "sourceType": "裁罰紀錄",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": null,
+              "companyName": "剛剛股份有限公司",
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "taipei-case-05d6d9e1a6a8ff779b93",
+              "documentId": "taipei-case-05d6d9e1a6a8ff779b93",
+              "title": "剛剛股份有限公司｜北市勞動字第11460130061號｜裁罰紀錄",
+              "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1141007\n處分日期：1140818\n處分字號：北市勞動字第11460130061號\n事業單位或事業主之名稱：剛剛股份有限公司\n違反勞動基準法條款：勞動基準法第39條;勞動基準法第24條第2項\n違反法規內容：假日工資未給或於休假日工作未依規定加給工資;未依法給付休息日工作之工資\n罰鍰金額：40000\n備註：勞動部114年度工讀生與部分工時勞工勞動條件專案+僱用管理就業平等專案",
+              "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+              "publisher": "臺北市政府勞動局",
+              "category": "裁罰",
+              "sourceType": "裁罰紀錄",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": null,
+              "companyName": "剛剛股份有限公司",
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03225806451612903
+          }
+        ],
+        "traceId": "70e6d11100c84ae0b45f5601fc1cffa4",
+        "elapsedMs": 6669.03
+      },
+      "manualReview": null
+    },
+    {
+      "id": "company-1",
+      "question": "請列出這家公司的裁罰處分字號、違規內容及公告中的罰鍰金額。",
+      "relevantDocumentIds": [
+        "taipei-case-a84f61cf614b94f05471"
+      ],
+      "category": "裁罰",
+      "companyName": "愛神阿芙羅黛蒂餐飲有限公司",
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "taipei-case-a84f61cf614b94f05471"
+      ],
+      "citedDocumentIds": [
+        "taipei-case-a84f61cf614b94f05471"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "裁罰處分字號為北市勞動字第11560018861號。 [taipei-case-a84f61cf614b94f05471]\n\n公告列載的違規內容為出勤紀錄未逐日記載勞工出勤情形至分鐘為止。 [taipei-case-a84f61cf614b94f05471]\n\n公告中的罰鍰金額為新臺幣20,000元。 [taipei-case-a84f61cf614b94f05471]",
+        "citations": [
+          {
+            "chunkId": "taipei-case-a84f61cf614b94f05471",
+            "documentId": "taipei-case-a84f61cf614b94f05471",
+            "title": "愛神阿芙羅黛蒂餐飲有限公司｜北市勞動字第11560018861號｜裁罰紀錄",
+            "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1150915\n處分日期：1150828\n處分字號：北市勞動字第11560018861號\n事業單位或事業主之名稱：愛神阿芙羅黛蒂餐飲有限公司\n違反勞動基準法條款：勞動基準法第30條第6項\n違反法規內容：出勤紀錄未逐日記載勞工出勤情形至分鐘為止\n罰鍰金額：20000\n備註：勞動部115年度工讀生與部分工時勞工勞動條件專案",
+            "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+            "publisher": "臺北市政府勞動局",
+            "category": "裁罰",
+            "sourceType": "裁罰紀錄",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": null,
+            "companyName": "愛神阿芙羅黛蒂餐飲有限公司",
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "taipei-case-a84f61cf614b94f05471",
+              "documentId": "taipei-case-a84f61cf614b94f05471",
+              "title": "愛神阿芙羅黛蒂餐飲有限公司｜北市勞動字第11560018861號｜裁罰紀錄",
+              "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1150915\n處分日期：1150828\n處分字號：北市勞動字第11560018861號\n事業單位或事業主之名稱：愛神阿芙羅黛蒂餐飲有限公司\n違反勞動基準法條款：勞動基準法第30條第6項\n違反法規內容：出勤紀錄未逐日記載勞工出勤情形至分鐘為止\n罰鍰金額：20000\n備註：勞動部115年度工讀生與部分工時勞工勞動條件專案",
+              "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+              "publisher": "臺北市政府勞動局",
+              "category": "裁罰",
+              "sourceType": "裁罰紀錄",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": null,
+              "companyName": "愛神阿芙羅黛蒂餐飲有限公司",
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          }
+        ],
+        "traceId": "76928e1d304d45d3b4b95195eb1ae3fc",
+        "elapsedMs": 4036.53
+      },
+      "manualReview": null
+    },
+    {
+      "id": "company-2",
+      "question": "請列出這家公司的裁罰處分字號、違規內容及公告中的罰鍰金額。",
+      "relevantDocumentIds": [
+        "taipei-case-36b33feb0f6dfa3dbb3d"
+      ],
+      "category": "裁罰",
+      "companyName": "鰻谷實業有限公司",
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "taipei-case-36b33feb0f6dfa3dbb3d"
+      ],
+      "citedDocumentIds": [
+        "taipei-case-36b33feb0f6dfa3dbb3d"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "鰻谷實業有限公司的處分字號為「北市勞動字第11560018841號」；違規內容為未依法給付休息日工作之工資（違反《勞動基準法》第24條第2項）；公告罰鍰金額為20,000（公告未標示幣別）。這是歷史裁罰紀錄，不代表目前仍違規。 [taipei-case-36b33feb0f6dfa3dbb3d]",
+        "citations": [
+          {
+            "chunkId": "taipei-case-36b33feb0f6dfa3dbb3d",
+            "documentId": "taipei-case-36b33feb0f6dfa3dbb3d",
+            "title": "鰻谷實業有限公司｜北市勞動字第11560018841號｜裁罰紀錄",
+            "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1150915\n處分日期：1150826\n處分字號：北市勞動字第11560018841號\n事業單位或事業主之名稱：鰻谷實業有限公司\n違反勞動基準法條款：勞動基準法第24條第2項\n違反法規內容：未依法給付休息日工作之工資\n罰鍰金額：20000\n備註：勞動部115年度工讀生與部分工時勞工勞動條件專案",
+            "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+            "publisher": "臺北市政府勞動局",
+            "category": "裁罰",
+            "sourceType": "裁罰紀錄",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": null,
+            "companyName": "鰻谷實業有限公司",
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "taipei-case-36b33feb0f6dfa3dbb3d",
+              "documentId": "taipei-case-36b33feb0f6dfa3dbb3d",
+              "title": "鰻谷實業有限公司｜北市勞動字第11560018841號｜裁罰紀錄",
+              "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1150915\n處分日期：1150826\n處分字號：北市勞動字第11560018841號\n事業單位或事業主之名稱：鰻谷實業有限公司\n違反勞動基準法條款：勞動基準法第24條第2項\n違反法規內容：未依法給付休息日工作之工資\n罰鍰金額：20000\n備註：勞動部115年度工讀生與部分工時勞工勞動條件專案",
+              "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+              "publisher": "臺北市政府勞動局",
+              "category": "裁罰",
+              "sourceType": "裁罰紀錄",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": null,
+              "companyName": "鰻谷實業有限公司",
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          }
+        ],
+        "traceId": "909ba41414974bafa6399d82e5ebf450",
+        "elapsedMs": 6277.89
+      },
+      "manualReview": null
+    },
+    {
+      "id": "company-79",
+      "question": "請列出這家公司的裁罰處分字號、違規內容及公告中的罰鍰金額。",
+      "relevantDocumentIds": [
+        "taipei-case-5a0554b5d0357cf738f0"
+      ],
+      "category": "裁罰",
+      "companyName": "品誠娛樂股份有限公司",
+      "expectedStatus": "answered",
+      "retrievedDocumentIds": [
+        "taipei-case-5a0554b5d0357cf738f0"
+      ],
+      "citedDocumentIds": [
+        "taipei-case-5a0554b5d0357cf738f0"
+      ],
+      "expectedSourceHit": true,
+      "expectedSourceCited": true,
+      "statusMatches": true,
+      "answer": {
+        "status": "answered",
+        "text": "處分字號：北市勞動字第11360274091號。 [taipei-case-5a0554b5d0357cf738f0]\n\n公告列載違規內容為未依法給付休息日工作之工資。 [taipei-case-5a0554b5d0357cf738f0]\n\n公告中的罰鍰金額為新臺幣20,000元。 [taipei-case-5a0554b5d0357cf738f0]",
+        "citations": [
+          {
+            "chunkId": "taipei-case-5a0554b5d0357cf738f0",
+            "documentId": "taipei-case-5a0554b5d0357cf738f0",
+            "title": "品誠娛樂股份有限公司｜北市勞動字第11360274091號｜裁罰紀錄",
+            "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1131104\n處分日期：1130930\n處分字號：北市勞動字第11360274091號\n事業單位或事業主之名稱：品誠娛樂股份有限公司\n違反勞動基準法條款：勞動基準法第24條第2項\n違反法規內容：未依法給付休息日工作之工資\n罰鍰金額：20000\n備註：勞動部113年度工讀生與部分工時勞工勞動條件專案",
+            "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+            "publisher": "臺北市政府勞動局",
+            "category": "裁罰",
+            "sourceType": "裁罰紀錄",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": null,
+            "companyName": "品誠娛樂股份有限公司",
+            "version": "2026-10-21",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "taipei-case-5a0554b5d0357cf738f0",
+              "documentId": "taipei-case-5a0554b5d0357cf738f0",
+              "title": "品誠娛樂股份有限公司｜北市勞動字第11360274091號｜裁罰紀錄",
+              "text": "本筆為歷史裁罰公告，不能推論事業單位目前仍違規；日期為民國年月日。\n\n公告日期：1131104\n處分日期：1130930\n處分字號：北市勞動字第11360274091號\n事業單位或事業主之名稱：品誠娛樂股份有限公司\n違反勞動基準法條款：勞動基準法第24條第2項\n違反法規內容：未依法給付休息日工作之工資\n罰鍰金額：20000\n備註：勞動部113年度工讀生與部分工時勞工勞動條件專案",
+              "sourceUrl": "https://data.taipei/dataset/detail?id=23630879-4926-4877-a48a-a0ae6cc2f7d5",
+              "publisher": "臺北市政府勞動局",
+              "category": "裁罰",
+              "sourceType": "裁罰紀錄",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": null,
+              "companyName": "品誠娛樂股份有限公司",
+              "version": "2026-10-21",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          }
+        ],
+        "traceId": "b66171f40d684a0180259a1bdcc8efdd",
+        "elapsedMs": 3465.35
+      },
+      "manualReview": null
+    },
+    {
+      "id": "unknown-0",
+      "question": "火星火山地質",
+      "relevantDocumentIds": [],
+      "category": null,
+      "companyName": null,
+      "expectedStatus": "no_evidence",
+      "retrievedDocumentIds": [],
+      "citedDocumentIds": [],
+      "expectedSourceHit": null,
+      "expectedSourceCited": null,
+      "statusMatches": true,
+      "answer": {
+        "status": "no_evidence",
+        "text": "目前資料中找不到相關內容，無法提供有來源支持的回答。請調整問題或補充資料。",
+        "citations": [],
+        "mode": "OpenAI 來源問答",
+        "hits": [],
+        "traceId": "98756cb58c6e440eb26b9625767817ef",
+        "elapsedMs": 322.86
+      },
+      "manualReview": null
+    },
+    {
+      "id": "unknown-1",
+      "question": "請教我寫Python網路爬蟲",
+      "relevantDocumentIds": [],
+      "category": null,
+      "companyName": null,
+      "expectedStatus": "no_evidence",
+      "retrievedDocumentIds": [],
+      "citedDocumentIds": [],
+      "expectedSourceHit": null,
+      "expectedSourceCited": null,
+      "statusMatches": true,
+      "answer": {
+        "status": "no_evidence",
+        "text": "目前資料中找不到相關內容，無法提供有來源支持的回答。請調整問題或補充資料。",
+        "citations": [],
+        "mode": "OpenAI 來源問答",
+        "hits": [],
+        "traceId": "1669e09b26e04e32998c6d650f8e089a",
+        "elapsedMs": 388.47
+      },
+      "manualReview": null
+    }
+  ],
+  "costNote": "依 2026-10-21 公開標準價格與 API 用量保守估算，未折抵輸入快取；非帳戶帳單或全站預算鎖。每次請求先預留 US$0.05，含先前測試預留總額不超過 US$3。",
+  "pricingSources": [
+    "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "https://developers.openai.com/api/docs/models/text-embedding-3-small"
+  ],
+  "resumedFrom": "C:\\Users\\User\\Desktop\\RAG1\\reports\\corpus-check-live-20261021-172550-801561.json",
+  "index": {
+    "indexed": 0,
+    "cached": 124,
+    "totalTokens": 0
+  },
+  "missingVectorsAfter": 0,
+  "estimatedCostUsd": 0.00071708,
+  "reservedTotalUsd": 0.5,
+  "summary": {
+    "caseCount": 18,
+    "statusMatches": 18,
+    "answerableCount": 16,
+    "sourceHitsAt3": 16,
+    "expectedSourcesCited": 16
+  }
+}

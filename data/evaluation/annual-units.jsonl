@@ -1,0 +1,2 @@
+{"id":"annual-original","question":"兼職每週上班天數跟正職一樣、每天時數較短，特休怎麼給？","relevantDocumentIds":["official-mol-81202"],"category":"休假","companyName":null,"expectedStatus":"answered","reviewCriteria":["依第38條給予休假日數，不因每日工時較短折減日數","不得接續把一般8小時換算套用到本情境"]}
+{"id":"annual-general","question":"我每週只上兩天，同公司正職每週五天，全年正常工時也比較少。部分工時特休可以按什麼比例計給？","relevantDocumentIds":["official-mol-81202"],"category":"休假","companyName":null,"expectedStatus":"answered","reviewCriteria":["依全年正常工作時間占全時全年正常工作時間比例乘法定特休日數說明一般情況","不套用同每週工作日數的例外，也不逕以每週兩天除五天代替全年工時比例","工時比例乘法定特休日數仍為日數，不得直接稱為時數","若提小時計給須保留雙方協商及一般情境條件"]}

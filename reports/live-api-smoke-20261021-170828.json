@@ -1,0 +1,199 @@
+{
+  "budgetUsd": 5,
+  "testReservationLimitUsd": 0.25,
+  "calls": [
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 999,
+        "total_tokens": 999
+      },
+      "estimatedCostUsd": 1.9980000000000002e-05
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 20,
+        "total_tokens": 20
+      },
+      "estimatedCostUsd": 4.0000000000000003e-07
+    },
+    {
+      "endpoint": "responses",
+      "model": "gpt-6-luna",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "input_tokens": 949,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 187,
+        "output_tokens_details": {
+          "reasoning_tokens": 68
+        },
+        "total_tokens": 1136
+      },
+      "estimatedCostUsd": 0.0001884
+    },
+    {
+      "endpoint": "embeddings",
+      "model": "text-embedding-3-small",
+      "reservedUsd": 0.05,
+      "status": "returned",
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "estimatedCostUsd": 1.4e-07
+    }
+  ],
+  "results": [
+    {
+      "question": "打破杯子老闆可以扣薪嗎？",
+      "expectedStatus": "answered",
+      "answer": {
+        "status": "answered",
+        "text": "依臺北市勞動局說明，老闆不能因你打破杯子，就自行認定賠償金額並直接從工資扣除。 [faq-wages-damage]\n\n賠償金額與清償方式應由雙方協議；協議不成時，應循司法途徑處理。 [faq-wages-damage]",
+        "citations": [
+          {
+            "chunkId": "faq-wages-damage",
+            "documentId": "bola-8D48F35D4240FBEC",
+            "title": "打破杯子、損壞物品可以直接扣薪嗎？",
+            "text": "依臺北市勞動局說明，工資是勞工提供勞務的報酬，與損害賠償的債權性質不同。雇主不得因勞工損壞物品，就單方面認定賠償金額並逕自扣發工資。賠償金額與清償方式應由雙方協議；無法達成協議時，應循司法途徑處理。",
+            "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&s=8D48F35D4240FBEC&sms=87415A8B9CE81B16",
+            "publisher": "臺北市政府勞動局",
+            "category": "薪資",
+            "sourceType": "官方摘要",
+            "collectedAt": "2026-10-21",
+            "sourceUpdatedAt": "2023-12-18",
+            "companyName": null,
+            "version": "1",
+            "active": true,
+            "allowedRoles": [
+              "public"
+            ],
+            "effectiveFrom": null,
+            "effectiveTo": null,
+            "parentId": null,
+            "parentText": null
+          }
+        ],
+        "mode": "OpenAI 來源問答",
+        "hits": [
+          {
+            "chunk": {
+              "chunkId": "faq-wages-damage",
+              "documentId": "bola-8D48F35D4240FBEC",
+              "title": "打破杯子、損壞物品可以直接扣薪嗎？",
+              "text": "依臺北市勞動局說明，工資是勞工提供勞務的報酬，與損害賠償的債權性質不同。雇主不得因勞工損壞物品，就單方面認定賠償金額並逕自扣發工資。賠償金額與清償方式應由雙方協議；無法達成協議時，應循司法途徑處理。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&s=8D48F35D4240FBEC&sms=87415A8B9CE81B16",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方摘要",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2023-12-18",
+              "companyName": null,
+              "version": "1",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk": {
+              "chunkId": "faq-wages-prepayment",
+              "documentId": "bola-89046A0E7CE5E5AC",
+              "title": "可以預扣工資作為盤損賠償或違約金嗎？",
+              "text": "臺北市勞動局說明，雇主不得預扣勞工工資作為違約金或賠償費用。即使損害事件已發生，若責任歸屬、範圍或金額仍未確定，也不得事先扣薪。該問答並說明，不可以品質扣款、盤損等名義扣發績效獎金作為賠償。",
+              "sourceUrl": "https://bola.gov.taipei/News_Content.aspx?n=FDEDF5DCB0A26A46&s=89046A0E7CE5E5AC&sms=87415A8B9CE81B16",
+              "publisher": "臺北市政府勞動局",
+              "category": "薪資",
+              "sourceType": "官方摘要",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2025-04-24",
+              "companyName": null,
+              "version": "1",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk": {
+              "chunkId": "faq-wages-minimum",
+              "documentId": "mol-parttime-conditions",
+              "title": "工讀生的時薪有最低工資保障嗎？",
+              "text": "勞動部工讀生權益專區說明，勞工與雇主議定的工資不得低於最低工資，部分工時勞工與工讀生也享有此項權益。本片段未收錄各年度最低工資金額，詢問特定年份數字時需另外查閱該年度官方公告。",
+              "sourceUrl": "https://www.mol.gov.tw/1607/28690/87756/87780/nodelist",
+              "publisher": "勞動部",
+              "category": "薪資",
+              "sourceType": "官方摘要",
+              "collectedAt": "2026-10-21",
+              "sourceUpdatedAt": "2026-02-05",
+              "companyName": null,
+              "version": "1",
+              "active": true,
+              "allowedRoles": [
+                "public"
+              ],
+              "effectiveFrom": null,
+              "effectiveTo": null,
+              "parentId": null,
+              "parentText": null
+            },
+            "score": 0.015873015873015872
+          }
+        ],
+        "traceId": "e09decd2110344b1a019132c56b68a57",
+        "elapsedMs": 6594.72
+      }
+    },
+    {
+      "question": "火星火山地質",
+      "expectedStatus": "no_evidence",
+      "answer": {
+        "status": "no_evidence",
+        "text": "目前資料中找不到相關內容，無法提供有來源支持的回答。請調整問題或補充資料。",
+        "citations": [],
+        "mode": "OpenAI 來源問答",
+        "hits": [],
+        "traceId": "311bee8123444d64b9e58fd0496e6790",
+        "elapsedMs": 3401.12
+      }
+    }
+  ],
+  "pricingPerMillion": {
+    "chatInput": 0.1,
+    "chatOutput": 0.5,
+    "embeddingInput": 0.02
+  },
+  "costNote": "Estimated from API usage; cached input charged at full input rate for conservative estimate. Not an account billing limit.",
+  "index": {
+    "indexed": 6,
+    "cached": 0,
+    "totalTokens": 999
+  },
+  "missingVectorsAfter": 0,
+  "estimatedReturnedUsageCostUsd": 0.00020892,
+  "reservedTotalUsd": 0.2
+}

@@ -1,0 +1,5 @@
+* text=auto eol=lf
+# 原始快照要維持位元組不變，才能跨平台核對來源雜湊。
+data/raw/expansion-20261021/** -text
+*.png binary
+*.jpg binary
