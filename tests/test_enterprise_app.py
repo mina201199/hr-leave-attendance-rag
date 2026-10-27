@@ -1,6 +1,7 @@
 import secrets
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 from streamlit.testing.v1 import AppTest
@@ -17,6 +18,7 @@ projectPath = Path(__file__).resolve().parents[1]
 
 @pytest.fixture
 def appSystem(tmp_path, monkeypatch):
+  monkeypatch.setattr("labor_rag.enterprise_display.currentPolicyDate", lambda: date(2026, 10, 22))
   monkeypatch.setenv("RAG_ENTERPRISE_DATA_DIR", str(tmp_path))
   monkeypatch.setenv("RAG_PROVIDER", "extractive")
   monkeypatch.setenv("RAG_RETRIEVAL", "bm25")
@@ -49,8 +51,8 @@ def login(app, passwords, userId):
 def query(app, question="請假申請流程", asOf=date(2026, 10, 22)):
   if app.radio(key="entPage").value != "制度查詢":
     app.radio(key="entPage").set_value("制度查詢").run()
-  app.date_input(key="entAsOf").set_value(asOf)
-  app.chat_input(key="entQuestion").set_value(question).run()
+  with patch("labor_rag.enterprise_display.currentPolicyDate", return_value=asOf):
+    app.chat_input(key="entQuestion").set_value(question).run()
   assert not app.exception
   return app.session_state["entConversation"][-1]["response"]
 
@@ -96,7 +98,7 @@ def test_role_sources_query_and_backend_management(appSystem, userId, expected, 
   app, service, passwords = appSystem
   token = login(app, passwords, userId)
   app.radio(key="entPage").set_value("資料來源").run()
-  app.date_input(key="entAsOf").set_value(date(2026, 10, 22)).run()
+  app.run()
   text = visibleText(app)
   for documentId in ("demo-leave", "demo-attendance", "demo-manager", "demo-hr"):
     assert (documentId in text) == (documentId in expected)
@@ -119,9 +121,42 @@ def testAllAuthorizedTopicsAndEffectiveDateReachService(appSystem):
   assert not any(element.key == "entCategory" for element in app.selectbox)
   combined = query(app, "請假申請與補打卡流程")
   assert {chunk.documentId for chunk in combined.citations} == {"demo-leave", "demo-attendance"}
+  assistant = app.chat_message[-1]
+  assert "查看引用（1）" in [element.label for element in assistant.get("expander")]
+  assert combined.citations[0].text in [element.value for element in assistant.get("text")]
+  assert combined.citations[1].text not in [element.value for element in assistant.get("text")]
+  assert combined.citations[1].chunkId not in visibleText(assistant)
+  assert not any(element.label == "對話設定" for element in app.expander)
+  assert not any(element.key == "entAsOf" for element in app.date_input)
   future = query(app, asOf=date(2026, 11, 1))
   assert {chunk.version for chunk in future.citations if chunk.documentId == "demo-leave"} == {"v2"}
   assert "交接代理安排" in visibleText(app)
+
+
+@pytest.mark.parametrize("status,mode", [
+  ("answered", "本機測試回答"),
+  ("conflict", "企業來源摘錄（離線，非模型回答）"),
+])
+def testMultipleUsedSourcesAreNotTruncated(appSystem, monkeypatch, status, mode):
+  from labor_rag.enterprise_generation import EnterpriseClaim, EnterpriseGeneratedAnswer
+
+  app, service, passwords = appSystem
+
+  class LocalGenerator:
+    externalProcessing = False
+
+    def generate(self, question, hits):
+      return EnterpriseGeneratedAnswer(status, tuple(EnterpriseClaim(hit.chunk.text, (hit.chunk.chunkId,)) for hit in hits))
+
+  service.generator = LocalGenerator()
+  service.generator.mode = mode
+  monkeypatch.setattr("labor_rag.enterprise.buildEnterpriseRuntime", lambda *args: service)
+  login(app, passwords, "employee")
+  response = query(app, "請假申請與補打卡流程")
+  assert len(response.citations) == 2
+  assistant = app.chat_message[-1]
+  assert "查看引用（2）" in [element.label for element in assistant.get("expander")]
+  assert all(chunk.text in [element.value for element in assistant.get("text")] for chunk in response.citations)
 
 
 def test_logout_clears_identity_widgets_results_and_owned_records(appSystem):
@@ -372,7 +407,7 @@ def testSuggestedQuestionUsesAuthorizedSourcesAndDoesNotRepeat(appSystem, userId
   app, service, passwords = appSystem
   script.prepareEnterprise(dbPath=service.store.path, importData=True)
   token = login(app, passwords, userId)
-  app.date_input(key="entAsOf").set_value(date(2026, 10, 22)).run()
+  app.run()
   buttons = {button.label: button for button in app.button}
   assert question in buttons
   if userId == "employee":

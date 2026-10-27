@@ -3,9 +3,7 @@ import hashlib
 import re
 import sqlite3
 import sys
-from datetime import datetime
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
 import streamlit as st
 
@@ -15,7 +13,7 @@ sys.path.insert(0, str(projectPath / "src"))
 
 from labor_rag.auth import AuthenticationError, AuthorizationError
 from labor_rag.enterprise import buildEnterpriseRuntime
-from labor_rag.enterprise_display import conciseExcerpt
+from labor_rag.enterprise_display import conciseExcerpt, currentPolicyDate
 from labor_rag.settings import loadSettings
 
 
@@ -77,7 +75,7 @@ def withoutCitationMarkers(text, citations):
 
 def answerDisplayParts(response, question=""):
   if response.mode != "企業來源摘錄（離線，非模型回答）":
-    return withoutCitationMarkers(response.text, response.citations), []
+    return withoutCitationMarkers(response.text, response.citations), [], response.citations
   body = response.text.removeprefix("【來源摘錄，非模型回答；虛構示範依各來源標示】\n\n")
   notes = []
   primaryExcerpt = None
@@ -114,17 +112,18 @@ def answerDisplayParts(response, question=""):
     notes.append(f"[{citation.chunkId}] " + "".join(details))
   if response.status == "answered" and primaryExcerpt is not None:
     body = conciseExcerpt(primaryExcerpt, question)
-  return withoutCitationMarkers(body, response.citations), notes
+    return body, notes[:1], response.citations[:1]
+  return withoutCitationMarkers(body, response.citations), notes, response.citations
 
 
 def showResponse(service, token, response, asOf, question):
   statusLabels = {"answered": "已找到來源", "no_evidence": "沒有足夠來源", "needs_clarification": "需要補充條件",
     "conflict": "來源有衝突", "context_limit": "來源超過內容預算"}
-  body, notes = answerDisplayParts(response, question)
+  body, notes, usedCitations = answerDisplayParts(response, question)
   st.text(body)
-  if response.citations:
-    with st.expander(f"查看引用（{len(response.citations)}）"):
-      for citation in response.citations:
+  if usedCitations:
+    with st.expander(f"查看引用（{len(usedCitations)}）"):
+      for citation in usedCitations:
         # 收合只改變呈現，每份原文仍必須經過後端驗權。
         authorized = service.readCitation(token, citation.chunkId, asOf, citation.version)
         showChunk(authorized)
@@ -132,7 +131,7 @@ def showResponse(service, token, response, asOf, question):
     for note in notes:
       st.caption(note)
     st.caption(f"狀態：{statusLabels.get(response.status, response.status)}｜{response.mode}")
-    st.caption("離線重點摘錄：以本機文字比對整理最相關來源，並非模型回答；完整條件與其他檢索結果請展開引用確認。")
+    st.caption("引用僅列出本段回答使用的來源。離線重點摘錄以本機文字比對整理，並非模型回答；完整條件請展開引用確認。")
     st.caption(f"紀錄 ID：{response.traceId}｜耗時：{response.elapsedMs:.0f} ms")
   feedbackColumns = st.columns([1, 1, 3])
   for index, (label, key, rating) in enumerate((("有幫助", "entHelpful", "helpful"), ("需要改善", "entUnhelpful", "unhelpful"))):
@@ -272,7 +271,8 @@ def showManagement(service, token, today):
 
 
 def showWorkspace(service, token, principal):
-  today = datetime.now(ZoneInfo("Asia/Taipei")).date()
+  today = currentPolicyDate()
+  asOf = today
   roleLabels = {"employee": "員工", "manager": "主管", "hr": "人資"}
   canManage = principal.role == "hr" and "knowledge:manage" in principal.capabilities
   with st.sidebar:
@@ -280,10 +280,6 @@ def showWorkspace(service, token, principal):
     st.button("＋ 新對話", key="entClearConversation", on_click=clearConversation, use_container_width=True)
     page = st.radio("功能選單", ["制度查詢", "資料來源", "我的紀錄"] + (["維護管理"] if canManage else []),
       key="entPage", label_visibility="collapsed")
-    with st.expander("對話設定"):
-      asOf = st.date_input("制度適用日期", value=today, key="entAsOf")
-      st.caption("日期影響下一題與資料來源清單，舊對話保留原日期。每題請提供完整條件，目前不做跨輪推論。")
-      st.caption("最近 10 輪僅保留在本次登入畫面；新對話會清空畫面，登出即清除。")
     st.divider()
     st.caption(f"目前身分：{roleLabels[principal.role]}")
     st.caption("虛構公司制度，僅供展示與測試")

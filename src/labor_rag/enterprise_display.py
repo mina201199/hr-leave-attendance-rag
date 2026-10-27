@@ -1,6 +1,12 @@
 import re
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from .retrieval import tokenize
+
+
+def currentPolicyDate():
+  return datetime.now(ZoneInfo("Asia/Taipei")).date()
 
 
 def conciseExcerpt(text, question):
