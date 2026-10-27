@@ -254,10 +254,15 @@ def testConversationKeepsTurnsAndClearsWithoutDeletingOwnedRecords(appSystem):
   first = query(app, "請假申請流程")
   second = query(app, "補打卡說明流程")
   assert [message.name for message in app.chat_message] == ["user", "assistant", "user", "assistant"]
+  assert app.chat_message[0].get("text")[0].value == "補打卡說明流程"
+  assert second.traceId in visibleText(app.chat_message[1])
+  assert app.chat_message[2].get("text")[0].value == "請假申請流程"
+  assert first.traceId in visibleText(app.chat_message[3])
   assert "請假申請流程" in visibleText(app)
   assert first.traceId in visibleText(app)
   assert second.traceId in visibleText(app)
   app.button(key=f"entHelpful-{first.traceId}").click().run()
+  assert app.chat_message[0].get("text")[0].value == "補打卡說明流程"
   assert next(trace for trace in service.recentTraces(token) if trace["traceId"] == first.traceId)["feedback"] == "helpful"
   app.button(key="entClearConversation").click().run()
   assert [message.name for message in app.chat_message] == ["assistant"]

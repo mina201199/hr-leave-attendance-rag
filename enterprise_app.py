@@ -190,7 +190,7 @@ def showConversation(service, token, asOf):
       with st.chat_message("assistant"):
         st.text("你好，請告訴我想了解的請假或出勤制度。我會依你的權限提供來源，方便你核對。")
         st.caption("例如：臨時請假要通知誰？補打卡需要哪些說明？")
-    for turn in authorizedHistory:
+    for turn in reversed(authorizedHistory):
       with st.chat_message("user"):
         st.text(turn["question"])
         st.caption(f"適用日期：{turn['asOf']}")
