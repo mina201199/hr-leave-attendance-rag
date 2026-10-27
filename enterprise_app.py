@@ -75,9 +75,8 @@ def withoutCitationMarkers(text, citations):
 
 def answerDisplayParts(response, question=""):
   if response.mode != "企業來源摘錄（離線，非模型回答）":
-    return withoutCitationMarkers(response.text, response.citations), [], response.citations
+    return withoutCitationMarkers(response.text, response.citations), response.citations
   body = response.text.removeprefix("【來源摘錄，非模型回答；虛構示範依各來源標示】\n\n")
-  notes = []
   primaryExcerpt = None
   demoMarker = "【虛構示範制度，非真實公司文件】"
   demoFooters = (
@@ -91,35 +90,29 @@ def answerDisplayParts(response, question=""):
     original = f"{citation.text} [{citation.chunkId}]"
     if not citation.isDemo or not citation.text.startswith(demoMarker) or original not in body:
       continue
-    # 只搬移已知展示格式，不用泛用句子規則刪掉制度條件；引用原文保持完整。
+    # 只隱藏已知展示格式，不用泛用句子規則刪掉制度條件；引用原文保持完整。
     excerpt = citation.text.removeprefix(demoMarker)
-    details = ["虛構示範制度，非真實公司文件。"]
     dateNote = re.match(r"本示範流程(?:適用於 \d{4}-\d{2}-\d{2} 前的制度查詢|自 \d{4}-\d{2}-\d{2} 起適用)。", excerpt)
     if dateNote:
-      details.append(dateNote[0])
       excerpt = excerpt[len(dateNote[0]):]
     excerpt = excerpt.removesuffix(f"來源識別碼：{citation.documentId}。")
     for footer in demoFooters:
       if excerpt.endswith(footer):
         excerpt = excerpt.removesuffix(footer)
-        details.append(footer)
         break
     if not excerpt.strip():
       continue
     if citation == response.citations[0]:
       primaryExcerpt = excerpt
     body = body.replace(original, f"{excerpt} [{citation.chunkId}]", 1)
-    notes.append(f"[{citation.chunkId}] " + "".join(details))
   if response.status == "answered" and primaryExcerpt is not None:
     body = conciseExcerpt(primaryExcerpt, question)
-    return body, notes[:1], response.citations[:1]
-  return withoutCitationMarkers(body, response.citations), notes, response.citations
+    return body, response.citations[:1]
+  return withoutCitationMarkers(body, response.citations), response.citations
 
 
 def showResponse(service, token, response, asOf, question):
-  statusLabels = {"answered": "已找到來源", "no_evidence": "沒有足夠來源", "needs_clarification": "需要補充條件",
-    "conflict": "來源有衝突", "context_limit": "來源超過內容預算"}
-  body, notes, usedCitations = answerDisplayParts(response, question)
+  body, usedCitations = answerDisplayParts(response, question)
   st.text(body)
   if usedCitations:
     with st.expander(f"查看引用（{len(usedCitations)}）"):
@@ -127,17 +120,6 @@ def showResponse(service, token, response, asOf, question):
         # 收合只改變呈現，每份原文仍必須經過後端驗權。
         authorized = service.readCitation(token, citation.chunkId, asOf, citation.version)
         showChunk(authorized)
-  with st.expander("來源與適用說明", expanded=False):
-    for note in notes:
-      st.caption(note)
-    st.caption(f"狀態：{statusLabels.get(response.status, response.status)}｜{response.mode}")
-    st.caption("引用僅列出本段回答使用的來源。離線重點摘錄以本機文字比對整理，並非模型回答；完整條件請展開引用確認。")
-    st.caption(f"紀錄 ID：{response.traceId}｜耗時：{response.elapsedMs:.0f} ms")
-  feedbackColumns = st.columns([1, 1, 3])
-  for index, (label, key, rating) in enumerate((("有幫助", "entHelpful", "helpful"), ("需要改善", "entUnhelpful", "unhelpful"))):
-    if feedbackColumns[index].button(label, key=f"{key}-{response.traceId}"):
-      service.feedback(token, response.traceId, rating)
-      st.success("已儲存本人回饋。")
 
 
 def clearConversation():

@@ -109,8 +109,8 @@ def test_role_sources_query_and_backend_management(appSystem, userId, expected, 
   response = query(app, "請假主管人資制度流程")
   assert response.status == "answered"
   assert {chunk.documentId for chunk in response.citations} <= expected
-  assert "來源摘錄" in visibleText(app)
-  assert "非模型回答" in visibleText(app)
+  assert "來源摘錄" in response.mode
+  assert "非模型回答" in response.mode
   assert service.validateResponse(token, response)
   assert "internal://" not in "\n".join(element.value for element in app.markdown)
 
@@ -163,8 +163,7 @@ def test_logout_clears_identity_widgets_results_and_owned_records(appSystem):
   app, service, passwords = appSystem
   oldToken = login(app, passwords, "employee")
   response = query(app)
-  app.button(key=f"entHelpful-{response.traceId}").click().run()
-  assert service.recentTraces(oldToken)[0]["feedback"] == "helpful"
+  app.radio(key="entPage").set_value("我的紀錄").run()
   assert response.traceId in visibleText(app)
   app.button(key="entLogout").click().run()
   assert not app.tabs
@@ -188,7 +187,7 @@ def test_revocation_clears_manager_ui_and_new_employee_cannot_reuse_evidence(app
   oldToken = login(app, passwords, "manager")
   response = query(app, "主管確認指引")
   assert "demo-manager" in {chunk.documentId for chunk in response.citations}
-  assert response.traceId in visibleText(app)
+  assert response.citations[0].text in visibleText(app)
   if change == "disable":
     service.authStore.setEnabled("manager", False)
   else:
@@ -295,15 +294,12 @@ def testConversationKeepsTurnsAndClearsWithoutDeletingOwnedRecords(appSystem):
   second = query(app, "補打卡說明流程")
   assert [message.name for message in app.chat_message] == ["user", "assistant", "user", "assistant"]
   assert app.chat_message[0].get("text")[0].value == "請假申請流程"
-  assert first.traceId in visibleText(app.chat_message[1])
+  assert first.citations[0].text in visibleText(app.chat_message[1])
   assert app.chat_message[2].get("text")[0].value == "補打卡說明流程"
-  assert second.traceId in visibleText(app.chat_message[3])
+  assert second.citations[0].text in visibleText(app.chat_message[3])
   assert "請假申請流程" in visibleText(app)
-  assert first.traceId in visibleText(app)
-  assert second.traceId in visibleText(app)
-  app.button(key=f"entHelpful-{first.traceId}").click().run()
+  app.run()
   assert app.chat_message[0].get("text")[0].value == "請假申請流程"
-  assert next(trace for trace in service.recentTraces(token) if trace["traceId"] == first.traceId)["feedback"] == "helpful"
   app.button(key="entClearConversation").click().run()
   assert [message.name for message in app.chat_message] == ["assistant"]
   assert "你好，請告訴我" in visibleText(app)
@@ -322,7 +318,7 @@ def testSidebarNavigationKeepsConversationAndNewChatReturnsToChat(appSystem):
   app.radio(key="entPage").set_value("我的紀錄").run()
   assert response.traceId in visibleText(app)
   app.radio(key="entPage").set_value("制度查詢").run()
-  assert response.traceId in visibleText(app.chat_message[-1])
+  assert response.citations[0].text in visibleText(app.chat_message[-1])
   app.radio(key="entPage").set_value("資料來源").run()
   app.button(key="entClearConversation").click().run()
   assert not app.exception
@@ -344,7 +340,7 @@ def testOlderWithdrawnTurnRemovesQuestionAndAnswerButKeepsAuthorizedTurn(appSyst
   assert len(app.chat_message) == 2
   assert "專屬識別碼QA" not in visibleText(app)
   assert first.traceId not in visibleText(app)
-  assert second.traceId in visibleText(app)
+  assert second.citations[0].text in visibleText(app)
   assert len(app.session_state["entConversation"]) == 1
 
 
@@ -368,7 +364,7 @@ def testConversationRetainsEachTurnDateAndBoundsMemory(appSystem):
   (date(2026, 10, 22), "本示範流程適用於 2026-11-01 前的制度查詢。", "需要調整時由主管退回說明"),
   (date(2026, 11, 1), "本示範流程自 2026-11-01 起適用。", "代理安排尚未確認時先補齊說明再送出"),
 ])
-def testDemoNotesCollapsedBelowAnswerAndOriginalCitationStaysIntact(appSystem, asOf, dateNote, condition):
+def testOnlyAnswerAndCitationShownWithOriginalConditionsIntact(appSystem, asOf, dateNote, condition):
   app, _, passwords = appSystem
   login(app, passwords, "employee")
   response = query(app, asOf=asOf)
@@ -380,15 +376,11 @@ def testDemoNotesCollapsedBelowAnswerAndOriginalCitationStaysIntact(appSystem, a
   assert dateNote not in body
   assert "來源識別碼" not in body
   assert all(f"[{chunk.chunkId}]" not in body for chunk in response.citations)
-  details = next(element for element in assistant.get("expander") if element.label == "來源與適用說明")
-  assert not details.proto.expanded
-  captions = "\n".join(element.value for element in details.get("caption"))
-  assert dateNote in captions
-  assert "虛構示範制度，非真實公司文件" in captions
-  assert "狀態：" in captions
-  assert "離線重點摘錄" in captions
-  assert response.traceId in captions
+  assert [element.label for element in assistant.get("expander")] == ["查看引用（1）"]
+  assert not assistant.get("button")
+  assert response.traceId not in visibleText(assistant)
   assert not any(element.type == "caption" for element in assistant.children.values())
+  assert dateNote in response.citations[0].text
   assert response.citations[0].text in [element.value for element in assistant.get("text")]
 
 
