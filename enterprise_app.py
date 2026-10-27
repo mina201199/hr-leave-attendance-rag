@@ -122,19 +122,21 @@ def showResponse(service, token, response, asOf, question):
     "conflict": "來源有衝突", "context_limit": "來源超過內容預算"}
   body, notes = answerDisplayParts(response, question)
   st.text(body)
-  for citation in response.citations:
-    # 內部識別碼只能經服務讀取，不產生可繞過授權的外部連結。
-    authorized = service.readCitation(token, citation.chunkId, asOf, citation.version)
-    with st.expander(f"引用：{authorized.title}（{authorized.version}）"):
-      showChunk(authorized)
+  if response.citations:
+    with st.expander(f"查看引用（{len(response.citations)}）"):
+      for citation in response.citations:
+        # 收合只改變呈現，每份原文仍必須經過後端驗權。
+        authorized = service.readCitation(token, citation.chunkId, asOf, citation.version)
+        showChunk(authorized)
   with st.expander("來源與適用說明", expanded=False):
     for note in notes:
       st.caption(note)
     st.caption(f"狀態：{statusLabels.get(response.status, response.status)}｜{response.mode}")
     st.caption("離線重點摘錄：以本機文字比對整理最相關來源，並非模型回答；完整條件與其他檢索結果請展開引用確認。")
     st.caption(f"紀錄 ID：{response.traceId}｜耗時：{response.elapsedMs:.0f} ms")
-  for label, key, rating in (("有幫助", "entHelpful", "helpful"), ("需要改善", "entUnhelpful", "unhelpful")):
-    if st.button(label, key=f"{key}-{response.traceId}"):
+  feedbackColumns = st.columns([1, 1, 3])
+  for index, (label, key, rating) in enumerate((("有幫助", "entHelpful", "helpful"), ("需要改善", "entUnhelpful", "unhelpful"))):
+    if feedbackColumns[index].button(label, key=f"{key}-{response.traceId}"):
       service.feedback(token, response.traceId, rating)
       st.success("已儲存本人回饋。")
 
@@ -142,13 +144,27 @@ def showResponse(service, token, response, asOf, question):
 def clearConversation():
   st.session_state["entConversation"] = []
   st.session_state.pop("entQuestion", None)
+  st.session_state.pop("entPendingQuestion", None)
+  st.session_state["entPage"] = "制度查詢"
+
+
+def queueSuggestedQuestion(question):
+  st.session_state["entPendingQuestion"] = question
 
 
 def showConversation(service, token, asOf):
-  st.subheader("請假與出勤問答")
-  st.caption("每次請輸入完整問題；目前逐題查詢，不會自動推論上一題的條件。最近 10 輪只保留在本次登入畫面，登出即清除。")
   history = st.session_state.get("entConversation", [])
-  suggestedQuestion = None
+  typedQuestion = st.chat_input("輸入請假或出勤制度問題…", key="entQuestion", max_chars=1000)
+  suggestedQuestion = st.session_state.pop("entPendingQuestion", None)
+  question = typedQuestion or suggestedQuestion
+  if question:
+    response = service.ask(token, question, asOf=asOf.isoformat())
+    history = (history + [{"question": question, "response": response,
+      "asOf": asOf.isoformat()}])[-10:]
+  st.caption("請假與出勤助理")
+  if not history:
+    st.title("今天想了解什麼？")
+    st.caption("直接問我請假或出勤制度，也可以從常用問題開始。")
   commonQuestions = (
     ("demo-emergency-leave", "臨時請假要通知誰？"),
     ("demo-leave-change", "請假日期變更或取消要怎麼辦？"),
@@ -165,15 +181,9 @@ def showConversation(service, token, asOf):
     with st.expander("常用問題", expanded=not history):
       columns = st.columns(2)
       for index, (documentId, question) in enumerate(questions):
-        if columns[index % 2].button(question, key=f"entSuggested-{documentId}", use_container_width=True):
-          suggestedQuestion = question
+        columns[index % 2].button(question, key=f"entSuggested-{documentId}", use_container_width=True,
+          on_click=queueSuggestedQuestion, args=(question,))
   conversationArea = st.container()
-  question = st.chat_input("輸入請假或出勤制度問題…", key="entQuestion", max_chars=1000)
-  question = question or suggestedQuestion
-  if question:
-    response = service.ask(token, question, asOf=asOf.isoformat())
-    history = (history + [{"question": question, "response": response,
-      "asOf": asOf.isoformat()}])[-10:]
   authorizedHistory = []
   for turn in history:
     try:
@@ -187,14 +197,14 @@ def showConversation(service, token, asOf):
     if len(authorizedHistory) != len(history):
       st.warning("部分對話的權限或來源版本已變更，已移除該輪問題與回答；請重新查詢。")
     if not authorizedHistory:
-      with st.chat_message("assistant"):
+      with st.chat_message("assistant", avatar="✨"):
         st.text("你好，請告訴我想了解的請假或出勤制度。我會依你的權限提供來源，方便你核對。")
         st.caption("例如：臨時請假要通知誰？補打卡需要哪些說明？")
-    for turn in reversed(authorizedHistory):
+    for turn in authorizedHistory:
       with st.chat_message("user"):
         st.text(turn["question"])
         st.caption(f"適用日期：{turn['asOf']}")
-      with st.chat_message("assistant"):
+      with st.chat_message("assistant", avatar="✨"):
         showResponse(service, token, turn["response"], turn["asOf"], turn["question"])
 
 
@@ -261,26 +271,34 @@ def showManagement(service, token, today):
 def showWorkspace(service, token, principal):
   today = datetime.now(ZoneInfo("Asia/Taipei")).date()
   roleLabels = {"employee": "員工", "manager": "主管", "hr": "人資"}
+  canManage = principal.role == "hr" and "knowledge:manage" in principal.capabilities
   with st.sidebar:
-    st.subheader("查詢設定")
-    st.caption(f"目前身分：{roleLabels[principal.role]}｜僅查制度，沒有個人假單、出勤與核准交易。")
-    asOf = st.date_input("制度適用日期", value=today, key="entAsOf")
-    st.caption("適用日期影響下一題與資料來源清單。舊對話保留當時的適用日期。")
-    st.button("清除對話", key="entClearConversation", on_click=clearConversation)
+    st.subheader("制度助理")
+    st.button("＋ 新對話", key="entClearConversation", on_click=clearConversation, use_container_width=True)
+    page = st.radio("功能選單", ["制度查詢", "資料來源", "我的紀錄"] + (["維護管理"] if canManage else []),
+      key="entPage", label_visibility="collapsed")
+    with st.expander("對話設定"):
+      asOf = st.date_input("制度適用日期", value=today, key="entAsOf")
+      st.caption("日期影響下一題與資料來源清單，舊對話保留原日期。每題請提供完整條件，目前不做跨輪推論。")
+      st.caption("最近 10 輪僅保留在本次登入畫面；新對話會清空畫面，登出即清除。")
+    st.divider()
+    st.caption(f"目前身分：{roleLabels[principal.role]}")
+    st.caption("虛構公司制度，僅供展示與測試")
+    st.caption("僅查制度，不提供個人出勤或核准交易。")
     st.button("登出", key="entLogout", on_click=logout, args=(service, token))
   if "entNotice" in st.session_state:
     st.success(st.session_state.pop("entNotice"))
-  canManage = principal.role == "hr" and "knowledge:manage" in principal.capabilities
-  tabs = st.tabs(["制度查詢", "資料來源", "我的紀錄"] + (["維護管理"] if canManage else []))
-  with tabs[0]:
+  if page == "制度查詢":
     showConversation(service, token, asOf)
-  with tabs[1]:
+  elif page == "資料來源":
+    st.title("資料來源")
     st.caption(f"以下為 {asOf.isoformat()} 當時有效、已發布且目前身分可讀的來源。內部來源以受控文字呈現。")
     for chunk in service.listSources(token, asOf=asOf.isoformat()):
       authorized = service.readCitation(token, chunk.chunkId, asOf.isoformat(), chunk.version)
       with st.expander(authorized.title):
         showChunk(authorized)
-  with tabs[2]:
+  elif page == "我的紀錄":
+    st.title("我的紀錄")
     st.caption("只顯示本人仍可讀的紀錄；不保留問題與回答原文。人資也只能查看自己的紀錄。")
     traces = service.recentTraces(token)
     if not traces:
@@ -289,15 +307,30 @@ def showWorkspace(service, token, principal):
       st.text(f"紀錄 ID：{trace['traceId']}｜日期：{trace['asOf']}｜建立時間：{trace['createdAt']}")
       st.caption(f"模式：{trace['mode']}｜狀態：{trace['status']}｜回饋：{trace['feedback'] or '尚未提供'}")
       st.text("來源版本：" + ", ".join(f"{ref['chunkId']} / {ref['version']}" for ref in trace["sourceVersions"]))
-  if canManage:
-    with tabs[3]:
-      showManagement(service, token, today)
+  elif page == "維護管理" and canManage:
+    st.title("維護管理")
+    showManagement(service, token, today)
 
 
 st.set_page_config(page_title="企業請假與出勤制度助理", page_icon="📚", layout="wide")
-st.title("企業請假與出勤制度助理")
-st.warning("虛構公司制度，僅供展示與測試")
-st.caption("本機展示介面；公司內規是否可用仍待確認。")
+st.html("""<style>
+  .stMainBlockContainer { max-width: 54rem; padding-top: 2rem; padding-bottom: 5rem; }
+  [data-testid="stSidebar"] { background: #f1f3f5; }
+  [data-testid="stChatMessage"] { background: transparent; padding: 1rem 0; }
+  [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+    background: #e9edf2; border-radius: 1.4rem; padding: 1rem 1.3rem;
+    margin-left: auto; max-width: 85%; width: fit-content;
+  }
+  [data-testid="stChatMessageAvatarUser"] { display: none; }
+  [data-testid="stChatInput"] { border-radius: 1.5rem; }
+  [data-testid="stBottomBlockContainer"] { max-width: 54rem; margin: auto; }
+  [data-testid="stText"] { line-height: 1.85; }
+  [data-testid="stAppDeployButton"] { display: none; }
+  @media (max-width: 640px) {
+    .stMainBlockContainer { padding-left: 1rem; padding-right: 1rem; }
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) { max-width: 95%; }
+  }
+</style>""")
 
 try:
   settings = loadSettings(projectPath)
@@ -309,6 +342,9 @@ except (ValueError, OSError, sqlite3.Error, ImportError) as error:
 
 token = st.session_state.get("entToken")
 if token is None:
+  st.title("企業制度助理")
+  st.caption("登入後，開始你的請假與出勤制度對話。")
+  st.warning("虛構公司制度，僅供展示與測試")
   showLogin(service)
 else:
   try:

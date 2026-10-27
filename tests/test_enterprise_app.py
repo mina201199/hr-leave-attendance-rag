@@ -47,6 +47,8 @@ def login(app, passwords, userId):
 
 
 def query(app, question="請假申請流程", asOf=date(2026, 10, 22)):
+  if app.radio(key="entPage").value != "制度查詢":
+    app.radio(key="entPage").set_value("制度查詢").run()
   app.date_input(key="entAsOf").set_value(asOf)
   app.chat_input(key="entQuestion").set_value(question).run()
   assert not app.exception
@@ -81,7 +83,7 @@ def test_login_boundary_and_empty_setup(appSystem):
   # 清除後仍能用正確個人帳號重試，不能讓錯誤提示卡住登入。
   _, _, passwords = appSystem
   login(app, passwords, "employee")
-  assert app.tabs
+  assert app.radio(key="entPage").value == "制度查詢"
 
 
 @pytest.mark.parametrize("userId,expected,managed", [
@@ -93,11 +95,12 @@ def test_login_boundary_and_empty_setup(appSystem):
 def test_role_sources_query_and_backend_management(appSystem, userId, expected, managed):
   app, service, passwords = appSystem
   token = login(app, passwords, userId)
+  app.radio(key="entPage").set_value("資料來源").run()
   app.date_input(key="entAsOf").set_value(date(2026, 10, 22)).run()
   text = visibleText(app)
   for documentId in ("demo-leave", "demo-attendance", "demo-manager", "demo-hr"):
     assert (documentId in text) == (documentId in expected)
-  assert ("維護管理" in [tab.label for tab in app.tabs]) == managed
+  assert ("維護管理" in app.radio(key="entPage").options) == managed
   if not managed:
     with pytest.raises(AuthorizationError):
       service.listManagedDocuments(token)
@@ -196,6 +199,7 @@ def test_withdrawn_answer_is_validated_before_render(appSystem):
 def test_management_controls_publish_withdraw_and_explicit_index_error(appSystem):
   app, service, passwords = appSystem
   token = login(app, passwords, "hr")
+  app.radio(key="entPage").set_value("維護管理").run()
   assert not app.exception
   assert app.get("file_uploader")
   assert app.button(key="entPreview").disabled
@@ -238,6 +242,7 @@ def test_index_uses_selected_effective_date_without_automatic_work(appSystem, mo
   service.embedder = LocalEmbedder()
   monkeypatch.setattr("labor_rag.enterprise.buildEnterpriseRuntime", lambda *args: service)
   token = login(app, passwords, "hr")
+  app.radio(key="entPage").set_value("維護管理").run()
   futureChunks = service.listSources(token, "2026-11-01")
   assert service.store.loadVectors("test-local", futureChunks) == {}
   app.date_input(key="entIndexDate").set_value(date(2026, 11, 1))
@@ -254,15 +259,15 @@ def testConversationKeepsTurnsAndClearsWithoutDeletingOwnedRecords(appSystem):
   first = query(app, "請假申請流程")
   second = query(app, "補打卡說明流程")
   assert [message.name for message in app.chat_message] == ["user", "assistant", "user", "assistant"]
-  assert app.chat_message[0].get("text")[0].value == "補打卡說明流程"
-  assert second.traceId in visibleText(app.chat_message[1])
-  assert app.chat_message[2].get("text")[0].value == "請假申請流程"
-  assert first.traceId in visibleText(app.chat_message[3])
+  assert app.chat_message[0].get("text")[0].value == "請假申請流程"
+  assert first.traceId in visibleText(app.chat_message[1])
+  assert app.chat_message[2].get("text")[0].value == "補打卡說明流程"
+  assert second.traceId in visibleText(app.chat_message[3])
   assert "請假申請流程" in visibleText(app)
   assert first.traceId in visibleText(app)
   assert second.traceId in visibleText(app)
   app.button(key=f"entHelpful-{first.traceId}").click().run()
-  assert app.chat_message[0].get("text")[0].value == "補打卡說明流程"
+  assert app.chat_message[0].get("text")[0].value == "請假申請流程"
   assert next(trace for trace in service.recentTraces(token) if trace["traceId"] == first.traceId)["feedback"] == "helpful"
   app.button(key="entClearConversation").click().run()
   assert [message.name for message in app.chat_message] == ["assistant"]
@@ -270,6 +275,26 @@ def testConversationKeepsTurnsAndClearsWithoutDeletingOwnedRecords(appSystem):
   assert app.session_state["entConversation"] == []
   assert service.authStore.authenticate(token).role == "employee"
   assert len(service.recentTraces(token)) == 2
+
+
+def testSidebarNavigationKeepsConversationAndNewChatReturnsToChat(appSystem):
+  app, service, passwords = appSystem
+  token = login(app, passwords, "employee")
+  response = query(app)
+  app.radio(key="entPage").set_value("資料來源").run()
+  assert not app.chat_input
+  assert "demo-leave" in visibleText(app)
+  app.radio(key="entPage").set_value("我的紀錄").run()
+  assert response.traceId in visibleText(app)
+  app.radio(key="entPage").set_value("制度查詢").run()
+  assert response.traceId in visibleText(app.chat_message[-1])
+  app.radio(key="entPage").set_value("資料來源").run()
+  app.button(key="entClearConversation").click().run()
+  assert not app.exception
+  assert app.radio(key="entPage").value == "制度查詢"
+  assert app.chat_input
+  assert not app.session_state["entConversation"]
+  assert len(service.recentTraces(token)) == 1
 
 
 def testOlderWithdrawnTurnRemovesQuestionAndAnswerButKeepsAuthorizedTurn(appSystem):
