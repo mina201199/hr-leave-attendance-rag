@@ -154,6 +154,8 @@ def queueSuggestedQuestion(question):
 
 def showConversation(service, token, asOf):
   history = st.session_state.get("entConversation", [])
+  # 與原生輸入框共用底部區域，避免固定定位偏移或遮住側欄。
+  suggestionsArea = st._bottom.container()
   typedQuestion = st.chat_input("輸入請假或出勤制度問題…", key="entQuestion", max_chars=1000)
   suggestedQuestion = st.session_state.pop("entPendingQuestion", None)
   question = typedQuestion or suggestedQuestion
@@ -177,12 +179,13 @@ def showConversation(service, token, asOf):
   )
   readableDocuments = {chunk.documentId for chunk in service.listSources(token, asOf.isoformat())}
   questions = [(documentId, question) for documentId, question in commonQuestions if documentId in readableDocuments]
-  if questions:
-    with st.expander("常用問題", expanded=not history):
-      columns = st.columns(2)
-      for index, (documentId, question) in enumerate(questions):
-        columns[index % 2].button(question, key=f"entSuggested-{documentId}", use_container_width=True,
-          on_click=queueSuggestedQuestion, args=(question,))
+  with suggestionsArea:
+    if questions:
+      with st.expander("常用問題", expanded=not history):
+        columns = st.columns(2)
+        for index, (documentId, question) in enumerate(questions):
+          columns[index % 2].button(question, key=f"entSuggested-{documentId}", use_container_width=True,
+            on_click=queueSuggestedQuestion, args=(question,))
   conversationArea = st.container()
   authorizedHistory = []
   for turn in history:
