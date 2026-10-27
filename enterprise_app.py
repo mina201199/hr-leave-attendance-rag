@@ -116,6 +116,7 @@ def showResponse(service, token, response, asOf, question):
   st.text(body)
   if usedCitations:
     with st.expander(f"查看引用（{len(usedCitations)}）"):
+      st.caption(f"適用日期：{asOf}")
       for citation in usedCitations:
         # 收合只改變呈現，每份原文仍必須經過後端驗權。
         authorized = service.readCitation(token, citation.chunkId, asOf, citation.version)
@@ -187,7 +188,6 @@ def showConversation(service, token, asOf):
     for turn in authorizedHistory:
       with st.chat_message("user"):
         st.text(turn["question"])
-        st.caption(f"適用日期：{turn['asOf']}")
       with st.chat_message("assistant", avatar="✨"):
         showResponse(service, token, turn["response"], turn["asOf"], turn["question"])
 

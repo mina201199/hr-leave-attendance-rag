@@ -354,6 +354,11 @@ def testConversationRetainsEachTurnDateAndBoundsMemory(appSystem):
   assert [turn["asOf"] for turn in app.session_state["entConversation"]] == ["2026-10-31", "2026-11-01"]
   assert "適用日期：2026-10-31" in visibleText(app)
   assert "適用日期：2026-11-01" in visibleText(app)
+  for index, expectedDate in ((0, "2026-10-31"), (2, "2026-11-01")):
+    assert not app.chat_message[index].get("caption")
+    citation = app.chat_message[index + 1].get("expander")[0]
+    assert not citation.proto.expanded
+    assert f"適用日期：{expectedDate}" in visibleText(citation)
   for index in range(9):
     query(app, f"補打卡說明流程 {index}")
   assert len(app.session_state["entConversation"]) == 10
