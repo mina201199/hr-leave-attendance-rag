@@ -2014,6 +2014,6 @@
   "missingVectorsAfter": 0,
   "error": {
     "type": "PermissionError",
-    "message": "[WinError 5] 存取被拒。: 'C:\\\\Users\\\\User\\\\Desktop\\\\RAG1\\\\reports\\\\corpus-check-live-20261021-172550-801561.tmp' -> 'C:\\\\Users\\\\User\\\\Desktop\\\\RAG1\\\\reports\\\\corpus-check-live-20261021-172550-801561.json'"
+    "message": "[WinError 5] 存取被拒。: 'reports\\\\corpus-check-live-20261021-172550-801561.tmp' -> 'reports\\\\corpus-check-live-20261021-172550-801561.json'"
   }
 }

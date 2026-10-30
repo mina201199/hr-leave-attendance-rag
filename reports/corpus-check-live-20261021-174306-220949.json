@@ -1,7 +1,7 @@
 {
   "mode": "live",
   "promptVersion": "labor-grounded-v2",
-  "caseFile": "C:\\Users\\User\\Desktop\\RAG1\\data\\evaluation\\annual-conditions.jsonl",
+  "caseFile": "data/evaluation/annual-conditions.jsonl",
   "budgetUsd": 3,
   "historicalReservationUsd": 2.1500000000000004,
   "calls": [

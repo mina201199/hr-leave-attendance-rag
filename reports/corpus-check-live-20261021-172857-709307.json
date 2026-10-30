@@ -2143,7 +2143,7 @@
     "https://developers.openai.com/api/docs/models/gpt-6-luna",
     "https://developers.openai.com/api/docs/models/text-embedding-3-small"
   ],
-  "resumedFrom": "C:\\Users\\User\\Desktop\\RAG1\\reports\\corpus-check-live-20261021-172550-801561.json",
+  "resumedFrom": "reports/corpus-check-live-20261021-172550-801561.json",
   "index": {
     "indexed": 0,
     "cached": 124,
