@@ -1,5 +1,7 @@
 # 打工權益問答與勞動裁罰紀錄檢索 RAG
 
+[![CI](https://github.com/mina201199/hr-leave-attendance-rag/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/mina201199/hr-leave-attendance-rag/actions/workflows/ci.yml)
+
 `main` 分支是可在本機執行的 RAG 專題：以臺北市政府勞動局、勞動部的官方問答，以及臺北市違反勞動基準法裁罰公告為資料，回答薪資、工時、休假問題，並可依完整公司名稱查詢歷史裁罰紀錄；答案附來源引用。介面為 Streamlit，資料存在本機 SQLite，沒有登入。
 
 > **企業請假與出勤制度助理（企業版）不在 `main`。**
@@ -192,6 +194,8 @@ python -m venv .venv
 
 Windows 若出現 `ZoneInfoNotFoundError: Asia/Taipei`，在此虛擬環境執行 `python -m pip install tzdata` 時請使用同一個 `.venv` Python 路徑。本專案目前沒有跨平台依賴鎖定檔，安裝解析的版本可能與原電腦不同；應以新電腦測試結果為準。
 
+GitHub Actions（`.github/workflows/ci.yml`）在 push 到 `main` 與每個 PR 時，以 Python 3.12 安裝 `.[dev]` 並執行 `pytest`。CI 設定 `RAG_PROVIDER=extractive`、`RAG_RETRIEVAL=bm25` 與空白 `OPENAI_API_KEY`；測試只使用離線路徑或 mock 的 HTTP 回應，不呼叫 OpenAI，也不需要 secret。
+
 **第一次是 `clone`，已下載過才是 `pull`：**
 
 ```powershell
@@ -221,6 +225,25 @@ $env:RAG_DATA_DIR = "data/index"
 
 `prepare_corpus.py --import` 會備份本機知識庫後匯入原版語料、停用舊摘要；不要在未來的企業資料庫上執行。`check_corpus.py` 預設只跑離線開發檢查，命中率不等於答案正確率。
 
+### 用 Docker 啟動
+
+需要 Docker。映像檔以 `python:3.12-slim` 為基底，建置時會執行 `prepare_corpus.py --import` 匯入 120 筆語料（只讀 repo 內檔案，不呼叫 API）；預設 `RAG_PROVIDER=extractive`、`RAG_RETRIEVAL=bm25`，不需要 API key。
+
+```powershell
+docker build -t labor-rights-rag .
+docker run --rm -p 8501:8501 labor-rights-rag
+```
+
+開啟 <http://localhost:8501>，操作與預期結果同上方離線模式。容器以非 root 使用者執行；本機索引與查詢紀錄寫在容器內 `/app/data/index`，容器移除後不保留。
+
+改用 OpenAI 時，金鑰只從執行環境傳入，不寫進 Dockerfile、映像檔或指令參數。先在目前 PowerShell 設定 `$env:OPENAI_API_KEY`，再執行：
+
+```powershell
+docker run --rm -p 8501:8501 -e OPENAI_API_KEY -e RAG_PROVIDER=openai -e OPENAI_CHAT_MODEL=gpt-6-luna labor-rights-rag
+```
+
+`-e OPENAI_API_KEY` 不帶值時，Docker 會沿用目前終端機的同名環境變數。要用 hybrid 再加 `-e RAG_RETRIEVAL=hybrid`，並在介面側欄建立向量索引；這會呼叫 API 並計費，且容器移除後需重建。`.dockerignore` 排除 `.env`、本機索引與資料庫，避免把本機金鑰或執行資料打包進映像檔。
+
 ### 需要恢復 OpenAI 模式時
 
 另開 PowerShell，避免上面的離線環境變數繼續覆蓋 `.env`。在專案目錄執行：
@@ -237,6 +260,7 @@ notepad .env
 - **會同步**：程式、測試、設定範例、企業實作計畫、原版整理語料、指定官方快照、明確允許的 2026-10-21 公開題組驗證報告。
 - **不會同步**：`.env`、API key、真實公司內規與個資、帳號／session 資料庫、本機索引、虛擬環境、暫存、服務 log。
 - 官方快照保留來源與雜湊，屬原來源內容；公司示範資料未建立，未來必須另標示虛構。
+- 快照中已遮蔽兩類資料：官方網頁內嵌的 Google Maps API key 改為 `REDACTED_GOOGLE_MAPS_KEY`；`taipei-penalties.csv` 的「負責人姓名」欄位改為 `（已遮蔽）`。因此這些快照與官方原始下載不再逐位元組相同，`manifest.json` 的 SHA-256 已更新為遮蔽後的檔案。負責人姓名原本就不在檢索語料內，`knowledge.jsonl` 內容不變；Git 歷史中的舊版本仍含原始內容。
 - `.gitignore` 僅對已檢視的具名快照及報告開放；不能因 Private repo 就任意加入公司資料或密碼。
 - 特定既有 API 測試報告一併同步，是因 `check_corpus.py` 從這些報告累計測試費用預留。既有總預留約 US$2.95／US$3；不要刪除／改名報告或提高上限來繼續付費測試，應先討論新預算。
 - 舊報告含原電腦的歷史檔案路徑；不代表新電腦需要建立相同絕對路徑。`--resume` 會檢查題組路徑、內容與提示版本，不保證能跨電腦接續舊報告。
@@ -262,3 +286,7 @@ notepad .env
 - [原版公開語料驗證報告](reports/corpus-120-validation-20261021.json)
 
 本 repo 目前以本機開發與展示為用途；原版沒有企業登入與資料隔離，完成企業授權驗收前不要用它存放真實受限內規。
+
+## 11. 授權
+
+程式碼以 [MIT License](LICENSE) 授權。`data/raw/`、`data/corpus/`、`data/seed/` 中的官方問答與裁罰公告內容，權利屬原發布機關，不在 MIT 授權範圍內；使用時請依原來源的規範。
