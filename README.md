@@ -1,14 +1,41 @@
-# 企業請假與出勤制度助理
+# 打工權益問答與勞動裁罰紀錄檢索 RAG
 
-單一公司的精簡 HR RAG 專題，目標服務員工、主管、人資，依身分與文件權限回答請假、出勤制度及作業流程，提供可核對的來源與生效日期。
+`main` 分支是可在本機執行的 RAG 專題：以臺北市政府勞動局、勞動部的官方問答，以及臺北市違反勞動基準法裁罰公告為資料，回答薪資、工時、休假問題，並可依完整公司名稱查詢歷史裁罰紀錄；答案附來源引用。介面為 Streamlit，資料存在本機 SQLite，沒有登入。
 
-> **交接日期：2026-10-21。企業版目前是已確認方向與待實作計畫，尚未完成。**
-> 現有可執行程式仍是「打工權益問答與勞動裁罰紀錄檢索」：Streamlit、公開資料、沒有登入。
-> 本次只整理 README、換機交接與 Git repo；沒有把角色權限功能宣稱為已完成，也沒有修改原版問答行為。
+> **企業請假與出勤制度助理（企業版）不在 `main`。**
+> 帳號登入（`auth.py`）、集中授權政策（`policy.py`）與員工／主管／人資三角色 ACL 的實作位於**尚未合併**的 [`codex/enterprise-mvp`](https://github.com/mina201199/hr-leave-attendance-rag/tree/codex/enterprise-mvp) 分支，入口為 `enterprise_app.py`，使用標示為虛構的示範制度；完成狀態與尚待人工／真實模型驗收的項目見該分支 README。
+> 下方第 1–5 節是企業版的範圍、權限設計與實作順序，保留作為分支背景說明；`main` 的程式沒有這些功能，勾選狀態停在 2026-10-21 交接時。
 
 Repository：<https://github.com/mina201199/hr-leave-attendance-rag>（Private）。
 
-## 1. 已確認範圍與第一版邊界
+![RAG 四模組責任與資料流架構](RAG四模組詳細架構圖.png)
+
+上圖是專題初期的四模組分工規劃（A 資料接入與知識整理、B 索引與檢索、C 回答生成與引用、D 問答介面與品質評估）。圖中部分規劃項目，例如 PDF／DOCX 解析與登入身分，`main` 沒有實作；四模組與實際程式六層的對照見 [docs/architecture.md](docs/architecture.md)。
+
+## main 目前包含的功能
+
+| 項目 | 主要檔案 | 說明 |
+|---|---|---|
+| 語料 | `data/corpus/2026-10-21/` | 40 筆官方問答＋80 件臺北市裁罰案件，共 120 筆、124 個檢索片段；來源與篩選見 [docs/corpus-120.md](docs/corpus-120.md) |
+| 處理與儲存 | `processing.py`、`storage.py` | 完整句子切片與父段落；SQLite 保存歷史版本、啟停、有效日期與向量快取 |
+| 關鍵字檢索 | `retrieval.py` | 自行實作的 BM25，中文以字元二元詞（bigram）切詞，另有少量同義詞正規化 |
+| 混合檢索 | `hybrid.py`、`providers.py` | OpenAI `text-embedding-3-small` 向量 cosine 與 BM25 各取候選，以 RRF（k=60）融合名次 |
+| 重排序 | `hybrid.py`（`LocalCrossEncoder`） | 可選的本機 CrossEncoder，**預設關閉** |
+| 上下文 | `context.py` | 父段落回補、去重與 8000 字內容預算 |
+| 生成 | `providers.py`、`service.py`、`generation.py` | OpenAI Responses API 以 strict JSON schema 回傳重點與引用，驗證引用 ID 必須是本次送入的來源，證據不足時拒答；`RAG_PROVIDER=extractive` 時改用不呼叫 API 的來源摘錄 |
+| 評估 | `evaluation.py`、`scripts/evaluate.py`、`scripts/check_corpus.py` | Recall@K、Precision@K、MRR、查無結果正確率與耗時；18 題語料檢查題組 |
+
+表中 Python 模組除 `scripts/` 外都在 `src/labor_rag/`。
+
+2026-10-21 以 OpenAI 生成＋hybrid 檢索執行 18 題開發檢查：16 題有答案題都在前 3 名命中預期來源並引用，2 題無關問題拒答；人工核對 17 題有來源支持、1 題需覆核（[報告](reports/corpus-120-validation-20261021.json)）。之後提示改為 `labor-grounded-v3`，只複測特休 2 題，沒有重跑完整題組。這些是開發檢查，不是獨立測試集成績。
+
+### 已知限制
+
+- **尚未進行 hybrid 與純 BM25 的消融評估。** `reports/` 內的 live 報告都使用 OpenAI 生成與 embedding（`check_corpus.py --live` 固定 hybrid、不啟用 reranker）；離線檢查則是 BM25＋來源摘錄。repo 內沒有在相同題組、相同生成設定下比較 hybrid 與純 BM25 的結果，因此目前無法說明加入向量檢索帶來多少改善。
+- **Reranker 預設關閉且未評估。** `RAG_RERANKER_PATH` 預設空白；repo 內沒有任何啟用 CrossEncoder 的評估結果。
+- 語料檢查題組只有 18 題（另有特休條件回歸 6 題與 2 題），屬開發檢查；裁罰資料只選 80 件，不能代表公司完整違規紀錄。
+
+## 1. 已確認範圍與第一版邊界（企業版：位於 `codex/enterprise-mvp` 分支）
 
 - **已確認**：精簡企業版、單一公司、請假與出勤制度、員工／主管／人資三角色與權限。
 - **建議的起步方式**：保留 Streamlit、Python 與 SQLite，沿用現有 RAG 模組；先完成角色與授權流程，再評估是否需要 FastAPI。
@@ -17,7 +44,7 @@ Repository：<https://github.com/mina201199/hr-leave-attendance-rag>（Private�
 - **本期不做**：個人薪資、剩餘假別、即時出勤紀錄、實際送出／核准申請、薪資計算、跨公司多租戶、企業 SSO、OCR、PDF／Word 解析及正式對外部署。
 - **實際公司資料上雲前**：先確認公司允許送至外部模型的資料範圍。登入權限只限制誰可以查詢，不等於公司同意把內規傳給 OpenAI。展示階段先使用公開與虛構資料。
 
-## 2. 要解決的工作情境
+## 2. 要解決的工作情境（企業版：位於 `codex/enterprise-mvp` 分支）
 
 | 對象 | 問題 | 第一版服務 | 展示問題 |
 |---|---|---|---|
@@ -27,7 +54,7 @@ Repository：<https://github.com/mina201199/hr-leave-attendance-rag>（Private�
 
 這些是待驗證的需求假設。驗收時應記錄代表性使用者完成任務的結果，不以資料筆數或模型名稱代替企業價值。
 
-## 3. 角色與權限設計
+## 3. 角色與權限設計（企業版：位於 `codex/enterprise-mvp` 分支）
 
 身分由後端驗證的帳號取得，不能靠角色下拉選單、提問文字或請求欄位自稱主管／人資。
 
@@ -49,7 +76,7 @@ Repository：<https://github.com/mina201199/hr-leave-attendance-rag>（Private�
 5. 一般使用者的查詢授權與維護者的索引授權分開；不能用 HR 身分查詢就自動觸發全庫索引。
 6. 未來若加入個人資料，另加入本人／部門／管理關係判斷，三角色不代表能讀所有個人紀錄。
 
-## 4. 現有專案保留、修改與新增項目
+## 4. 現有專案保留、修改與新增項目（企業版：位於 `codex/enterprise-mvp` 分支）
 
 ### 保留並沿用
 
@@ -80,7 +107,9 @@ Repository：<https://github.com/mina201199/hr-leave-attendance-rag>（Private�
 | `scripts/evaluate.py`、`data/evaluation/` | 增加角色、日期、預期來源、預期狀態、必須排除的來源；舊基準不冒稱企業版成績 |
 | `README.md`、`docs/architecture.md` | 隨里程碑更新實際完成狀態；舊架構文件在改版前僅描述原版 |
 
-### 建議新增（目前尚未建立）
+### 建議新增（`main` 尚未建立）
+
+`codex/enterprise-mvp` 分支已新增 `auth.py`、`policy.py`、`scripts/manage_accounts.py`、`data/company_demo/` 與對應測試；實際檔案以分支為準，與下列規劃不完全相同（例如分支沒有獨立的 `citations.py`）。
 
 - `src/labor_rag/auth.py`：帳號、密碼雜湊、session、停用與角色變更。
 - `src/labor_rag/policy.py`：集中判斷閱讀、維護及紀錄擁有權，不由 LLM 決定授權。
@@ -91,7 +120,9 @@ Repository：<https://github.com/mina201199/hr-leave-attendance-rag>（Private�
 
 既有 Python package 暫時保留 `labor_rag` 名稱，避免純改名造成大範圍變動。
 
-## 5. 實作順序與完成條件
+## 5. 實作順序與完成條件（企業版：位於 `codex/enterprise-mvp` 分支）
+
+> 以下勾選狀態是 `main` 在 2026-10-21 的交接狀態。步驟 1–6 的實作與驗收在 `codex/enterprise-mvp` 分支進行，實際進度以該分支 README 為準。
 
 每一階段先加入能重現需求的測試、確認失敗，再做最小修改並重跑相關測試；完成後提交獨立 commit。第一個實作階段是步驟 1，不是改首頁名稱。
 
@@ -213,6 +244,8 @@ notepad .env
 - 既有 18 題 live 成績來自較早提示；最終 `labor-grounded-v3` 只實際複測特休兩題。不能宣稱最新提示已重跑完整題組，更不是企業版驗收成績。
 
 ## 9. 下一次接續開發
+
+> 企業版後續開發已在 `codex/enterprise-mvp` 分支進行（步驟 1 起的實作都在該分支）；接續企業版時請先切換到該分支，以分支 README 為準。以下是 2026-10-21 交接時的原始指引。
 
 先讀本 README 與 `AGENTS.md`，執行測試，再從步驟 1 開始。可把以下內容交給協作工具：
 
