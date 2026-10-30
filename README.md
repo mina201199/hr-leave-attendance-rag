@@ -2,291 +2,120 @@
 
 [![CI](https://github.com/mina201199/hr-leave-attendance-rag/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/mina201199/hr-leave-attendance-rag/actions/workflows/ci.yml)
 
-`main` 分支是可在本機執行的 RAG 專題：以臺北市政府勞動局、勞動部的官方問答，以及臺北市違反勞動基準法裁罰公告為資料，回答薪資、工時、休假問題，並可依完整公司名稱查詢歷史裁罰紀錄；答案附來源引用。介面為 Streamlit，資料存在本機 SQLite，沒有登入。
+以官方勞動問答與臺北市裁罰公告為知識庫的 RAG 問答系統：回答薪資、工時、休假問題時一定附上可點開的官方來源，證據不足就拒答；也能依完整公司名稱查詢已收錄的歷史裁罰紀錄。
 
-> **企業請假與出勤制度助理（企業版）不在 `main`。**
-> 帳號登入（`auth.py`）、集中授權政策（`policy.py`）與員工／主管／人資三角色 ACL 的實作位於**尚未合併**的 [`codex/enterprise-mvp`](https://github.com/mina201199/hr-leave-attendance-rag/tree/codex/enterprise-mvp) 分支，入口為 `enterprise_app.py`，使用標示為虛構的示範制度；完成狀態與尚待人工／真實模型驗收的項目見該分支 README。
-> 下方第 1–5 節是企業版的範圍、權限設計與實作順序，保留作為分支背景說明；`main` 的程式沒有這些功能，勾選狀態停在 2026-10-21 交接時。
+> **關於 repo 名稱**：這個 repo 原本規劃做企業內部的「請假與出勤制度助理」，所以名稱是 `hr-leave-attendance-rag`。`main` 分支實際完成的是公開資料版的**打工權益問答**；企業版（登入、三角色權限、虛構公司制度）位於**尚未合併**的 [`codex/enterprise-mvp`](https://github.com/mina201199/hr-leave-attendance-rag/tree/codex/enterprise-mvp) 分支，完成狀態以該分支 README 為準，本頁只描述 `main`。
 
-Repository：<https://github.com/mina201199/hr-leave-attendance-rag>（Private）。
+## 要解決的問題
 
-![RAG 四模組責任與資料流架構](RAG四模組詳細架構圖.png)
+打工族與新鮮人遇到「打破東西可以扣薪嗎」「兼職有沒有特休」這類問題時，常在論壇看到互相矛盾的說法；官方答案雖然存在，卻分散在勞動局、勞動部的問答頁與裁罰公告裡，不容易找到、也不容易判斷適用條件。
 
-上圖是專題初期的四模組分工規劃（A 資料接入與知識整理、B 索引與檢索、C 回答生成與引用、D 問答介面與品質評估）。圖中部分規劃項目，例如 PDF／DOCX 解析與登入身分，`main` 沒有實作；四模組與實際程式六層的對照見 [docs/architecture.md](docs/architecture.md)。
+一般聊天機器人可以給出流暢的回答，但無法保證內容來自官方、也可能編造法條。這個專案的重點是**可核對**：每個回答重點都要對應到本次檢索送入的來源段落，否則就拒答。難點在於中文短問題的檢索（口語與法規用語落差大）、避免模型引用不存在的來源，以及在沒有大量標註資料下如何誠實地評估。
 
-## main 目前包含的功能
+## Demo
 
-| 項目 | 主要檔案 | 說明 |
-|---|---|---|
-| 語料 | `data/corpus/2026-10-21/` | 40 筆官方問答＋80 件臺北市裁罰案件，共 120 筆、124 個檢索片段；來源與篩選見 [docs/corpus-120.md](docs/corpus-120.md) |
-| 處理與儲存 | `processing.py`、`storage.py` | 完整句子切片與父段落；SQLite 保存歷史版本、啟停、有效日期與向量快取 |
-| 關鍵字檢索 | `retrieval.py` | 自行實作的 BM25，中文以字元二元詞（bigram）切詞，另有少量同義詞正規化 |
-| 混合檢索 | `hybrid.py`、`providers.py` | OpenAI `text-embedding-3-small` 向量 cosine 與 BM25 各取候選，以 RRF（k=60）融合名次 |
-| 重排序 | `hybrid.py`（`LocalCrossEncoder`） | 可選的本機 CrossEncoder，**預設關閉** |
-| 上下文 | `context.py` | 父段落回補、去重與 8000 字內容預算 |
-| 生成 | `providers.py`、`service.py`、`generation.py` | OpenAI Responses API 以 strict JSON schema 回傳重點與引用，驗證引用 ID 必須是本次送入的來源，證據不足時拒答；`RAG_PROVIDER=extractive` 時改用不呼叫 API 的來源摘錄 |
-| 評估 | `evaluation.py`、`scripts/evaluate.py`、`scripts/check_corpus.py` | Recall@K、Precision@K、MRR、查無結果正確率與耗時；18 題語料檢查題組 |
+離線模式（BM25＋來源摘錄，不呼叫任何付費 API）的實際執行畫面，資料為 repo 內的公開官方語料：
 
-表中 Python 模組除 `scripts/` 外都在 `src/labor_rag/`。
+![提問「打破杯子老闆可以扣薪嗎？」，回傳來源摘錄與官方頁面連結](docs/images/answer-with-citation.png)
 
-2026-10-21 以 OpenAI 生成＋hybrid 檢索執行 18 題開發檢查：16 題有答案題都在前 3 名命中預期來源並引用，2 題無關問題拒答；人工核對 17 題有來源支持、1 題需覆核（[報告](reports/corpus-120-validation-20261021.json)）。之後提示改為 `labor-grounded-v3`，只複測特休 2 題，沒有重跑完整題組。這些是開發檢查，不是獨立測試集成績。
+![提問「火星火山地質」這類無關問題時，系統拒答](docs/images/no-evidence-refusal.png)
 
-### 已知限制
+本專案沒有線上部署；可用下方「如何執行」的離線指令或 Docker 在本機重現同樣畫面。
 
-- **尚未進行 hybrid 與純 BM25 的消融評估。** `reports/` 內的 live 報告都使用 OpenAI 生成與 embedding（`check_corpus.py --live` 固定 hybrid、不啟用 reranker）；離線檢查則是 BM25＋來源摘錄。repo 內沒有在相同題組、相同生成設定下比較 hybrid 與純 BM25 的結果，因此目前無法說明加入向量檢索帶來多少改善。
-- **Reranker 預設關閉且未評估。** `RAG_RERANKER_PATH` 預設空白；repo 內沒有任何啟用 CrossEncoder 的評估結果。
-- 語料檢查題組只有 18 題（另有特休條件回歸 6 題與 2 題），屬開發檢查；裁罰資料只選 80 件，不能代表公司完整違規紀錄。
+## 架構
 
-## 1. 已確認範圍與第一版邊界（企業版：位於 `codex/enterprise-mvp` 分支）
+```mermaid
+flowchart LR
+  RAW["官方快照<br/>data/raw/"] --> CORPUS["整理後語料<br/>data/corpus/2026-10-21/"]
+  CORPUS --> ING["ingestion.py／processing.py<br/>完整句子切片、父段落"]
+  ING --> DB[("SQLite<br/>storage.py：版本、啟停、有效日期、向量快取")]
+  Q["Streamlit 介面<br/>app.py"] --> SVC["service.py"]
+  SVC --> BM25["retrieval.py<br/>BM25（字元 bigram）"]
+  SVC --> VEC["providers.py<br/>OpenAI embedding cosine"]
+  DB --> BM25
+  DB --> VEC
+  BM25 --> RRF["hybrid.py<br/>RRF 融合（k=60）"]
+  VEC --> RRF
+  RRF --> CTX["context.py<br/>父段落回補、去重、8000 字預算"]
+  CTX --> GEN["生成<br/>OpenAI strict JSON schema<br/>或離線來源摘錄"]
+  GEN --> CHECK["引用 ID 檢查<br/>不在本次來源內就拒答"]
+  CHECK --> Q
+  SVC --> TEL["telemetry.py<br/>查詢紀錄與回饋"]
+  EVAL["evaluation.py／scripts/check_corpus.py<br/>Recall@K、MRR、拒答"] --> SVC
+```
 
-- **已確認**：精簡企業版、單一公司、請假與出勤制度、員工／主管／人資三角色與權限。
-- **建議的起步方式**：保留 Streamlit、Python 與 SQLite，沿用現有 RAG 模組；先完成角色與授權流程，再評估是否需要 FastAPI。
-- **資料來源尚待確認**：是否有獲准使用的真實公司內規。未取得前，以明確標示「虛構、僅供展示」的公司制度設計案例；不得當成真實公司制度或官方法規。
-- **現有模型選型保持不變**：回答 `gpt-6-luna`，embedding `text-embedding-3-small`，BM25 + 向量 + RRF；不預先加入 Reranker。
-- **本期不做**：個人薪資、剩餘假別、即時出勤紀錄、實際送出／核准申請、薪資計算、跨公司多租戶、企業 SSO、OCR、PDF／Word 解析及正式對外部署。
-- **實際公司資料上雲前**：先確認公司允許送至外部模型的資料範圍。登入權限只限制誰可以查詢，不等於公司同意把內規傳給 OpenAI。展示階段先使用公開與虛構資料。
+`RAG_RETRIEVAL=bm25` 時只走 BM25；`hybrid` 時才會呼叫 embedding 並以 RRF 融合。Python 模組除 `scripts/` 外都在 `src/labor_rag/`。各層說明見 [docs/architecture.md](docs/architecture.md)。
 
-## 2. 要解決的工作情境（企業版：位於 `codex/enterprise-mvp` 分支）
+## 技術重點
 
-| 對象 | 問題 | 第一版服務 | 展示問題 |
-|---|---|---|---|
-| 員工 | 找不到規定、申請順序、表單與承辦窗口 | 查可閱讀的公司制度與官方資料 | 臨時請假要通知誰，之後要補什麼資料？ |
-| 主管 | 不清楚審核項目、例外與轉交條件 | 查主管審核指引，列出需確認事項 | 員工漏打卡，主管要確認哪些資料？ |
-| 人資 | 重複答覆、制度版本不一致 | 查內部 SOP、維護並發布知識文件、處理回饋 | 新版辦法何時生效，舊版何時停止適用？ |
+- **中文關鍵字檢索不靠斷詞套件**（`retrieval.py`）：自行實作 BM25，中文以字元二元詞（bigram）切詞，另有少量同義詞正規化，不需要額外的斷詞字典。
+- **Hybrid 檢索用名次融合**（`hybrid.py`）：BM25 與 `text-embedding-3-small` 向量 cosine 各取候選，以 Reciprocal Rank Fusion（k=60）融合名次，避免兩種分數尺度不同的問題。可選的本機 CrossEncoder reranker 預設關閉。
+- **結構化輸出＋引用驗證**（`providers.py`、`service.py`）：OpenAI Responses API 以 strict JSON schema 回傳「重點＋citationIds」；`service.py` 檢查每個引用 ID 都必須是本次送入的來源，否則整個回答改為拒答，而不是只把錯誤引用刪掉。
+- **離線模式**：`RAG_PROVIDER=extractive` 時不呼叫 API，直接回傳來源摘錄。CI、測試、Docker 預設都走這條路徑，不需要任何 secret。
+- **版本化知識庫**（`storage.py`）：SQLite 保存歷史版本、啟停狀態、有效日期與向量內容雜湊快取；重新匯入語料會先備份並停用舊摘要，不覆寫歷史。
+- **付費測試有預算閘門**（`scripts/check_corpus.py`）：`--live` 每次請求先保守預留 US$0.05，連同 `reports/` 內先前報告的預留合計不超過 US$3（只約束此腳本，不是帳戶上限）。
+- **資料處理**：原始快照保留來源與 SHA-256（`manifest.json`）；官方網頁內嵌的 Google Maps API key 與裁罰 CSV 的負責人姓名已遮蔽後才提交。
 
-這些是待驗證的需求假設。驗收時應記錄代表性使用者完成任務的結果，不以資料筆數或模型名稱代替企業價值。
+## 成果與數字
 
-## 3. 角色與權限設計（企業版：位於 `codex/enterprise-mvp` 分支）
+| 項目 | 結果 | 來源 |
+| --- | --- | --- |
+| 語料規模 | 40 筆官方問答＋80 件臺北市裁罰，共 120 筆、124 個檢索片段 | [docs/corpus-120.md](docs/corpus-120.md)、`data/corpus/2026-10-21/` |
+| 自動化測試 | **70 passed**（2026-10-30，本機 Python 3.13.9，離線設定同 CI） | `python -m pytest -q` |
+| 18 題語料檢查（離線 BM25＋摘錄） | 狀態 18/18 符合；16 題有答案題前 3 名命中預期來源 16/16，摘錄引用到預期來源 14/16；2 題無關問題拒答 | 2026-10-30 執行 `scripts/check_corpus.py`（報告寫入 `reports/`，未提交） |
+| 18 題語料檢查（OpenAI 生成＋hybrid） | 狀態 18/18 符合；前 3 名命中 16/16、引用預期來源 16/16；人工核對 17 題有來源支持、1 題需覆核 | [reports/corpus-120-validation-20261021.json](reports/corpus-120-validation-20261021.json)（2026-10-21） |
 
-身分由後端驗證的帳號取得，不能靠角色下拉選單、提問文字或請求欄位自稱主管／人資。
+這些是 18 題**開發檢查**，不是獨立測試集成績。live 結果之後提示改為 `labor-grounded-v3`，只複測了特休 2 題（[報告](reports/annual-condition-validation-20261021.json)），沒有重跑完整題組。
 
-| 資料或操作 | employee | manager | hr |
-|---|---|---|---|
-| 已發布的一般員工制度與官方來源 | 可讀 | 可讀 | 可讀 |
-| 主管審核指引 | 不可讀 | 可讀 | 文件明確授權才可讀 |
-| 人資內部 SOP | 不可讀 | 不可讀 | 文件明確授權才可讀 |
-| 本人的查詢紀錄與回饋 | 可讀寫自己的紀錄 | 可讀寫自己的紀錄 | 可讀寫自己的紀錄 |
-| 其他人的問答紀錄 | 不可讀 | 不可讀 | 不因人資角色而自動取得 |
-| 草稿預覽、匯入、發布、撤回、建索引 | 不可操作 | 不可操作 | 另外具有 `knowledge:manage` 能力的指定維護者 |
+## 如何執行
 
-授權規則：
-
-1. 內部文件缺少明確 ACL 時拒絕存取，不沿用現有 `allowedRoles=("public",)` 當作企業預設。
-2. 先檢查帳號、角色、文件 ACL、發布狀態及生效日期，再檢索；授權與來源版本也要在生成前及顯示時重新確認。
-3. 引用、原始文件、資料來源列表、紀錄與回饋入口都要檢查權限。受限文件不能先傳到前端再隱藏。
-4. 帳號停用、角色變更、文件撤回後，舊 session／畫面結果不能繼續暴露已失去權限的內容。
-5. 一般使用者的查詢授權與維護者的索引授權分開；不能用 HR 身分查詢就自動觸發全庫索引。
-6. 未來若加入個人資料，另加入本人／部門／管理關係判斷，三角色不代表能讀所有個人紀錄。
-
-## 4. 現有專案保留、修改與新增項目（企業版：位於 `codex/enterprise-mvp` 分支）
-
-### 保留並沿用
-
-| 現有檔案／資料 | 保留用途 |
-|---|---|
-| `src/labor_rag/retrieval.py`、`hybrid.py` | BM25、cosine、RRF 演算法；加入授權時補測試，不重寫核心 |
-| `processing.py`、`context.py` | 完整句子切片、父段落回補、去重與內容預算；回補前也要檢查授權 |
-| `storage.py` | SQLite、歷史版本、有效日期、向量內容雜湊與快取 |
-| `providers.py`、`generation.py` | OpenAI 介面、引用檢查、證據不足拒答及離線摘錄 |
-| `evaluation.py`、`tests/` | 檢索指標與原版回歸測試，另增加企業測試集 |
-| `data/corpus/2026-10-21/`、`data/seed/` | 原版公開語料及基準，保留以便比較與回復 |
-| `data/raw/expansion-20261021/` | 已核對來源清單的官方快照，供換機重建及既有測試 |
-| 原裁罰 CSV 匯入與公司查詢 | 保留程式及測試；企業主畫面不再以裁罰為核心 |
-| `.env.example`、現有模型選型 | 保持既有選型；更換模型或改用本機模型前另行確認 |
-
-### 修改既有模組
-
-| 檔案 | 企業版修改方向 |
-|---|---|
-| `models.py`、`ingestion.py` | 加入公司制度／SOP 來源類型、請假／出勤分類、發布狀態、維護者與明確 ACL；內部來源使用受控識別碼，不能偽造公開 HTTPS 網址通過驗證 |
-| `storage.py` | 以可回復遷移加入企業欄位；讀取時支援授權與查詢日期；同版本內容不可無痕覆寫 |
-| `runtime.py` | 拆開目前硬編碼的 `publicChunks()`、公開 seed 自動匯入、一般查詢與維護者建索引；企業資料庫與舊版基準分開 |
-| `hybrid.py`、`context.py` | 使用後端傳入的可信身分；確保搜尋、重排序、父段落、去重、生成上下文都不跨越 ACL |
-| `service.py`、`providers.py` | 依授權來源產生制度說明、適用條件與流程；區分官方依據／公司內規；保留資料不足、條件缺漏與來源衝突狀態 |
-| `telemetry.py` | 紀錄綁定擁有者；只允許本人查閱與回饋；預設維持不保存問答原文，不因人資角色而開放所有紀錄 |
-| `app.py` | 登入／登出、依身分呈現問題範例；查詢區與管理區分開；登出及換帳號清除舊答案；資料來源頁同樣套用權限 |
-| `settings.py`、`scripts/manage.py` | 區分帳號設定、企業資料庫、維護命令與索引；帳密不經命令列明文參數 |
-| `scripts/evaluate.py`、`data/evaluation/` | 增加角色、日期、預期來源、預期狀態、必須排除的來源；舊基準不冒稱企業版成績 |
-| `README.md`、`docs/architecture.md` | 隨里程碑更新實際完成狀態；舊架構文件在改版前僅描述原版 |
-
-### 建議新增（`main` 尚未建立）
-
-`codex/enterprise-mvp` 分支已新增 `auth.py`、`policy.py`、`scripts/manage_accounts.py`、`data/company_demo/` 與對應測試；實際檔案以分支為準，與下列規劃不完全相同（例如分支沒有獨立的 `citations.py`）。
-
-- `src/labor_rag/auth.py`：帳號、密碼雜湊、session、停用與角色變更。
-- `src/labor_rag/policy.py`：集中判斷閱讀、維護及紀錄擁有權，不由 LLM 決定授權。
-- `src/labor_rag/citations.py`：以身分與日期取得授權來源，提供受控內部引用入口。
-- `scripts/manage_accounts.py`：本機初始化個別示範帳號；用互動式隱藏輸入設定密碼，不提供預設共用密碼。
-- `data/company_demo/`：標示為虛構的制度、主管指引、人資 SOP、新舊版案例與來源清單。
-- `tests/test_auth.py`、`test_policy.py`、`test_citation_access.py`、`test_enterprise_app.py`：角色、越權、引用、畫面與帳號隔離回歸。
-
-既有 Python package 暫時保留 `labor_rag` 名稱，避免純改名造成大範圍變動。
-
-## 5. 實作順序與完成條件（企業版：位於 `codex/enterprise-mvp` 分支）
-
-> 以下勾選狀態是 `main` 在 2026-10-21 的交接狀態。步驟 1–6 的實作與驗收在 `codex/enterprise-mvp` 分支進行，實際進度以該分支 README 為準。
-
-每一階段先加入能重現需求的測試、確認失敗，再做最小修改並重跑相關測試；完成後提交獨立 commit。第一個實作階段是步驟 1，不是改首頁名稱。
-
-### 步驟 0：保存原版與換機交接（本次工作）
-
-- [x] 保留原版操作說明到 `docs/legacy-public-rag.md`。
-- [x] 整理企業範圍、檔案調整、權限矩陣與實作順序。
-- [x] Git 忽略金鑰、執行資料庫、帳密、個人／公司私有資料與測試暫存。
-- [x] 納入特定官方原始快照，讓既有重建測試不依賴這台電腦。
-- 驗收：只使用已提交檔案即可執行既有測試；遠端 repo 可取得 README 與程式碼。
-
-### 步驟 1：固定情境、資料契約與測試題目
-
-- [ ] 確認是否有可用內規；否則以虛構公司示範資料開始，先讓使用者核對制度內容。
-- [ ] 建立一般員工辦法、主管審核指引、人資 SOP 與至少一份新舊版制度；每份標示來源類型、ACL、狀態、維護者、生效日期。
-- [ ] 修改 `models.py`、`ingestion.py`、`storage.py`，建立可回復的資料遷移與獨立企業資料庫；保留原版測試語料。
-- [ ] 在調整檢索前分開開發題組與不參與調參的保留題組，涵蓋三角色、日期、無答案與衝突。
-- 驗收：缺 ACL、日期錯誤、未支援來源類型的資料被拒絕；同版本修改被拒絕；新舊版切換保留歷史。
-
-### 步驟 2：完成登入與集中授權
-
-- [ ] 新增 `auth.py`、`policy.py` 與帳號管理入口；三角色採個別帳號，不寫入固定密碼。
-- [ ] 定義可信 `Principal`（帳號 ID、角色、明確能力）及 session 生命周期；每次操作重新確認帳號狀態。
-- [ ] 將 `knowledge:manage` 與閱讀權分離，建立角色與文件矩陣測試。
-- 驗收：錯誤密碼、到期 session、停用帳號不能操作；偽造角色不會提權；員工與主管不可發布資料。
-
-### 步驟 3：把授權串到整條 RAG 管線
-
-- [ ] 修改 `runtime.py`、`hybrid.py`、`context.py`、`service.py`；以可信 Principal、日期與已發布版本選來源。
-- [ ] 分開維護者索引路徑與使用者查詢路徑；只有獲准外送的公開／虛構來源可進入現有 OpenAI embedding。
-- [ ] 新增受控引用讀取；來源頁、引用、紀錄、回饋、父段落與快取都套用同一授權政策。
-- 驗收：用假的 embedder／generator 記錄輸入，證明受限來源未進入無權使用者的上下文；直接猜引用 ID、跨帳號讀紀錄、文件撤回與角色降級都不洩漏內容。
-
-### 步驟 4：完成請假與出勤回答規則
-
-- [ ] 修改生成提示與回應契約：簡短結論、適用條件、有依據的申請／審核步驟、表單／窗口、引用及版本。
-- [ ] 官方來源與公司內規分開標示；缺少條件先要求補充，來源衝突列出差異並轉交人資確認。
-- [ ] 保留完整原文對照；不以引用 ID 有效宣稱答案語意正確。
-- 驗收：不編造窗口／表單，不混用一般規則與例外，不推算個人剩餘假別，不將一般背景當作特殊流程答案。
-
-### 步驟 5：完成三角色介面與最小管理流程
-
-- [ ] 修改 `app.py`：登入後顯示角色、請假／出勤範例、答案及本人紀錄；原裁罰工具從企業主流程移出但不刪除。
-- [ ] 指定維護者可以預覽匯入、檢查 ACL／生效日、發布／撤回及建立索引；一般使用者不能呼叫管理操作。
-- [ ] 檢查 Streamlit session 與快取隔離；若無法滿足授權測試，再提出改用 FastAPI 的具體方案。
-- 驗收：三個獨立帳號完成各自情境；登出後不殘留上一人的答案；沒有用只隱藏按鈕代替後端授權。
-
-### 步驟 6：完整驗收、保留題與展示
-
-- [ ] 重跑原版回歸與企業版自動測試；凍結資料、提示、模型與參數後再跑保留題。
-- [ ] 分開報告檢索命中、答案正確性、引用支持度、條件／例外完整性、拒答、版本及授權；答案品質由人工對照來源。
-- [ ] 任一越權或跨帳號洩漏測試失敗即不通過；其他品質門檻在開保留題前約定，不事後改標準。
-- [ ] 記錄員工找流程、主管找審核規範、人資更新制度三項任務的成功情況與耗時；有人工查找基準才宣稱效率改善。
-- [ ] 補上已知限制與失敗案例，再決定是否加入 Reranker 或更換介面。
-
-## 6. 回家第一次下載
-
-需要 Git、Python 3.11 以上（目前本機為 Python 3.13.9），以及能讀取此 Private repo 的 GitHub 帳號。以下為 PowerShell，請在想放專案的資料夾執行。
+需要 Python 3.11 以上。以下為 PowerShell；離線模式不需要 API key，也不會產生雲端費用。
 
 ```powershell
-git clone https://github.com/mina201199/hr-leave-attendance-rag.git
-cd hr-leave-attendance-rag
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 .\.venv\Scripts\python.exe -m pytest -q
-```
 
-Windows 若出現 `ZoneInfoNotFoundError: Asia/Taipei`，在此虛擬環境執行 `python -m pip install tzdata` 時請使用同一個 `.venv` Python 路徑。本專案目前沒有跨平台依賴鎖定檔，安裝解析的版本可能與原電腦不同；應以新電腦測試結果為準。
-
-GitHub Actions（`.github/workflows/ci.yml`）在 push 到 `main` 與每個 PR 時，以 Python 3.12 安裝 `.[dev]` 並執行 `pytest`。CI 設定 `RAG_PROVIDER=extractive`、`RAG_RETRIEVAL=bm25` 與空白 `OPENAI_API_KEY`；測試只使用離線路徑或 mock 的 HTTP 回應，不呼叫 OpenAI，也不需要 secret。
-
-**第一次是 `clone`，已下載過才是 `pull`：**
-
-```powershell
-cd hr-leave-attendance-rag
-git status --short
-git pull --ff-only
-```
-
-有本機未提交變更時先檢查並保存自己的工作，不使用 `reset --hard` 或覆寫檔案來強行同步。
-
-## 7. 免費啟動目前的原版基準
-
-先用離線模式確認環境，不需要 API key，也不會自動產生雲端費用。設定只影響目前 PowerShell 程序，不改寫 `.env`。
-
-```powershell
+# 離線模式：只影響目前的 PowerShell，不改寫 .env
 $env:RAG_PROVIDER = "extractive"
 $env:RAG_RETRIEVAL = "bm25"
-$env:RAG_RERANKER_PATH = ""
 $env:OPENAI_API_KEY = ""
-$env:RAG_DATA_DIR = "data/index"
-.\.venv\Scripts\python.exe -X utf8 scripts/prepare_corpus.py --import
-.\.venv\Scripts\python.exe -X utf8 scripts/check_corpus.py
+.\.venv\Scripts\python.exe -X utf8 scripts/prepare_corpus.py --import   # 匯入 120 筆語料（先備份本機知識庫）
+.\.venv\Scripts\python.exe -X utf8 scripts/check_corpus.py              # 18 題離線檢查
 .\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-開啟 <http://127.0.0.1:8501>，預期仍顯示「打工權益資料助理」，側欄有 120 筆文件／案件、124 個檢索片段。輸入「打破杯子老闆可以扣薪嗎？」應有來源摘錄與引用；輸入「火星火山地質」應顯示資料不足。這是在驗證原版，不是企業版已完成。
+開啟 <http://127.0.0.1:8501>，側欄應顯示 120 筆文件／案件、124 個檢索片段。輸入「打破杯子老闆可以扣薪嗎？」應有來源摘錄與官方連結；輸入「火星火山地質」應顯示資料不足。Windows 若出現 `ZoneInfoNotFoundError: Asia/Taipei`，在同一個虛擬環境執行 `pip install tzdata`。
 
-`prepare_corpus.py --import` 會備份本機知識庫後匯入原版語料、停用舊摘要；不要在未來的企業資料庫上執行。`check_corpus.py` 預設只跑離線開發檢查，命中率不等於答案正確率。
-
-### 用 Docker 啟動
-
-需要 Docker。映像檔以 `python:3.12-slim` 為基底，建置時會執行 `prepare_corpus.py --import` 匯入 120 筆語料（只讀 repo 內檔案，不呼叫 API）；預設 `RAG_PROVIDER=extractive`、`RAG_RETRIEVAL=bm25`，不需要 API key。
+**Docker**（映像建置時匯入語料，預設離線模式）：
 
 ```powershell
 docker build -t labor-rights-rag .
 docker run --rm -p 8501:8501 labor-rights-rag
 ```
 
-開啟 <http://localhost:8501>，操作與預期結果同上方離線模式。容器以非 root 使用者執行；本機索引與查詢紀錄寫在容器內 `/app/data/index`，容器移除後不保留。
+**OpenAI 模式**：複製 `.env.example` 為 `.env`，只在本機填入自己的 `OPENAI_API_KEY`（`.env` 已列入 `.gitignore` 與 `.dockerignore`）。要用 hybrid 檢索需在側欄手動建立向量索引，會呼叫 API 並計費。Docker 可用 `-e OPENAI_API_KEY -e RAG_PROVIDER=openai` 從目前終端機傳入金鑰，不寫進映像檔。
 
-改用 OpenAI 時，金鑰只從執行環境傳入，不寫進 Dockerfile、映像檔或指令參數。先在目前 PowerShell 設定 `$env:OPENAI_API_KEY`，再執行：
+CI（`.github/workflows/ci.yml`）在 push 到 `main` 與每個 PR 時以 Python 3.12 執行 `pytest`，設定 `RAG_PROVIDER=extractive`、`RAG_RETRIEVAL=bm25` 與空白金鑰；測試只走離線路徑或 mock 的 HTTP 回應。
 
-```powershell
-docker run --rm -p 8501:8501 -e OPENAI_API_KEY -e RAG_PROVIDER=openai -e OPENAI_CHAT_MODEL=gpt-6-luna labor-rights-rag
-```
+## 已知限制與下一步
 
-`-e OPENAI_API_KEY` 不帶值時，Docker 會沿用目前終端機的同名環境變數。要用 hybrid 再加 `-e RAG_RETRIEVAL=hybrid`，並在介面側欄建立向量索引；這會呼叫 API 並計費，且容器移除後需重建。`.dockerignore` 排除 `.env`、本機索引與資料庫，避免把本機金鑰或執行資料打包進映像檔。
+- **尚未做 hybrid 與純 BM25 的消融評估。** live 報告固定使用 hybrid＋OpenAI 生成，離線檢查則是 BM25＋摘錄，兩者生成設定不同，無法說明加入向量檢索帶來多少改善。
+- **Reranker 預設關閉且未評估**；repo 內沒有任何啟用 CrossEncoder 的結果。
+- 題組只有 18 題（另有特休條件回歸 6 題與 2 題），屬開發檢查；裁罰資料只選 80 件，不能代表公司完整違規紀錄，查無紀錄不代表沒有違規。
+- 沒有跨平台依賴鎖定檔，安裝解析出的版本可能不同。
+- 網頁查詢與建索引沒有共用的全站費用上限；腳本的預算閘門只約束 `check_corpus.py --live`。
+- `main` 沒有登入與資料隔離，不適合存放受限的企業內規。
+- 原始快照已遮蔽 API key 與負責人姓名，但 Git 歷史中的舊版本仍含原始內容。
 
-### 需要恢復 OpenAI 模式時
+下一步：在相同題組、相同生成設定下比較 BM25／hybrid／hybrid＋reranker；建立不參與調參的保留題組；把企業版分支的授權測試完成驗收後再合併。
 
-另開 PowerShell，避免上面的離線環境變數繼續覆蓋 `.env`。在專案目錄執行：
+> [RAG四模組詳細架構圖.png](RAG四模組詳細架構圖.png) 是專題初期的四模組規劃，部分項目（例如 PDF／DOCX 解析、登入）`main` 沒有實作；實際模組以上方架構圖與 [docs/architecture.md](docs/architecture.md) 為準。原版操作細節見 [docs/legacy-public-rag.md](docs/legacy-public-rag.md)。
 
-```powershell
-if (-not (Test-Path .env)) { Copy-Item .env.example .env }
-notepad .env
-```
+## 我負責的部分
 
-只在本機填入自己的 `OPENAI_API_KEY`；不要貼進 README、聊天或 Git。範例已保留既有模型選型。設定後啟動 Streamlit，手動建立向量索引才可使用 hybrid；新電腦不包含原電腦的向量資料庫，重建會使用 API 並計費。
+本專案由我獨立完成，涵蓋需求定義、資料蒐集與整理、系統設計、檢索與生成實作、評估腳本、測試、CI／Docker 與文件。
 
-## 8. 哪些內容會跟著 Git，哪些不會
-
-- **會同步**：程式、測試、設定範例、企業實作計畫、原版整理語料、指定官方快照、明確允許的 2026-10-21 公開題組驗證報告。
-- **不會同步**：`.env`、API key、真實公司內規與個資、帳號／session 資料庫、本機索引、虛擬環境、暫存、服務 log。
-- 官方快照保留來源與雜湊，屬原來源內容；公司示範資料未建立，未來必須另標示虛構。
-- 快照中已遮蔽兩類資料：官方網頁內嵌的 Google Maps API key 改為 `REDACTED_GOOGLE_MAPS_KEY`；`taipei-penalties.csv` 的「負責人姓名」欄位改為 `（已遮蔽）`。因此這些快照與官方原始下載不再逐位元組相同，`manifest.json` 的 SHA-256 已更新為遮蔽後的檔案。負責人姓名原本就不在檢索語料內，`knowledge.jsonl` 內容不變；Git 歷史中的舊版本仍含原始內容。
-- `.gitignore` 僅對已檢視的具名快照及報告開放；不能因 Private repo 就任意加入公司資料或密碼。
-- 特定既有 API 測試報告一併同步，是因 `check_corpus.py` 從這些報告累計測試費用預留。既有總預留約 US$2.95／US$3；不要刪除／改名報告或提高上限來繼續付費測試，應先討論新預算。
-- 舊報告含原電腦的歷史檔案路徑；不代表新電腦需要建立相同絕對路徑。`--resume` 會檢查題組路徑、內容與提示版本，不保證能跨電腦接續舊報告。
-- 網頁查詢與建索引目前沒有共用的全站預算鎖；腳本預留額也不是 OpenAI 帳戶的費用上限。
-- 既有 18 題 live 成績來自較早提示；最終 `labor-grounded-v3` 只實際複測特休兩題。不能宣稱最新提示已重跑完整題組，更不是企業版驗收成績。
-
-## 9. 下一次接續開發
-
-> 企業版後續開發已在 `codex/enterprise-mvp` 分支進行（步驟 1 起的實作都在該分支）；接續企業版時請先切換到該分支，以分支 README 為準。以下是 2026-10-21 交接時的原始指引。
-
-先讀本 README 與 `AGENTS.md`，執行測試，再從步驟 1 開始。可把以下內容交給協作工具：
-
-> 請依 README 的精簡企業版計畫，先處理步驟 1：請假與出勤情境、公司示範資料契約與權限矩陣。先確認公司資料來源；未有獲准使用的真實內規就提出明確標示為虛構的草案。先說明檔案修改範圍與驗證方法，保留原版資料及測試，不一次實作所有階段，不變更既有模型，不呼叫付費 API。舊 docs/superpowers/plans 描述原版歷史，不是新的企業版工作清單。
-
-建議新功能分支使用 `codex/` 前綴，例如 `codex/enterprise-data-contract`。每完成一個可驗證階段，再更新本 README 的勾選狀態與限制。
-
-## 10. 原版參考資料
-
-- [原版操作說明](docs/legacy-public-rag.md)
-- [原版架構與能力界線](docs/architecture.md)
-- [120 筆公開語料來源與驗證紀錄](docs/corpus-120.md)
-- [原版特休條件修正報告](reports/annual-condition-validation-20261021.json)
-- [原版公開語料驗證報告](reports/corpus-120-validation-20261021.json)
-
-本 repo 目前以本機開發與展示為用途；原版沒有企業登入與資料隔離，完成企業授權驗收前不要用它存放真實受限內規。
-
-## 11. 授權
+## 授權
 
 程式碼以 [MIT License](LICENSE) 授權。`data/raw/`、`data/corpus/`、`data/seed/` 中的官方問答與裁罰公告內容，權利屬原發布機關，不在 MIT 授權範圍內；使用時請依原來源的規範。
