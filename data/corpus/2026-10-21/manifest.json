@@ -861,119 +861,119 @@
   "rawFiles": [
     {
       "path": "data/raw/expansion-20261021/bola-024AC00552729B45.html",
-      "sha256": "10a41790e8531e9a7a17c8fd2e124319dddde3c085486040b0ba204fa8902d83"
+      "sha256": "0a7535ad5e932b850304c9317140a6b139b37beeed2b9ec719dc8a76712816aa"
     },
     {
       "path": "data/raw/expansion-20261021/bola-0835C7A13BC1EF15.html",
-      "sha256": "c0d157967ee9c744e8528786475450cc760e3ffcebfedee09782750ad1d9d9b1"
+      "sha256": "418459f3d01e38182b87021b8216cad3386e0a2c06094e46d219803d25a1e359"
     },
     {
       "path": "data/raw/expansion-20261021/bola-1F52A51C58625A34.html",
-      "sha256": "7822bb3f868cfab1b7b93668eec5b7395f0b07f11bab0b476f5842a6ea0850b6"
+      "sha256": "e967081a487cdfebefa268debade69774b0acac0099d1d900c5c1527a8bb5fcd"
     },
     {
       "path": "data/raw/expansion-20261021/bola-231C37E49F241157.html",
-      "sha256": "0a8c8c531037033c024bc3c5baf066471983e5a63e633d1d6fdf31c490a04c7b"
+      "sha256": "4ae67425190b764e1b75b6d1f6157c4ab3300b23f72337df1813bd4dbada6b0c"
     },
     {
       "path": "data/raw/expansion-20261021/bola-2B4459B0BAA6CB3D.html",
-      "sha256": "f28988f03fc61cda76eaf05670a81d94cdc79acc64f7c2052ee42846e1f5f63d"
+      "sha256": "49b555b27e0c63c0142447bea6bb2a71c6ba04a6c5c38118a58a84438bd6a275"
     },
     {
       "path": "data/raw/expansion-20261021/bola-5BA1BA88064D0F26.html",
-      "sha256": "37a56d54ac052467f7f8f68fb4220e7db46bd41519e48d1f2c26dff7dfdbc01f"
+      "sha256": "bb0aa044d75eabc521d0ce870c2375866bb2e7f09562395ad6b68ba4dd9f527b"
     },
     {
       "path": "data/raw/expansion-20261021/bola-659A978FCD6DD2C3.html",
-      "sha256": "eb97735da0b7a3e698b5071fb00ee37cff4e7d52451e359107a4bf273fb090d0"
+      "sha256": "2695b20c65be77471fd08d1ed1b66bf50810261d622025a28162ae820b7292e1"
     },
     {
       "path": "data/raw/expansion-20261021/bola-6A8B18F938AEDB3F.html",
-      "sha256": "25a60500b6f680e0d9899cb2965817b6c4c38d1be799768a377adc1292835994"
+      "sha256": "e37ea919c522539235a439bee50dbbc012ad5cdd7228df772f1d99b5a7248c1e"
     },
     {
       "path": "data/raw/expansion-20261021/bola-6BA2B6D870F13C23.html",
-      "sha256": "eae5bac9fa4d30bbfc7f673946594a415084f45af2fa3b83f5382333977a4abf"
+      "sha256": "b6f4b7b72fc71f177840f58a081b1f1563b1d689a919d579b535c3ac99879d5f"
     },
     {
       "path": "data/raw/expansion-20261021/bola-70464C835E4688A8.html",
-      "sha256": "fe1ac8a1230d8fc92c587344bf29e23b213565d7f400a4b00e88e5e68ff9b676"
+      "sha256": "169b3b239e8a9bcbf2d19794d7f8f15d83f194fbcd1c40f7ccc7a1367929be1c"
     },
     {
       "path": "data/raw/expansion-20261021/bola-82FD6BE83122A7A0.html",
-      "sha256": "a7e0c8309897aeec05d432b5905c29b50de4c8a74afee528b9520f231c6736d1"
+      "sha256": "ae24e84cdb3713b4bea014796d7a77c798a0425d842f69ef504d582e5eb85e72"
     },
     {
       "path": "data/raw/expansion-20261021/bola-86E3C6586F9A2EDD.html",
-      "sha256": "725f29688fc56020170ffd8464fce0eef48ae98f10e48326b975bb7aabf810bb"
+      "sha256": "208c4b3ae4c4b55c1a830fa04653bd14e4addb6cda421efc62ee9aa75c693fbb"
     },
     {
       "path": "data/raw/expansion-20261021/bola-89046A0E7CE5E5AC.html",
-      "sha256": "68c7d75ab0b2c255c566330fcd43cff0aa27332faa2939ae38f32981eadd33f9"
+      "sha256": "83fb9fe1a89fd7755754a62d202d14e85883bee1b1984bd8709215a50754d122"
     },
     {
       "path": "data/raw/expansion-20261021/bola-8C413EC102381D8D.html",
-      "sha256": "9c30b7769a0493b7ba9bf04a7925120ea06ed98177e3686d0a95d0447abb80ab"
+      "sha256": "a17f3fa95e3779020ab1966345bc7378ec712ab978e99fcee4fc9766422c42ab"
     },
     {
       "path": "data/raw/expansion-20261021/bola-8D48F35D4240FBEC.html",
-      "sha256": "d8ffa70196c80f11995df67f70dcd4803d2200618189a285ff00ba86e5ccdb1f"
+      "sha256": "08fbf998881a5dcf638886c71e6ee8a7509707b72f5180b2401ee6e937b632a4"
     },
     {
       "path": "data/raw/expansion-20261021/bola-8DC386681402F624.html",
-      "sha256": "1de97f45c5e6fcf25211460fbb8cfd62bc4d76f69f7072cae5eae4e1f4fd22ce"
+      "sha256": "eb419df9f46890fae9a39cb67a7db42994f5fbffbd123a17241235f4feac2cb3"
     },
     {
       "path": "data/raw/expansion-20261021/bola-9E7DB7AF346E2B7D.html",
-      "sha256": "da6af60e072a70e7d6c4b3e7313d4b749efbec15ed626a5c0a4e3a2a7f1c663f"
+      "sha256": "a6d8f590be6d42036b6e6c52752ff0d543340cd648fa06a35e7182ac1dd93b3f"
     },
     {
       "path": "data/raw/expansion-20261021/bola-B5DDD7D62A791464.html",
-      "sha256": "e28c887e8b0f164a95b22fe168898aa435bd06964944cf8802765037d1613626"
+      "sha256": "5183b83e645e4fa9557543f3079e5a9d43736ff55865d9ccaa556d80d237d1fc"
     },
     {
       "path": "data/raw/expansion-20261021/bola-BB7AAE526A9BA3D8.html",
-      "sha256": "b84fb5d22a1ccdfb26b6e5892c9240a9e7c681da18a0e7b000956242f0f1bc6b"
+      "sha256": "0561b1942bf64a3fc1f8c0c5ef045d6673c5feddb508b1baadbc307d50ab6a9d"
     },
     {
       "path": "data/raw/expansion-20261021/bola-C66C625CF46D828C.html",
-      "sha256": "bbe5004403ac11ff780232f933f773a867f411190435bc1e52acb59cdbba2798"
+      "sha256": "6272810351fca722fa37caaa1e509c89995425e69a339337c7b5b3e58650eaa1"
     },
     {
       "path": "data/raw/expansion-20261021/bola-C67BB3717EC148B8.html",
-      "sha256": "bed70b8ea47bcea1a5be79b12982371890bb6b4865f961a4f2f38ef7803261e0"
+      "sha256": "2b4c339d935b91919bccc48f1c950a66b2e0ea44bb2dd02339a3878a428bf067"
     },
     {
       "path": "data/raw/expansion-20261021/bola-C7F1B09DBDDB54D5.html",
-      "sha256": "cd74114ee0397811b81b3985301024c12bcb3139f417351a7e0c47138c4b7261"
+      "sha256": "00d3bd2807042f18d7b7146bc534dafc4328b124e1f0c788e0f5ad51c4a68ced"
     },
     {
       "path": "data/raw/expansion-20261021/bola-C89ED2FE141B47BC.html",
-      "sha256": "12a9025fa77d248f712e93071bc177a5348f16d4554de650cddcee0a3ce1d75a"
+      "sha256": "166ff2aaa529b12cc76b00909d78eb3e2a8769f1a748ffc1fd0b2405dd374c7d"
     },
     {
       "path": "data/raw/expansion-20261021/bola-CE03773A2E71617A.html",
-      "sha256": "58a436502591abbbc3db955bfea1c2274502c956ef67da7707f7d7cf89b95db9"
+      "sha256": "b794add3e566b88250aca3a48b9abd7ad77d0eb91b18f6daf989e2230c92cb51"
     },
     {
       "path": "data/raw/expansion-20261021/bola-D0530C11174A545A.html",
-      "sha256": "1ad78094afda8420eedb05e229f61e737f9dc1c7526b8dc06056b960f70ac210"
+      "sha256": "c624a4218d8abb16a1ad6024de233baef1b08696f4fc6aafebbe5770c03a2513"
     },
     {
       "path": "data/raw/expansion-20261021/bola-D071801F88711ED5.html",
-      "sha256": "a13ac2e8c08b1ef044a5d105628fbaad831a5b355260e3b14c55ae32be665f5b"
+      "sha256": "97a7b252ebcab3a9f03071e8d35a137e527fb063515cefd6046bcc4e89efa9bb"
     },
     {
       "path": "data/raw/expansion-20261021/bola-D3AFE42FAD98227F.html",
-      "sha256": "d1dca219aab4fb0746e26ef5e54d92a80d75402109f1b2ab4fc03e1f987157f4"
+      "sha256": "ba15f9bd18d210285b233b6cf7ece8b5ec4c7c84f7348e3e8711628a31c0fa5b"
     },
     {
       "path": "data/raw/expansion-20261021/bola-D63232505FEC3843.html",
-      "sha256": "3a9c445ed6144aeed5161787196a6d86d852ef310c0a4a97852a49d83fea449e"
+      "sha256": "10412e3952c9dcf043d9c53de50855f1dbc33c1191bf3eef18095305cf16d6be"
     },
     {
       "path": "data/raw/expansion-20261021/bola-EDE809BE28BC4E4D.html",
-      "sha256": "951933b98d9404793371204e4ecd362df6056fd073461f2b76b6f1e330d6be9e"
+      "sha256": "147a63119914ee3cfb90ae9783cd01d0543ceb45cea487c8afdc646c25ef366d"
     },
     {
       "path": "data/raw/expansion-20261021/faq-selection.json",
@@ -1033,7 +1033,7 @@
     },
     {
       "path": "data/raw/expansion-20261021/taipei-faq-list.html",
-      "sha256": "2698ae7d7edca2d71367aa77c918a527f2b734b1d6cc127ec46b00cd48f37415"
+      "sha256": "14b7ac8c8234396d8a09d07581155ab889168791f3de558e5f3c636485c1e42a"
     },
     {
       "path": "data/raw/expansion-20261021/taipei-faq.json",
@@ -1041,11 +1041,11 @@
     },
     {
       "path": "data/raw/expansion-20261021/taipei-leave-list.html",
-      "sha256": "494d31fb4f9930ef5b70cf89a985ba913e1b3c2bdb8a8fd5624d4735519c5213"
+      "sha256": "1db7f0ae2466804f37634709ea7f9d40eb2f1b8a25e954d66d63b9aa0c10f145"
     },
     {
       "path": "data/raw/expansion-20261021/taipei-penalties.csv",
-      "sha256": "e686b95e4ead0bc8ded9bd16f3588d66ff49354a97ec03714a622e816eb58c4a"
+      "sha256": "ac4ce15ab3d180e8be6073819d75e2ab48428e6df63b5ae7ec53a477a46e8ba7"
     }
   ]
 }

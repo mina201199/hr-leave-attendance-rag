@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      # 測試全部走離線／mock 路徑；明確清空金鑰並指定離線模式，避免任何測試意外呼叫付費 API
+      RAG_PROVIDER: extractive
+      RAG_RETRIEVAL: bm25
+      RAG_RERANKER_PATH: ""
+      OPENAI_API_KEY: ""
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Run tests
+        run: python -m pytest -q
